@@ -16,7 +16,7 @@ Source code for **[www.aaronsoft.de](https://www.aaronsoft.de)**.
 ### Docker
 
 ```bash
-docker run -d -p 8080:80 ghcr.io/Kartoffelbauer/web-aaronsoft:latest
+docker run -d -p 8080:8080 ghcr.io/Kartoffelbauer/web-aaronsoft:latest
 ```
 
 ### Manual
