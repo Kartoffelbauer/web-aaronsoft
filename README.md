@@ -1,5 +1,8 @@
 # aaronsoft.de
 
+[![Build and Release](https://github.com/Kartoffelbauer/web-aaronsoft/actions/workflows/build-release.yml/badge.svg)](https://github.com/Kartoffelbauer/web-aaronsoft/actions/workflows/build-release.yml)
+[![Website Status](https://img.shields.io/website?url=https%3A%2F%2Fwww.aaronsoft.de)](https://www.aaronsoft.de)
+
 Source code for **[www.aaronsoft.de](https://www.aaronsoft.de)**.
 
 ## 🛠 Built With
@@ -10,7 +13,16 @@ Source code for **[www.aaronsoft.de](https://www.aaronsoft.de)**.
 
 ## 🚀 Getting Started
 
-Simply open `index.html` in any web browser to view the site.
+### Docker
+
+```bash
+docker run -d -p 8080:80 ghcr.io/Kartoffelbauer/web-aaronsoft:latest
+```
+
+### Manual
+
+Download the `website-source.zip` from the [Releases](https://github.com/Kartoffelbauer/web-aaronsoft/releases) page, extract it, and open `index.html` in your browser.
+
 
 ## 📄 License
 
