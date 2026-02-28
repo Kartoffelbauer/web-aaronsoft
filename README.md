@@ -16,12 +16,12 @@ Source code for **[www.aaronsoft.de](https://www.aaronsoft.de)**.
 ### Docker
 
 ```bash
-docker run -d -p 8080:8080 ghcr.io/Kartoffelbauer/web-aaronsoft:latest
+docker run -d -p 8080:8080 ghcr.io/kartoffelbauer/web-aaronsoft:latest
 ```
 
 ### Manual
 
-Download the `website-source.zip` from the [Releases](https://github.com/kartoffelbauer/web-aaronsoft/releases) page, extract it, and open `index.html` in your browser.
+Download the `website-source.zip` from the [Releases](https://github.com/Kartoffelbauer/web-aaronsoft/releases) page, extract it, and open `index.html` in your browser.
 
 
 ## 📄 License
