@@ -1,0 +1,50 @@
+/**
+ * @fileoverview CSS Custom Properties for theme management.
+ */
+
+:root {
+  /* Light Theme */
+  --theme-background: #ffffff;
+  --theme-on-background: #001a42;
+  --theme-surface: #ffffff;
+  --theme-on-surface: #001a42;
+  --theme-surface-variant: #f0f3fa;
+  --theme-on-surface-variant: #3c475a;
+  --theme-primary: #005ac2;
+  --theme-on-primary: #ffffff;
+  --theme-outline: #8c909f;
+  --theme-outline-variant: #c2c6d6;
+  --theme-surface-container-lowest: #ffffff;
+  --theme-surface-container-low: #f8fafc;
+  --theme-surface-container: #f1f5f9;
+
+  /* Typography */
+  --font-headline: "Inter", sans-serif;
+  --font-code: "Fira Code", monospace;
+  --font-body: "Inter", sans-serif;
+
+  /* Spacing */
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+  --spacing-xl: 64px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Theme */
+    --theme-background: #0b1326;
+    --theme-on-background: #dbe2fd;
+    --theme-surface: #0b1326;
+    --theme-on-surface: #dbe2fd;
+    --theme-surface-variant: #2d3449;
+    --theme-on-surface-variant: #c2c6d6;
+    --theme-primary: #adc6ff;
+    --theme-on-primary: #002e6a;
+    --theme-outline: #8c909f;
+    --theme-outline-variant: #424754;
+    --theme-surface-container-lowest: #060d20;
+    --theme-surface-container-low: #131b2e;
+    --theme-surface-container: #171f33;
+  }
+}

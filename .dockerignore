@@ -11,6 +11,14 @@ Dockerfile
 README.md
 LICENSE
 
+# Node Files
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+
 # System Files (macOS & Windows)
 .DS_Store
 .DS_Store?

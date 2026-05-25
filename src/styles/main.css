@@ -1,0 +1,135 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--theme-background);
+  color: var(--theme-on-background);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1, h2, h3, .logo {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--theme-on-surface);
+}
+
+/* Layout Utilities */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  /* Fluid padding: 16px (mobile) scales to 32px (desktop) */
+  padding: 0 clamp(var(--spacing-md), 4vw, var(--spacing-lg));
+}
+
+.section {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-lg);
+  border-top: 1px solid color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-header h2 {
+  /* Fluid typography: 2rem (mobile) scales linearly to 3rem (desktop) */
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  letter-spacing: -0.02em;
+}
+
+/*
+ * FLUID GRIDS
+ * auto-fit automatically wraps columns into rows when they fall below the min width.
+ * This completely removes the need for @media queries for grid wrapping.
+ */
+
+.grid-2 {
+  display: grid;
+  gap: var(--spacing-lg);
+  /* Minimum column width 320px, otherwise take up 1 fraction of space */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.grid-4 {
+  display: grid;
+  gap: var(--spacing-md);
+  /* Minimum column width 200px, otherwise take up 1 fraction of space */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+}
+
+/* UI primitives (Buttons, Base Cards, Icons) */
+
+/* Icons */
+.icon-primary {
+  color: var(--theme-primary);
+  font-size: 2rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: var(--font-code);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--theme-primary);
+  color: var(--theme-on-primary);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-outline {
+  border-color: var(--theme-outline);
+  color: var(--theme-on-surface);
+}
+
+.btn-outline:hover {
+  border-color: var(--theme-primary);
+  color: var(--theme-primary);
+}
+
+/* Base Card */
+.card {
+  background: var(--theme-surface-container);
+  border: 1px solid var(--theme-outline-variant);
+  border-radius: 8px;
+  transition: border-color 0.2s;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  border-color: var(--theme-primary);
+}

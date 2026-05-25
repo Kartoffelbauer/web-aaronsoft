@@ -1,0 +1,21 @@
+/**
+ * @fileoverview Scoped styles for the Skills grid.
+ * Extends the global .card utility class.
+ */
+
+.skill-card {
+  padding: var(--spacing-md);
+}
+
+.skill-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.skill-card span {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  color: var(--theme-outline);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

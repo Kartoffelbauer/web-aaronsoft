@@ -1,0 +1,51 @@
+/**
+ * @fileoverview Scoped styles for the application Footer.
+ */
+
+.footer {
+  background: var(--theme-surface-container-lowest);
+  border-top: 1px solid var(--theme-outline-variant);
+  padding: var(--spacing-lg) 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footer-logo {
+  color: var(--theme-primary);
+  font-weight: 600;
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+}
+
+.footer-copyright {
+  color: var(--theme-on-surface-variant);
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--spacing-md);
+  font-family: var(--font-code);
+  font-size: 0.875rem;
+}
+
+.footer-links a {
+  color: var(--theme-on-surface-variant);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--theme-primary);
+}
