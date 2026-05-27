@@ -1,9 +1,16 @@
+# Astro Specific
+.astro/
+
+# Environment Variables (Security)
+.env
+.env.*
+!.env.example
+
 # Node Files
 node_modules/
-build/
 dist/
+build/
 coverage/
-.DS_Store
 *.log
 
 # System Files (macOS & Windows)
@@ -22,5 +29,3 @@ Desktop.ini
 *.swp
 *.swo
 *~
-
-

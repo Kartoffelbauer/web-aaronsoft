@@ -17,8 +17,8 @@ RUN npm ci
 # Copy the rest of the application source code
 COPY . .
 
-# Execute the build script (runs 'tsc && vite build' as defined in package.json)
-# This generates the production-ready static files in the /app/dist directory
+# Execute the Astro build script (runs 'astro build' as defined in package.json)
+# This generates the highly-optimized static HTML/CSS in the /app/dist directory
 RUN npm run build
 
 # ==============================================================================

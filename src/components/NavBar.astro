@@ -1,0 +1,72 @@
+---
+import { siteConfig } from '../data/config';
+
+const { nav, resumeUrl } = siteConfig;
+---
+
+<nav class="navbar">
+  <div class="container navbar-content">
+    <div class="logo">DevPortfolio</div>
+
+    <div class="nav-links">
+      {nav.map((link) => (
+        <a href={link.url} class="nav-link">{link.label}</a>
+      ))}
+    </div>
+
+    <a href={resumeUrl} class="btn btn-primary" target="_blank">Resume</a>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    background: color-mix(in srgb, var(--theme-surface) 80%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--theme-outline-variant);
+  }
+
+  .navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: none;
+    gap: var(--spacing-lg);
+    font-family: var(--font-code);
+    font-size: 0.875rem;
+  }
+
+  .nav-links a {
+    color: var(--theme-on-surface-variant);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--theme-primary);
+  }
+
+  /* Note: The active class is injected dynamically by scrollSpy.ts */
+  .nav-links a.active {
+    color: var(--theme-primary);
+    font-weight: 700;
+    border-bottom: 2px solid var(--theme-primary);
+    padding-bottom: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links { display: flex; }
+  }
+</style>

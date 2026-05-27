@@ -1,22 +1,24 @@
-# Git and Version Control
-.git
+# Git, Docker, and Docs (Keeps build context small and fast)
+.git/
 .gitignore
-.github
-
-# Docker Files
+.github/
 Dockerfile
 .dockerignore
-
-# Documentation
 README.md
 LICENSE
 
+# Astro Specific
+.astro/
+
+# Environment Variables (Security)
+.env
+.env.*
+
 # Node Files
 node_modules/
-build/
 dist/
+build/
 coverage/
-.DS_Store
 *.log
 
 # System Files (macOS & Windows)

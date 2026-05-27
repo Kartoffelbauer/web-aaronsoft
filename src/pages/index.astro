@@ -1,0 +1,25 @@
+---
+/**
+ * @fileoverview Main entry point mapping to the root '/' URL.
+ * Assembles the layout and section components cleanly.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NavBar from '../components/NavBar.astro';
+import Hero from '../components/Hero.astro';
+import Education from '../components/Education.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Aaronsoft | Software Engineer">
+  <NavBar />
+  <main class="container">
+    <Hero />
+    <Education />
+    <Skills />
+    <Projects />
+  </main>
+  <Footer />
+</BaseLayout>
