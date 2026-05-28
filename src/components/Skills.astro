@@ -2,10 +2,10 @@
 import { siteConfig } from "../data/config.ts";
 import { getExperienceString } from "../utils/dateUtils.ts";
 
-const { skills } = siteConfig;
+const { skills } = siteConfig.sections;
 ---
 
-<section id="skills" class="section">
+<section id={skills.displayName} class="section">
   <div class="section-header">
     <span class="material-symbols-outlined icon-primary">terminal</span>
     <h2>Core Expertise</h2>
@@ -13,7 +13,7 @@ const { skills } = siteConfig;
 
   <div class="skill-list">
     {
-      skills.map((skill) => {
+      skills.items.map((skill) => {
         const expString = getExperienceString(skill.startDate);
 
         return (

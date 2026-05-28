@@ -25,26 +25,43 @@ export interface ProjectItem {
 
 export interface SiteConfig {
   logo: string;
-  linkedinUrl: string;
-  githubUrl: string;
   nav: {
     resumeUrl: string;
   };
-  hero: {
-    title: string;
-    description: string;
-    image: string;
+  sections: {
+    hero: {
+      displayName: string;
+      title: string;
+      description: string;
+      imageUrl: string;
+      linkedinUrl: string;
+      githubUrl: string;
+    };
+    education: {
+      displayName: string;
+      items: EducationItem[];
+    };
+    skills: {
+      displayName: string;
+      items: SkillItem[];
+    };
+    projects: {
+      displayName: string;
+      items: ProjectItem[];
+    };
   };
-  education: EducationItem[];
-  skills: SkillItem[];
-  projects: ProjectItem[];
-  impress: {
-    title: string;
-    description: string;
-  };
-  privacy: {
-    title: string;
-    description: string;
+  legal: {
+    personalData: {
+      name: string;
+      address: {
+        street: string;
+        city: string;
+        zip: string;
+        country: string;
+      };
+      email: string;
+      phone: string;
+    };
     hosterData: {
       name: string;
       address: {
@@ -54,16 +71,5 @@ export interface SiteConfig {
         country: string;
       };
     };
-  };
-  personalData: {
-    name: string;
-    address: {
-      street: string;
-      city: string;
-      zip: string;
-      country: string;
-    };
-    email: string;
-    phone: string;
   };
 }

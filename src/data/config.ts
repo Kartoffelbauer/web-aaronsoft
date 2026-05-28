@@ -6,78 +6,95 @@ import type { SiteConfig } from "../types/index.ts";
 
 export const siteConfig: SiteConfig = {
   logo: "DevPortfolio",
-  linkedinUrl: "https://linkedin.com",
-  githubUrl: "https://github.com",
   nav: {
     resumeUrl: "/assets/resume.pdf",
   },
-  hero: {
-    title: "Software Engineer & Master's Student.",
-    description:
-      "Skilled developer focused on architecting high-performance applications, robust distributed systems, and low-level engine development. Currently based in Germany, bridging theoretical computer science with pragmatic engineering.",
-    image:
-      "https://www.eyesandmore.de/dw/image/v2/BJBD_PRD/on/demandware.static/-/Library-Sites-Library-eyesandmore/default/dw942e6286/Biometrisches-Passbild-mit-Brille-desk.png",
+  sections: {
+    hero: {
+      displayName: "About",
+      title: "Software Engineer & Master's Student.",
+      description:
+        "Skilled developer focused on architecting high-performance applications, robust distributed systems, and low-level engine development. Currently based in Germany, bridging theoretical computer science with pragmatic engineering.",
+      imageUrl:
+        "https://www.eyesandmore.de/dw/image/v2/BJBD_PRD/on/demandware.static/-/Library-Sites-Library-eyesandmore/default/dw942e6286/Biometrisches-Passbild-mit-Brille-desk.png",
+      linkedinUrl: "https://linkedin.com",
+      githubUrl: "https://github.com",
+    },
+    education: {
+      displayName: "Education",
+      items: [
+        {
+          degree: "Master of Science",
+          institution: "Hochschule Heilbronn",
+          description:
+            "Specializing in advanced software architecture, concurrent systems, and high-performance computing.",
+          startDate: "2025-09-01",
+          endDate: "2026-09-01",
+        },
+        {
+          degree: "Bachelor of Science",
+          institution: "Hochschule Heilbronn",
+          description:
+            "Foundational computer science principles, data structures, algorithms, and applied software engineering.",
+          startDate: "2022-09-01",
+          endDate: "2025-09-01",
+        },
+      ],
+    },
+    skills: {
+      displayName: "Skills",
+      items: [
+        { name: "C++", startDate: "2021-01-01" },
+        { name: "C#", startDate: "2022-01-01" },
+        { name: "Java", startDate: "2022-01-01" },
+        { name: "Unity", startDate: "2023-01-01" },
+      ],
+    },
+    projects: {
+      displayName: "Projects",
+      items: [
+        {
+          title: "Game Engine Core",
+          link: "#",
+          description:
+            "A custom 3D rendering engine built from scratch to explore low-level graphics APIs and memory management techniques.",
+          imageUrl:
+            "https://img.magnific.com/vektoren-kostenlos/hintergrund-realistische-abstrakte-technologie-teilchen_23-2148431735.jpg?semt=ais_hybrid&w=740&q=80",
+          tags: ["C++", "OpenGL", "CMake"],
+        },
+        {
+          title: "Distributed Systems",
+          link: "#",
+          description:
+            "Implementation of a fault-tolerant distributed key-value store using the Raft consensus algorithm.",
+          imageUrl:
+            "https://img.magnific.com/vektoren-kostenlos/hintergrund-realistische-abstrakte-technologie-teilchen_23-2148431735.jpg?semt=ais_hybrid&w=740&q=80",
+          tags: ["Java", "Networking", "Concurrency"],
+        },
+        {
+          title: "Engine Architecture",
+          link: "#",
+          description:
+            "A scalable entity-component-system (ECS) framework designed for performance and cache-friendliness in simulation environments.",
+          imageUrl:
+            "https://img.magnific.com/vektoren-kostenlos/hintergrund-realistische-abstrakte-technologie-teilchen_23-2148431735.jpg?semt=ais_hybrid&w=740&q=80",
+          tags: ["C#", "Unity", "Architecture"],
+        },
+      ],
+    },
   },
-  education: [
-    {
-      degree: "Master of Science",
-      institution: "Hochschule Heilbronn",
-      description:
-        "Specializing in advanced software architecture, concurrent systems, and high-performance computing.",
-      startDate: "2025-09-01",
-      endDate: "2026-09-01",
+  legal: {
+    personalData: {
+      name: "DevPortfolio GmbH",
+      address: {
+        street: "Musterstraße 111",
+        zip: "90210",
+        city: "Musterstadt",
+        country: "Deutschland",
+      },
+      phone: "+49 (0) 123 44 55 66",
+      email: "mustermann@musterfirma.de",
     },
-    {
-      degree: "Bachelor of Science",
-      institution: "Hochschule Heilbronn",
-      description:
-        "Foundational computer science principles, data structures, algorithms, and applied software engineering.",
-      startDate: "2022-09-01",
-      endDate: "2025-09-01",
-    },
-  ],
-  skills: [
-    { name: "C++", startDate: "2021-01-01" },
-    { name: "C#", startDate: "2022-01-01" },
-    { name: "Java", startDate: "2022-01-01" },
-    { name: "Unity", startDate: "2023-01-01" },
-  ],
-  projects: [
-    {
-      title: "Game Engine Core",
-      link: "#",
-      description:
-        "A custom 3D rendering engine built from scratch to explore low-level graphics APIs and memory management techniques.",
-      imageUrl:
-        "https://img.magnific.com/vektoren-kostenlos/hintergrund-realistische-abstrakte-technologie-teilchen_23-2148431735.jpg?semt=ais_hybrid&w=740&q=80",
-      tags: ["C++", "OpenGL", "CMake"],
-    },
-    {
-      title: "Distributed Systems",
-      link: "#",
-      description:
-        "Implementation of a fault-tolerant distributed key-value store using the Raft consensus algorithm.",
-      imageUrl:
-        "https://img.magnific.com/vektoren-kostenlos/hintergrund-realistische-abstrakte-technologie-teilchen_23-2148431735.jpg?semt=ais_hybrid&w=740&q=80",
-      tags: ["Java", "Networking", "Concurrency"],
-    },
-    {
-      title: "Engine Architecture",
-      link: "#",
-      description:
-        "A scalable entity-component-system (ECS) framework designed for performance and cache-friendliness in simulation environments.",
-      imageUrl:
-        "https://img.magnific.com/vektoren-kostenlos/hintergrund-realistische-abstrakte-technologie-teilchen_23-2148431735.jpg?semt=ais_hybrid&w=740&q=80",
-      tags: ["C#", "Unity", "Architecture"],
-    },
-  ],
-  impress: {
-    title: "Impressum | DevPortfolio",
-    description: "Impress of the DevPortfolio",
-  },
-  privacy: {
-    title: "Datenschutzerklärung | DevPortfolio",
-    description: "Privacy Policy of the DevPortfolio",
     hosterData: {
       name: "Hoster GmbH",
       address: {
@@ -87,16 +104,5 @@ export const siteConfig: SiteConfig = {
         country: "Deutschland",
       },
     },
-  },
-  personalData: {
-    name: "DevPortfolio GmbH",
-    address: {
-      street: "Musterstraße 111",
-      zip: "90210",
-      city: "Musterstadt",
-      country: "Deutschland",
-    },
-    phone: "+49 (0) 123 44 55 66",
-    email: "mustermann@musterfirma.de",
   },
 };

@@ -1,20 +1,20 @@
 ---
 import { siteConfig } from "../data/config.ts";
-const { hero, linkedinUrl, githubUrl } = siteConfig;
+const { hero } = siteConfig.sections;
 ---
 
-<section id="about" class="hero-section">
+<section id={hero.displayName} class="hero-section">
   <div class="hero-content">
     <h1>{hero.title}</h1>
     <p>{hero.description}</p>
     <div class="hero-actions">
-      <a href={linkedinUrl} class="btn btn-primary" target="_blank">
+      <a href={hero.linkedinUrl} class="btn btn-primary" target="_blank">
         <span class="material-symbols-outlined" aria-hidden="true"
           >open_in_new</span
         > LinkedIn
       </a>
       <a
-        href={githubUrl}
+        href={hero.githubUrl}
         class="btn btn-outline"
         target="_blank"
         rel="noopener noreferrer"
@@ -27,7 +27,7 @@ const { hero, linkedinUrl, githubUrl } = siteConfig;
   <div class="hero-image-wrapper">
     <div class="image-border">
       <img
-        src={hero.image}
+        src={hero.imageUrl}
         alt="Profile picture"
         class="profile-img"
         loading="eager"

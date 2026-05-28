@@ -1,10 +1,10 @@
 ---
 import { siteConfig } from "../data/config";
 
-const { projects } = siteConfig;
+const { projects } = siteConfig.sections;
 ---
 
-<section id="projects" class="section">
+<section id={projects.displayName} class="section">
   <div class="section-header">
     <span class="material-symbols-outlined icon-primary">code_blocks</span>
     <h2>Featured Work</h2>
@@ -12,7 +12,7 @@ const { projects } = siteConfig;
 
   <div class="project-list">
     {
-      projects.map((project) => (
+      projects.items.map((project) => (
         <div class="card project-card">
           <div class="img-wrapper">
             <img

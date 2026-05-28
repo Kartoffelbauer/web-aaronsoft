@@ -11,10 +11,13 @@ import Footer from "../components/Footer.astro";
 import "../styles/legal.css";
 
 import { siteConfig } from "../data/config.ts";
-const { impress, personalData } = siteConfig;
+const { personalData } = siteConfig.legal;
 ---
 
-<BaseLayout title={impress.title} description={impress.description}>
+<BaseLayout
+  title=`Impressum | ${siteConfig.logo}`
+  description="Impressum von ${siteConfig.logo}"
+>
   <NavBar isMainPage={false} />
   <main class="container legal-content">
     <h1>Impressum</h1>

@@ -11,10 +11,13 @@ import Footer from "../components/Footer.astro";
 import "../styles/legal.css";
 
 import { siteConfig } from "../data/config.ts";
-const { privacy, personalData } = siteConfig;
+const { personalData, hosterData } = siteConfig.legal;
 ---
 
-<BaseLayout title={privacy.title} description={privacy.description}>
+<BaseLayout
+  title=`Datenschutz­erklärung | ${siteConfig.logo}`
+  description="Datenschutz­erklärung von ${siteConfig.logo}"
+>
   <NavBar isMainPage={false} />
   <main class="container legal-content privacy-content">
     <h1>Datenschutz&shy;erkl&auml;rung</h1>
@@ -108,13 +111,13 @@ const { privacy, personalData } = siteConfig;
     </p>
     <p>Wir setzen folgende(n) Hoster ein:</p>
     <p>
-      {privacy.hosterData.name}<br />
-      {privacy.hosterData.address.street}
+      {hosterData.name}<br />
+      {hosterData.address.street}
       <br />
-      {privacy.hosterData.address.zip}
-      {privacy.hosterData.address.city}
+      {hosterData.address.zip}
+      {hosterData.address.city}
       <br />
-      {privacy.hosterData.address.country}
+      {hosterData.address.country}
     </p>
     <h2>3. Allgemeine Hinweise und Pflicht&shy;informationen</h2>
     <h3>Datenschutz</h3>

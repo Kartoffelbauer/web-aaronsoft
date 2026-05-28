@@ -2,10 +2,10 @@
 import { siteConfig } from "../data/config.ts";
 import { getAcademicStatus } from "../utils/dateUtils.ts";
 
-const { education } = siteConfig;
+const { education } = siteConfig.sections;
 ---
 
-<section id="education" class="section">
+<section id={education.displayName} class="section">
   <div class="section-header">
     <span class="material-symbols-outlined icon-primary">school</span>
     <h2>Academic Journey</h2>
@@ -13,7 +13,7 @@ const { education } = siteConfig;
 
   <div class="timeline">
     {
-      education.map((item) => {
+      education.items.map((item) => {
         const { durationText, statusLabel, isActive } = getAcademicStatus(
           item.startDate,
           item.endDate,
