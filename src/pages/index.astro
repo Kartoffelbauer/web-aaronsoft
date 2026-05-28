@@ -11,9 +11,12 @@ import Education from "../components/Education.astro";
 import Skills from "../components/Skills.astro";
 import Projects from "../components/Projects.astro";
 import Footer from "../components/Footer.astro";
+
+import { siteConfig } from "../data/config.ts";
+const { hero } = siteConfig;
 ---
 
-<BaseLayout title="Aaronsoft | Software Engineer">
+<BaseLayout title={hero.title} description={hero.description}>
   <NavBar />
   <main class="container">
     <Hero />

@@ -1,7 +1,18 @@
 ---
 import { siteConfig } from "../data/config";
 
-const { nav, resumeUrl } = siteConfig;
+export interface NavLink {
+  label: string;
+  url: string;
+}
+
+const { nav } = siteConfig;
+const navLinks = [
+  { label: "About", url: "#about" },
+  { label: "Education", url: "#education" },
+  { label: "Skills", url: "#skills" },
+  { label: "Projects", url: "#projects" },
+] as NavLink[];
 ---
 
 <nav class="navbar">
@@ -10,7 +21,7 @@ const { nav, resumeUrl } = siteConfig;
 
     <div class="nav-links">
       {
-        nav.map((link) => (
+        navLinks.map((link) => (
           <a href={link.url} class="nav-link">
             {link.label}
           </a>
@@ -18,7 +29,8 @@ const { nav, resumeUrl } = siteConfig;
       }
     </div>
 
-    <a href={resumeUrl} class="btn btn-primary btn-sm" target="_blank">Resume</a
+    <a href={nav.resumeUrl} class="btn btn-primary btn-sm" target="_blank"
+      >Resume</a
     >
   </div>
 </nav>

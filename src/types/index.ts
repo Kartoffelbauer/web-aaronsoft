@@ -2,11 +2,6 @@
  * @fileoverview Global type definitions for the application.
  */
 
-export interface NavLink {
-  label: string;
-  url: string;
-}
-
 export interface EducationItem {
   degree: string;
   status: string;
@@ -25,24 +20,27 @@ export interface ProjectItem {
   title: string;
   link: string;
   description: string;
-  image: string;
+  imageUrl: string;
   tags: string[];
 }
 
 export interface SiteConfig {
+  logo: string;
+  linkedinUrl: string;
+  githubUrl: string;
+  nav: {
+    resumeUrl: string;
+  };
   hero: {
     title: string;
     description: string;
-    linkedin: string;
-    github: string;
     image: string;
   };
-  nav: NavLink[];
-  resumeUrl: string;
   education: EducationItem[];
   skills: SkillItem[];
   projects: ProjectItem[];
-  footer: {
+  impress: {
     title: string;
+    description: string;
   };
 }

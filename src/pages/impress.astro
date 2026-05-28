@@ -1,0 +1,19 @@
+---
+/**
+ * @fileoverview Main entry point mapping to the root '/' URL.
+ * Assembles the layout and section components cleanly.
+ */
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NavBar from "../components/NavBar.astro";
+import Footer from "../components/Footer.astro";
+
+import { siteConfig } from "../data/config.ts";
+const { impress } = siteConfig;
+---
+
+<BaseLayout title={impress.title} description={impress.description}>
+  <NavBar />
+  <main class="container"></main>
+  <Footer />
+</BaseLayout>

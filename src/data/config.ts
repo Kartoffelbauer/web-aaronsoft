@@ -5,22 +5,19 @@
 import type { SiteConfig } from "../types/index.ts";
 
 export const siteConfig: SiteConfig = {
+  logo: "DevPortfolio",
+  linkedinUrl: "https://linkedin.com",
+  githubUrl: "https://github.com",
+  nav: {
+    resumeUrl: "/assets/resume.pdf",
+  },
   hero: {
     title: "Software Engineer & Master's Student.",
     description:
       "Skilled developer focused on architecting high-performance applications, robust distributed systems, and low-level engine development. Currently based in Germany, bridging theoretical computer science with pragmatic engineering.",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
     image:
       "https://www.eyesandmore.de/dw/image/v2/BJBD_PRD/on/demandware.static/-/Library-Sites-Library-eyesandmore/default/dw942e6286/Biometrisches-Passbild-mit-Brille-desk.png",
   },
-  nav: [
-    { label: "About", url: "#about" },
-    { label: "Education", url: "#education" },
-    { label: "Skills", url: "#skills" },
-    { label: "Projects", url: "#projects" },
-  ],
-  resumeUrl: "/assets/resume.pdf",
   education: [
     {
       degree: "Master of Science",
@@ -53,7 +50,7 @@ export const siteConfig: SiteConfig = {
       link: "#",
       description:
         "A custom 3D rendering engine built from scratch to explore low-level graphics APIs and memory management techniques.",
-      image:
+      imageUrl:
         "https://img.magnific.com/vektoren-kostenlos/hintergrund-realistische-abstrakte-technologie-teilchen_23-2148431735.jpg?semt=ais_hybrid&w=740&q=80",
       tags: ["C++", "OpenGL", "CMake"],
     },
@@ -62,7 +59,7 @@ export const siteConfig: SiteConfig = {
       link: "#",
       description:
         "Implementation of a fault-tolerant distributed key-value store using the Raft consensus algorithm.",
-      image:
+      imageUrl:
         "https://img.magnific.com/vektoren-kostenlos/hintergrund-realistische-abstrakte-technologie-teilchen_23-2148431735.jpg?semt=ais_hybrid&w=740&q=80",
       tags: ["Java", "Networking", "Concurrency"],
     },
@@ -71,12 +68,13 @@ export const siteConfig: SiteConfig = {
       link: "#",
       description:
         "A scalable entity-component-system (ECS) framework designed for performance and cache-friendliness in simulation environments.",
-      image:
+      imageUrl:
         "https://img.magnific.com/vektoren-kostenlos/hintergrund-realistische-abstrakte-technologie-teilchen_23-2148431735.jpg?semt=ais_hybrid&w=740&q=80",
       tags: ["C#", "Unity", "Architecture"],
     },
   ],
-  footer: {
-    title: "DevPortfolio",
+  impress: {
+    title: "Impress",
+    description: "lol",
   },
 };

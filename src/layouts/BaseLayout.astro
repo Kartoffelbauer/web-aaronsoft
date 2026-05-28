@@ -2,8 +2,14 @@
 import "../styles/theme.css";
 import "../styles/main.css";
 
-import { siteConfig } from "../data/config.ts";
-const { hero } = siteConfig;
+// 1. Define the expected shape of your props (TypeScript Best Practice)
+export interface Props {
+  title: string;
+  description: string;
+}
+
+// 2. Extract the variables from the global Astro.props object
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -11,8 +17,8 @@ const { hero } = siteConfig;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=width, initial-scale=1.0" />
-    <title>{hero.title}</title>
-    <meta name="description" content={hero.description} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

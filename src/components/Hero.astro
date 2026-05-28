@@ -1,6 +1,6 @@
 ---
 import { siteConfig } from "../data/config.ts";
-const { hero } = siteConfig;
+const { hero, linkedinUrl, githubUrl } = siteConfig;
 ---
 
 <section id="about" class="hero-section">
@@ -8,13 +8,13 @@ const { hero } = siteConfig;
     <h1>{hero.title}</h1>
     <p>{hero.description}</p>
     <div class="hero-actions">
-      <a href={hero.linkedin} class="btn btn-primary" target="_blank">
+      <a href={linkedinUrl} class="btn btn-primary" target="_blank">
         <span class="material-symbols-outlined" aria-hidden="true"
           >open_in_new</span
         > LinkedIn
       </a>
       <a
-        href={hero.github}
+        href={githubUrl}
         class="btn btn-outline"
         target="_blank"
         rel="noopener noreferrer"
