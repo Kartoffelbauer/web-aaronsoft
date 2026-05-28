@@ -10,7 +10,7 @@ const { projects } = siteConfig;
     <h2>Featured Work</h2>
   </div>
 
-  <div class="projects">
+  <div class="project-list">
     {
       projects.map((project) => (
         <div class="card project-card">
@@ -52,7 +52,7 @@ const { projects } = siteConfig;
 </section>
 
 <style>
-  .projects {
+  .project-list {
     display: grid;
     gap: var(--spacing-lg);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));

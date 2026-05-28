@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  margin-top: var(--spacing-xl);
+  margin-top: calc(var(--spacing-xl) + var(--spacing-lg));
   background-color: var(--theme-background);
   color: var(--theme-on-background);
   font-family: var(--font-body);
