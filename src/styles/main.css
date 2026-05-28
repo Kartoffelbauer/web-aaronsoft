@@ -7,9 +7,11 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--spacing-xl);
 }
 
 body {
+  margin-top: var(--spacing-xl);
   background-color: var(--theme-background);
   color: var(--theme-on-background);
   font-family: var(--font-body);
