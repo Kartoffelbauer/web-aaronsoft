@@ -80,6 +80,15 @@ export const siteConfig: SiteConfig = {
   privacy: {
     title: "Datenschutzerklärung | DevPortfolio",
     description: "Privacy Policy of the DevPortfolio",
+    hosterData: {
+      name: "Hoster GmbH",
+      address: {
+        street: "Musterstraße 111",
+        zip: "90210",
+        city: "Musterstadt",
+        country: "Deutschland",
+      },
+    },
   },
   personalData: {
     name: "DevPortfolio GmbH",
@@ -91,14 +100,5 @@ export const siteConfig: SiteConfig = {
     },
     phone: "+49 (0) 123 44 55 66",
     email: "mustermann@musterfirma.de",
-  },
-  hoster: {
-    name: "Hoster GmbH",
-    address: {
-      street: "Musterstraße 111",
-      zip: "90210",
-      city: "Musterstadt",
-      country: "Deutschland",
-    },
   },
 };

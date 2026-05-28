@@ -11,7 +11,7 @@ import Footer from "../components/Footer.astro";
 import "../styles/legal.css";
 
 import { siteConfig } from "../data/config.ts";
-const { privacy, personalData, hoster } = siteConfig;
+const { privacy, personalData } = siteConfig;
 ---
 
 <BaseLayout title={privacy.title} description={privacy.description}>
@@ -108,13 +108,13 @@ const { privacy, personalData, hoster } = siteConfig;
     </p>
     <p>Wir setzen folgende(n) Hoster ein:</p>
     <p>
-      {hoster.name}<br />
-      {hoster.address.street}
+      {privacy.hosterData.name}<br />
+      {privacy.hosterData.address.street}
       <br />
-      {hoster.address.zip}
-      {hoster.address.city}
+      {privacy.hosterData.address.zip}
+      {privacy.hosterData.address.city}
       <br />
-      {hoster.address.country}
+      {privacy.hosterData.address.country}
     </p>
     <h2>3. Allgemeine Hinweise und Pflicht&shy;informationen</h2>
     <h3>Datenschutz</h3>

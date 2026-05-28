@@ -46,6 +46,15 @@ export interface SiteConfig {
   privacy: {
     title: string;
     description: string;
+    hosterData: {
+      name: string;
+      address: {
+        street: string;
+        city: string;
+        zip: string;
+        country: string;
+      };
+    };
   };
   personalData: {
     name: string;
@@ -57,14 +66,5 @@ export interface SiteConfig {
     };
     email: string;
     phone: string;
-  };
-  hoster: {
-    name: string;
-    address: {
-      street: string;
-      city: string;
-      zip: string;
-      country: string;
-    };
   };
 }
