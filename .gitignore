@@ -29,7 +29,11 @@ Desktop.ini
 
 # IDEs and Text Editors
 .idea/
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+!.vscode/extensions.json
 *.swp
 *.swo
 *~

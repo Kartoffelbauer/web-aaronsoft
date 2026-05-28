@@ -22,7 +22,10 @@ a {
   color: inherit;
 }
 
-h1, h2, h3, .logo {
+h1,
+h2,
+h3,
+.logo {
   font-family: var(--font-headline);
   color: var(--theme-on-surface);
 }
@@ -39,7 +42,8 @@ h1, h2, h3, .logo {
 .section {
   padding-top: var(--spacing-md);
   padding-bottom: var(--spacing-lg);
-  border-top: 1px solid color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
+  border-top: 1px solid
+    color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
 }
 
 .section-header {

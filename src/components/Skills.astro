@@ -1,6 +1,6 @@
 ---
-import { siteConfig } from '../data/config';
-import { calculateYearsOfExperience } from '../utils/dateUtils';
+import { siteConfig } from "../data/config";
+import { calculateYearsOfExperience } from "../utils/dateUtils";
 
 const { skills } = siteConfig;
 ---
@@ -12,15 +12,19 @@ const { skills } = siteConfig;
   </div>
 
   <div class="grid-4">
-    {skills.map((skill) => {
-      const years = calculateYearsOfExperience(skill.startDate);
-      return (
-        <div class="card skill-card">
-          <h3>{skill.name}</h3>
-          <span>{years} Year{years !== 1 ? 's' : ''} Exp</span>
-        </div>
-      );
-    })}
+    {
+      skills.map((skill) => {
+        const years = calculateYearsOfExperience(skill.startDate);
+        return (
+          <div class="card skill-card">
+            <h3>{skill.name}</h3>
+            <span>
+              {years} Year{years !== 1 ? "s" : ""} Exp
+            </span>
+          </div>
+        );
+      })
+    }
   </div>
 </section>
 

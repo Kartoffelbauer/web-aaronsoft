@@ -1,5 +1,5 @@
 ---
-import { siteConfig } from '../data/config.ts';
+import { siteConfig } from "../data/config.ts";
 const { hero } = siteConfig;
 ---
 
@@ -9,9 +9,16 @@ const { hero } = siteConfig;
     <p>{hero.description}</p>
     <div class="hero-actions">
       <a href={hero.linkedin} class="btn btn-primary" target="_blank">
-        <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span> LinkedIn
+        <span class="material-symbols-outlined" aria-hidden="true"
+          >open_in_new</span
+        > LinkedIn
       </a>
-      <a href={hero.github} class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+      <a
+        href={hero.github}
+        class="btn btn-outline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         GitHub
       </a>
     </div>
@@ -19,7 +26,12 @@ const { hero } = siteConfig;
 
   <div class="hero-image-wrapper">
     <div class="image-border">
-      <img src={hero.image} alt="Profile picture" class="profile-img" loading="eager" />
+      <img
+        src={hero.image}
+        alt="Profile picture"
+        class="profile-img"
+        loading="eager"
+      />
     </div>
   </div>
 </section>
@@ -58,7 +70,9 @@ const { hero } = siteConfig;
   }
 
   @media (min-width: 768px) {
-    .hero-image-wrapper { justify-content: flex-end; }
+    .hero-image-wrapper {
+      justify-content: flex-end;
+    }
   }
 
   .image-border {

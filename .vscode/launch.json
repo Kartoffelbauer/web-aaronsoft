@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Server: Astro Dev",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "restart": true
+    },
+    {
+      "name": "Client: Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4321",
+      "webRoot": "${workspaceFolder}",
+      "userDataDir": false
+    },
+    {
+      "name": "Client: Firefox",
+      "type": "firefox",
+      "request": "launch",
+      "url": "http://localhost:4321",
+      "webRoot": "${workspaceFolder}",
+      "reAttach": true
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack: Astro + Firefox",
+      "configurations": ["Server: Astro Dev", "Client: Firefox"]
+    },
+    {
+      "name": "Full Stack: Astro + Chrome",
+      "configurations": ["Server: Astro Dev", "Client: Chrome"]
+    }
+  ]
+}

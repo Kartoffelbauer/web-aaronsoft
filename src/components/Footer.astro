@@ -1,6 +1,6 @@
 ---
-import { siteConfig } from '../data/config';
-import { getCurrentYear } from '../utils/dateUtils';
+import { siteConfig } from "../data/config";
+import { getCurrentYear } from "../utils/dateUtils";
 
 const { hero } = siteConfig;
 const currentYear = getCurrentYear();
@@ -9,7 +9,9 @@ const currentYear = getCurrentYear();
 <footer class="footer">
   <div class="container footer-content">
     <div class="footer-logo">DevPortfolio</div>
-    <div class="footer-copyright">&copy; {currentYear} Software Engineer Portfolio. Built with precision.</div>
+    <div class="footer-copyright">
+      &copy; {currentYear} Software Engineer Portfolio. Built with precision.
+    </div>
 
     <div class="footer-links">
       <a href={hero.github} target="_blank">GitHub</a>

@@ -1,5 +1,5 @@
 ---
-import { siteConfig } from '../data/config';
+import { siteConfig } from "../data/config";
 
 const { nav, resumeUrl } = siteConfig;
 ---
@@ -9,12 +9,17 @@ const { nav, resumeUrl } = siteConfig;
     <div class="logo">DevPortfolio</div>
 
     <div class="nav-links">
-      {nav.map((link) => (
-        <a href={link.url} class="nav-link">{link.label}</a>
-      ))}
+      {
+        nav.map((link) => (
+          <a href={link.url} class="nav-link">
+            {link.label}
+          </a>
+        ))
+      }
     </div>
 
-    <a href={resumeUrl} class="btn btn-primary btn-sm" target="_blank">Resume</a>
+    <a href={resumeUrl} class="btn btn-primary btn-sm" target="_blank">Resume</a
+    >
   </div>
 </nav>
 
@@ -67,6 +72,8 @@ const { nav, resumeUrl } = siteConfig;
   }
 
   @media (min-width: 768px) {
-    .nav-links { display: flex; }
+    .nav-links {
+      display: flex;
+    }
   }
 </style>
