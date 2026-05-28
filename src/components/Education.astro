@@ -14,23 +14,19 @@ const { education } = siteConfig;
   <div class="timeline">
     {
       education.map((item) => {
-        // Build-time calculation (Acts as the initial SEO-friendly state)
         const { durationText, statusLabel, isActive } = getAcademicStatus(
           item.startDate,
           item.endDate,
         );
 
         return (
-          <div
-            class="timeline-item js-edu-item"
+          <academic-tracker
+            class="timeline-item"
             data-start={item.startDate}
             data-end={item.endDate}
           >
             <div
-              class:list={[
-                "timeline-dot js-edu-dot",
-                isActive ? "active" : "inactive",
-              ]}
+              class:list={["timeline-dot", isActive ? "active" : "inactive"]}
             />
 
             <div class="timeline-content">
@@ -38,7 +34,7 @@ const { education } = siteConfig;
                 <h3>{item.degree}</h3>
                 <span
                   class:list={[
-                    "timeline-badge js-edu-badge",
+                    "timeline-badge",
                     isActive ? "badge-active" : "badge-inactive",
                   ]}
                 >
@@ -47,10 +43,10 @@ const { education } = siteConfig;
               </div>
 
               <p class="timeline-inst">{item.institution}</p>
-              <p class="timeline-date js-edu-duration">{durationText}</p>
+              <p class="timeline-date">{durationText}</p>
               <p class="timeline-desc">{item.description}</p>
             </div>
-          </div>
+          </academic-tracker>
         );
       })
     }
@@ -60,47 +56,39 @@ const { education } = siteConfig;
 <script>
   import { getAcademicStatus } from "../utils/dateUtils.ts";
 
-  function hydrateAcademicTimelines() {
-    const items = document.querySelectorAll<HTMLElement>(".js-edu-item");
-
-    items.forEach((item) => {
-      const start = item.dataset.start;
-      const end = item.dataset.end;
+  // 2. Define the Custom Element behavior
+  class AcademicTracker extends HTMLElement {
+    connectedCallback() {
+      const start = this.dataset.start;
+      const end = this.dataset.end;
 
       if (!start || !end) return;
 
-      // Recalculate using the client's current runtime clock
       const { durationText, statusLabel, isActive } = getAcademicStatus(
         start,
         end,
       );
 
-      // DOM Elements
-      const dot = item.querySelector(".js-edu-dot");
-      const badge = item.querySelector(".js-edu-badge");
-      const durationEl = item.querySelector(".js-edu-duration");
+      // 3. Scoped DOM updates (no document.querySelector needed)
+      this.querySelector(".timeline-dot")!.className =
+        `timeline-dot ${isActive ? "active" : "inactive"}`;
 
-      // Inject runtime state
-      if (dot)
-        dot.className = `timeline-dot js-edu-dot ${isActive ? "active" : "inactive"}`;
-      if (badge) {
-        badge.className = `timeline-badge js-edu-badge ${isActive ? "badge-active" : "badge-inactive"}`;
-        badge.textContent = statusLabel;
-      }
-      if (durationEl) durationEl.textContent = durationText;
-    });
+      const badge = this.querySelector(".timeline-badge")!;
+      badge.className = `timeline-badge ${isActive ? "badge-active" : "badge-inactive"}`;
+      badge.textContent = statusLabel;
+
+      this.querySelector(".timeline-date")!.textContent = durationText;
+    }
   }
 
-  // Execute as soon as the DOM is ready
-  document.addEventListener("DOMContentLoaded", hydrateAcademicTimelines);
+  // 4. Register the component with the browser
+  customElements.define("academic-tracker", AcademicTracker);
 </script>
 
 <style>
-  /* * 'display: contents' tells the browser to treat the <academic-tracker> wrapper
-   * as if it doesn't exist for layout purposes, preventing it from breaking your Flexbox/Grid CSS!
-   */
+  /* Ensure the custom element behaves like a block container */
   academic-tracker {
-    display: contents;
+    display: block;
   }
 
   /* --- Original Timeline CSS --- */

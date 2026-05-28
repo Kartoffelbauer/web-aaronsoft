@@ -1,9 +1,4 @@
 ---
-// src/components/Skills.astro
-/**
- * @fileoverview Skills matrix component.
- * Automatically calculates years of experience at runtime.
- */
 import { siteConfig } from "../data/config.ts";
 import { getExperienceString } from "../utils/dateUtils.ts";
 
@@ -19,17 +14,13 @@ const { skills } = siteConfig;
   <div class="skill-list">
     {
       skills.map((skill) => {
-        // Build-time calculation (Acts as the initial SEO-friendly state)
         const expString = getExperienceString(skill.startDate);
 
         return (
-          <div
-            class="card skill-card js-skill-item"
-            data-start={skill.startDate}
-          >
+          <skill-tracker class="card skill-card" data-start={skill.startDate}>
             <h3>{skill.name}</h3>
-            <span class="js-skill-exp">{expString}</span>
-          </div>
+            <span class="skill-exp">{expString}</span>
+          </skill-tracker>
         );
       })
     }
@@ -39,25 +30,18 @@ const { skills } = siteConfig;
 <script>
   import { getExperienceString } from "../utils/dateUtils.ts";
 
-  function hydrateSkills() {
-    const items = document.querySelectorAll<HTMLElement>(".js-skill-item");
-
-    items.forEach((item) => {
-      const start = item.dataset.start;
-      if (!start) return;
-
-      // Find the specific span within this card
-      const expEl = item.querySelector(".js-skill-exp");
-
-      // Inject the newly calculated string based on the runtime clock
-      if (expEl) {
-        expEl.textContent = getExperienceString(start);
+  class SkillTracker extends HTMLElement {
+    connectedCallback() {
+      const start = this.dataset.start;
+      if (start) {
+        // Hydrate instantly upon mounting
+        this.querySelector(".skill-exp")!.textContent =
+          getExperienceString(start);
       }
-    });
+    }
   }
 
-  // Execute as soon as the DOM is ready
-  document.addEventListener("DOMContentLoaded", hydrateSkills);
+  customElements.define("skill-tracker", SkillTracker);
 </script>
 
 <style>

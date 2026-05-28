@@ -1,28 +1,20 @@
+// src/utils/dateUtils.ts
 /**
  * @fileoverview Pure functional utility methods for date and academic calculations.
- * Designed to be executed on both Server (Build-time) and Client (Runtime).
  */
 
-/**
- * Determines if a given academic timeline is currently active based on the system clock.
- * @param endDate The target graduation date
- * @returns True if the end date is in the future
- */
-export function isCurrentlyActive(endDate: string): boolean {
+// --- INTERNAL HELPERS (Not exported) ---
+
+function isCurrentlyActive(endDate: string): boolean {
   return new Date(endDate).getTime() > new Date().getTime();
 }
 
-/**
- * Calculates the number of academic semesters passed.
- * Assumes a standard 6-month academic semester.
- */
-export function calculateSemesters(
+function calculateSemesters(
   startDate: string,
   endDate: string,
   isActive: boolean,
 ): number {
   const start = new Date(startDate);
-  // If active, calculate up to today. If completed, calculate up to the graduation date.
   const end = isActive ? new Date() : new Date(endDate);
 
   const months =
@@ -30,6 +22,8 @@ export function calculateSemesters(
     (end.getMonth() - start.getMonth());
   return Math.max(1, Math.floor(months / 6) + 1);
 }
+
+// --- PUBLIC API (Exported) ---
 
 /**
  * Formats the academic payload into UI-ready strings and state flags.
@@ -56,8 +50,6 @@ export function getAcademicStatus(startDate: string, endDate: string) {
 
 /**
  * Calculates the number of years between a given past date and today.
- * @param startDate The starting date in ISO format (e.g. '2019-05-01')
- * @returns The number of full years passed
  */
 export function calculateYearsOfExperience(startDate: string): number {
   const start = new Date(startDate);
@@ -70,15 +62,11 @@ export function calculateYearsOfExperience(startDate: string): number {
     years--;
   }
 
-  // Ensure we don't return negative years, standardizes at least 0
   return Math.max(0, years);
 }
 
 /**
- * Generates a formatted experience string (e.g., "3 Years Exp" or "1 Year Exp").
- * Designed for cross-environment execution (Node.js build-time & Browser runtime).
- * @param startDate The starting date in ISO format
- * @returns A clean, readable experience string
+ * Generates a formatted experience string (e.g., "3 Years Exp").
  */
 export function getExperienceString(startDate: string): string {
   const years = calculateYearsOfExperience(startDate);
