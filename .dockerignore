@@ -7,19 +7,24 @@ Dockerfile
 README.md
 LICENSE
 
-# Astro Specific
+# Build output
+dist/
+
+# Generated types
 .astro/
 
-# Environment Variables (Security)
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment Variables
 .env
 .env.*
-
-# Node Files
-node_modules/
-dist/
-build/
-coverage/
-*.log
 
 # System Files (macOS & Windows)
 .DS_Store

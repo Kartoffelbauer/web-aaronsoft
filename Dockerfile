@@ -2,7 +2,7 @@
 # Stage 1: Build Environment (Node.js)
 # ==============================================================================
 # Use a lightweight Alpine-based Node image for the build step
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
