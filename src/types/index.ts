@@ -47,4 +47,24 @@ export interface SiteConfig {
     title: string;
     description: string;
   };
+  personalData: {
+    name: string;
+    address: {
+      street: string;
+      city: string;
+      zip: string;
+      country: string;
+    };
+    email: string;
+    phone: string;
+  };
+  hoster: {
+    name: string;
+    address: {
+      street: string;
+      city: string;
+      zip: string;
+      country: string;
+    };
+  };
 }

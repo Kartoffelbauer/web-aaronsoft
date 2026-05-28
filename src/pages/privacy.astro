@@ -11,7 +11,7 @@ import Footer from "../components/Footer.astro";
 import "../styles/legal.css";
 
 import { siteConfig } from "../data/config.ts";
-const { privacy } = siteConfig;
+const { privacy, personalData, hoster } = siteConfig;
 ---
 
 <BaseLayout title={privacy.title} description={privacy.description}>
@@ -108,9 +108,13 @@ const { privacy } = siteConfig;
     </p>
     <p>Wir setzen folgende(n) Hoster ein:</p>
     <p>
-      Musterhosting AG<br />
-      Musterweg 100<br />
-      90210 Musterstadt
+      {hoster.name}<br />
+      {hoster.address.street}
+      <br />
+      {hoster.address.zip}
+      {hoster.address.city}
+      <br />
+      {hoster.address.country}
     </p>
     <h2>3. Allgemeine Hinweise und Pflicht&shy;informationen</h2>
     <h3>Datenschutz</h3>
@@ -140,13 +144,16 @@ const { privacy } = siteConfig;
       Website ist:
     </p>
     <p>
-      Beispielfirma<br />
-      Musterweg 10<br />
-      90210 Musterstadt
+      {personalData.name}<br />
+      {personalData.address.street}<br />
+      {personalData.address.zip}
+      {personalData.address.city}<br />
+      {personalData.address.country}
     </p>
     <p>
-      Telefon: +49 (0) 123 44 55 66<br />
-      E-Mail: info@beispielfirma.de
+      Telefon: <a href={`tel:${personalData.phone}`}>{personalData.phone}</a><br
+      />
+      E-Mail: <a href={`mailto:${personalData.email}`}>{personalData.email}</a>
     </p>
     <p>
       Verantwortliche Stelle ist die nat&uuml;rliche oder juristische Person,

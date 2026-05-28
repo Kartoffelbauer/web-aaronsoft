@@ -11,7 +11,7 @@ import Footer from "../components/Footer.astro";
 import "../styles/legal.css";
 
 import { siteConfig } from "../data/config.ts";
-const { impress } = siteConfig;
+const { impress, personalData } = siteConfig;
 ---
 
 <BaseLayout title={impress.title} description={impress.description}>
@@ -20,17 +20,18 @@ const { impress } = siteConfig;
     <h1>Impressum</h1>
 
     <p>
-      Max Mustermann<br />
-      Musterstra&szlig;e 111<br />
-      Geb&auml;ude 44<br />
-      90210 Musterstadt
+      {personalData.name}<br />
+      {personalData.address.street}<br />
+      {personalData.address.zip}
+      {personalData.address.city}<br />
+      {personalData.address.country}
     </p>
 
     <h2>Kontakt</h2>
     <p>
-      Telefon: +49 (0) 123 44 55 66<br />
-      Telefax: +49 (0) 123 44 55 99<br />
-      E-Mail: mustermann@musterfirma.de
+      Telefon: <a href={`tel:${personalData.phone}`}>{personalData.phone}</a><br
+      />
+      E-Mail: <a href={`mailto:${personalData.email}`}>{personalData.email}</a>
     </p>
 
     <p>Quelle: <a href="https://www.e-recht24.de">eRecht24</a></p>
