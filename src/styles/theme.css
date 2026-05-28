@@ -17,6 +17,9 @@
   --theme-surface-container-lowest: #ffffff;
   --theme-surface-container-low: #f8fafc;
   --theme-surface-container: #f1f5f9;
+  --theme-link: #005ac2;
+  --theme-link-visited: #6610f2;
+  --theme-link-hover: #004499;
 
   /* Typography */
   --font-headline: "Inter", sans-serif;
@@ -48,5 +51,8 @@
     --theme-surface-container-lowest: #060d20;
     --theme-surface-container-low: #131b2e;
     --theme-surface-container: #171f33;
+    --theme-link: #adc6ff;
+    --theme-link-visited: #b197fc;
+    --theme-link-hover: #dbe2fd;
   }
 }
