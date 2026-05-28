@@ -11,7 +11,7 @@ const { skills } = siteConfig;
     <h2>Core Expertise</h2>
   </div>
 
-  <div class="grid-4">
+  <div class="skills">
     {
       skills.map((skill) => {
         const years = calculateYearsOfExperience(skill.startDate);
@@ -29,6 +29,12 @@ const { skills } = siteConfig;
 </section>
 
 <style>
+  .skills {
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  }
+
   .skill-card {
     padding: var(--spacing-md);
   }

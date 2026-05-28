@@ -61,37 +61,6 @@ h3,
   letter-spacing: -0.02em;
 }
 
-/*
- * FLUID GRIDS
- * auto-fit automatically wraps columns into rows when they fall below the min width.
- * This completely removes the need for @media queries for grid wrapping.
- */
-
-.grid-2 {
-  display: grid;
-  gap: var(--spacing-lg);
-  /* Minimum column width 320px, otherwise take up 1 fraction of space */
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-4 {
-  display: grid;
-  gap: var(--spacing-md);
-  /* Minimum column width 200px, otherwise take up 1 fraction of space */
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-}
-
-@media (max-width: 800px) {
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-
-  .grid-2 > * {
-    min-width: 0;
-    overflow: hidden; /* Prevents text/images from spilling out */
-  }
-}
-
 /* UI primitives (Buttons, Base Cards, Icons) */
 
 /* Icons */
