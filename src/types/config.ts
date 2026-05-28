@@ -1,5 +1,5 @@
 /**
- * @fileoverview Global type definitions for the application.
+ * @fileoverview Global configuration type definitions.
  */
 
 export interface EducationItem {
@@ -40,6 +40,10 @@ export interface SiteConfig {
   skills: SkillItem[];
   projects: ProjectItem[];
   impress: {
+    title: string;
+    description: string;
+  };
+  privacy: {
     title: string;
     description: string;
   };

@@ -2,7 +2,7 @@
 /**
  * @fileoverview Configuration file for the portfolio content.
  */
-import type { SiteConfig } from "../types/index.ts";
+import type { SiteConfig } from "../types/config.ts";
 
 export const siteConfig: SiteConfig = {
   logo: "DevPortfolio",
@@ -74,7 +74,11 @@ export const siteConfig: SiteConfig = {
     },
   ],
   impress: {
-    title: "Impress",
-    description: "lol",
+    title: "Impressum | DevPortfolio",
+    description: "Impress of the DevPortfolio",
+  },
+  privacy: {
+    title: "Datenschutzerklärung | DevPortfolio",
+    description: "Privacy Policy of the DevPortfolio",
   },
 };
