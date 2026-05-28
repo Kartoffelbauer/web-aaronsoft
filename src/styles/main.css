@@ -79,6 +79,17 @@ h3,
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
 }
 
+@media (max-width: 800px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-2 > * {
+    min-width: 0;
+    overflow: hidden; /* Prevents text/images from spilling out */
+  }
+}
+
 /* UI primitives (Buttons, Base Cards, Icons) */
 
 /* Icons */
