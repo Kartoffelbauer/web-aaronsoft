@@ -28,6 +28,8 @@
   --spacing-md: 16px;
   --spacing-lg: 32px;
   --spacing-xl: 64px;
+
+  --border-radius-base: 0.25rem;
 }
 
 @media (prefers-color-scheme: dark) {

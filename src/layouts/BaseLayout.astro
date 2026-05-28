@@ -2,15 +2,8 @@
 import '../styles/theme.css';
 import '../styles/main.css';
 
-interface Props {
-  title: string;
-  description?: string;
-}
-
-const {
-  title,
-  description = "Portfolio of a Software Engineer and Master's Student"
-} = Astro.props;
+import { siteConfig } from '../data/config.ts';
+const { hero } = siteConfig;
 ---
 
 <!DOCTYPE html>
@@ -18,8 +11,8 @@ const {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
+  <title>{hero.title}</title>
+  <meta name="description" content={hero.description} />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
