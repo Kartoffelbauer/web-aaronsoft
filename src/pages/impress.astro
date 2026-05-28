@@ -8,13 +8,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
 
+import "../styles/legal.css";
+
 import { siteConfig } from "../data/config.ts";
 const { impress } = siteConfig;
 ---
 
 <BaseLayout title={impress.title} description={impress.description}>
   <NavBar isMainPage={false} />
-  <main class="container impress-section">
+  <main class="container legal-content">
     <h1>Impressum</h1>
 
     <p>
@@ -35,12 +37,3 @@ const { impress } = siteConfig;
   </main>
   <Footer />
 </BaseLayout>
-
-<style>
-  .impress-section h1 {
-    padding-top: var(--spacing-lg);
-  }
-  .impress-section p {
-    margin-bottom: var(--spacing-md);
-  }
-</style>

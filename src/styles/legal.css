@@ -1,0 +1,8 @@
+@import "./theme.css";
+@import "./main.css";
+
+.legal-content {
+  p {
+    margin-bottom: var(--spacing-md);
+  }
+}

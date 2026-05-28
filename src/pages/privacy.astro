@@ -8,13 +8,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
 
+import "../styles/legal.css";
+
 import { siteConfig } from "../data/config.ts";
 const { privacy } = siteConfig;
 ---
 
 <BaseLayout title={privacy.title} description={privacy.description}>
   <NavBar isMainPage={false} />
-  <main class="container privacy-section">
+  <main class="container legal-content privacy-content">
     <h1>Datenschutz&shy;erkl&auml;rung</h1>
     <h2>1. Datenschutz auf einen Blick</h2>
     <h3>Allgemeine Hinweise</h3>
@@ -369,10 +371,18 @@ noreferrer">https://policies.google.com/privacy?hl=de</a
 </BaseLayout>
 
 <style>
-  .privacy-section h1 {
-    padding-top: var(--spacing-lg);
-  }
-  .privacy-section p {
-    margin-bottom: var(--spacing-md);
+  .privacy-content {
+    p {
+      text-align: justify;
+    }
+
+    ul {
+      padding-bottom: var(--spacing-md);
+      padding-left: var(--spacing-lg);
+
+      li {
+        padding-left: var(--spacing-md);
+      }
+    }
   }
 </style>
