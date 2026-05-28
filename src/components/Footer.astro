@@ -1,26 +1,47 @@
 ---
-import { siteConfig } from "../data/config";
-import { getCurrentYear } from "../utils/dateUtils";
+/**
+ * @fileoverview Global footer component.
+ * Features client-side hydration to ensure the copyright year is never out of date.
+ */
+import { siteConfig } from "../data/config.ts";
+import { getCurrentYear } from "../utils/dateUtils.ts";
 
 const { logo, githubUrl, linkedinUrl } = siteConfig;
-const currentYear = getCurrentYear();
 ---
 
 <footer class="footer">
   <div class="container footer-content">
     <div class="footer-logo">{logo}</div>
+
     <div class="footer-copyright">
-      &copy; {currentYear} Software Engineer Portfolio. Built with precision.
+      &copy; <span class="js-current-year">{getCurrentYear()}</span> Software Engineer
+      Portfolio. Built with precision.
     </div>
 
     <div class="footer-links">
       <a href="/impress">Impressum</a>
       <a href="/privacy">Datenschutz</a>
-      <a href={githubUrl} target="_blank">GitHub</a>
-      <a href={linkedinUrl} target="_blank">LinkedIn</a>
+      <a href={githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href={linkedinUrl} target="_blank" rel="noopener noreferrer"
+        >LinkedIn</a
+      >
     </div>
   </div>
 </footer>
+
+<script>
+  import { getCurrentYear } from "../utils/dateUtils.ts";
+
+  function hydrateCopyrightYear() {
+    const yearEl = document.querySelector(".js-current-year");
+    if (yearEl) {
+      yearEl.textContent = getCurrentYear();
+    }
+  }
+
+  // Execute as soon as the DOM is ready
+  document.addEventListener("DOMContentLoaded", hydrateCopyrightYear);
+</script>
 
 <style>
   .footer {

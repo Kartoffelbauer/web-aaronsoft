@@ -24,18 +24,16 @@ export const siteConfig: SiteConfig = {
       institution: "Hochschule Heilbronn",
       description:
         "Specializing in advanced software architecture, concurrent systems, and high-performance computing.",
-      startDate: "2023-09-01",
-      endDate: "2024-08-31",
-      isActive: true,
+      startDate: "2025-09-01",
+      endDate: "2026-09-01",
     },
     {
       degree: "Bachelor of Science",
       institution: "Hochschule Heilbronn",
       description:
         "Foundational computer science principles, data structures, algorithms, and applied software engineering.",
-      startDate: "2019-09-01",
-      endDate: "2023-02-28",
-      isActive: false,
+      startDate: "2022-09-01",
+      endDate: "2025-09-01",
     },
   ],
   skills: [

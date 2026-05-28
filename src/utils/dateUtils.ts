@@ -1,56 +1,57 @@
 /**
- * Utility functions for date calculations
+ * @fileoverview Pure functional utility methods for date and academic calculations.
+ * Designed to be executed on both Server (Build-time) and Client (Runtime).
  */
 
 /**
- * Calculates the number of academic semesters passed between two dates.
+ * Determines if a given academic timeline is currently active based on the system clock.
+ * @param endDate The target graduation date
+ * @returns True if the end date is in the future
+ */
+export function isCurrentlyActive(endDate: string): boolean {
+  return new Date(endDate).getTime() > new Date().getTime();
+}
+
+/**
+ * Calculates the number of academic semesters passed.
  * Assumes a standard 6-month academic semester.
- * * @param startDate The starting date in ISO format (e.g., '2023-09-01')
- * @param endDate Optional end date. Defaults to today if omitted.
- * @returns The integer number of semesters
  */
 export function calculateSemesters(
   startDate: string,
-  endDate?: string,
+  endDate: string,
+  isActive: boolean,
 ): number {
   const start = new Date(startDate);
-  const end = endDate ? new Date(endDate) : new Date();
+  // If active, calculate up to today. If completed, calculate up to the graduation date.
+  const end = isActive ? new Date() : new Date(endDate);
 
-  // Calculate total months between the two dates
   const months =
     (end.getFullYear() - start.getFullYear()) * 12 +
     (end.getMonth() - start.getMonth());
-
-  // Divide by 6 to get semesters, add 1 because the first 6 months is Semester 1
   return Math.max(1, Math.floor(months / 6) + 1);
 }
 
 /**
- * Generates a formatted academic duration string (e.g., "Semester 3 / Expected 2025").
- * * @param item The EducationItem to format
- * @returns A clean, readable duration string
+ * Formats the academic payload into UI-ready strings and state flags.
  */
-export function formatAcademicDuration(item: {
-  startDate: string;
-  endDate?: string;
-  isActive: boolean;
-}): string {
-  // If active, calculate against today. If completed, calculate against the endDate.
-  const semesters = calculateSemesters(
-    item.startDate,
-    item.isActive ? undefined : item.endDate,
-  );
+export function getAcademicStatus(startDate: string, endDate: string) {
+  const isActive = isCurrentlyActive(endDate);
+  const semesters = calculateSemesters(startDate, endDate, isActive);
 
-  if (item.isActive && item.endDate) {
-    const expectedYear = new Date(item.endDate).getFullYear();
-    return `Semester ${semesters} / Expected ${expectedYear}`;
+  if (isActive) {
+    const expectedYear = new Date(endDate).getFullYear();
+    return {
+      durationText: `Semester ${semesters} / Expected ${expectedYear}`,
+      statusLabel: "Current",
+      isActive: true,
+    };
   }
 
-  if (item.isActive) {
-    return `Semester ${semesters}`;
-  }
-
-  return `${semesters} Semesters`;
+  return {
+    durationText: `${semesters} Semesters`,
+    statusLabel: "Completed",
+    isActive: false,
+  };
 }
 
 /**
@@ -71,6 +72,17 @@ export function calculateYearsOfExperience(startDate: string): number {
 
   // Ensure we don't return negative years, standardizes at least 0
   return Math.max(0, years);
+}
+
+/**
+ * Generates a formatted experience string (e.g., "3 Years Exp" or "1 Year Exp").
+ * Designed for cross-environment execution (Node.js build-time & Browser runtime).
+ * @param startDate The starting date in ISO format
+ * @returns A clean, readable experience string
+ */
+export function getExperienceString(startDate: string): string {
+  const years = calculateYearsOfExperience(startDate);
+  return `${years} Year${years !== 1 ? "s" : ""} Exp`;
 }
 
 /**

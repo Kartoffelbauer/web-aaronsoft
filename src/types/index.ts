@@ -6,9 +6,8 @@ export interface EducationItem {
   degree: string;
   institution: string;
   description: string;
-  startDate: string; // ISO date string e.g., '2024-03-01'
-  endDate?: string; // Serves as graduation date or expected graduation
-  isActive: boolean; // true for "Current", false for "Completed"
+  startDate: string; // ISO format e.g., '2023-09-01'
+  endDate: string; // Graduation date or expected graduation
 }
 
 export interface SkillItem {

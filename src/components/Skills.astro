@@ -1,6 +1,11 @@
 ---
-import { siteConfig } from "../data/config";
-import { calculateYearsOfExperience } from "../utils/dateUtils";
+// src/components/Skills.astro
+/**
+ * @fileoverview Skills matrix component.
+ * Automatically calculates years of experience at runtime.
+ */
+import { siteConfig } from "../data/config.ts";
+import { getExperienceString } from "../utils/dateUtils.ts";
 
 const { skills } = siteConfig;
 ---
@@ -14,19 +19,46 @@ const { skills } = siteConfig;
   <div class="skill-list">
     {
       skills.map((skill) => {
-        const years = calculateYearsOfExperience(skill.startDate);
+        // Build-time calculation (Acts as the initial SEO-friendly state)
+        const expString = getExperienceString(skill.startDate);
+
         return (
-          <div class="card skill-card">
+          <div
+            class="card skill-card js-skill-item"
+            data-start={skill.startDate}
+          >
             <h3>{skill.name}</h3>
-            <span>
-              {years} Year{years !== 1 ? "s" : ""} Exp
-            </span>
+            <span class="js-skill-exp">{expString}</span>
           </div>
         );
       })
     }
   </div>
 </section>
+
+<script>
+  import { getExperienceString } from "../utils/dateUtils.ts";
+
+  function hydrateSkills() {
+    const items = document.querySelectorAll<HTMLElement>(".js-skill-item");
+
+    items.forEach((item) => {
+      const start = item.dataset.start;
+      if (!start) return;
+
+      // Find the specific span within this card
+      const expEl = item.querySelector(".js-skill-exp");
+
+      // Inject the newly calculated string based on the runtime clock
+      if (expEl) {
+        expEl.textContent = getExperienceString(start);
+      }
+    });
+  }
+
+  // Execute as soon as the DOM is ready
+  document.addEventListener("DOMContentLoaded", hydrateSkills);
+</script>
 
 <style>
   .skill-list {
