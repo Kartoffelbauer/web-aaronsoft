@@ -2,7 +2,7 @@
 /**
  * @fileoverview Configuration file for the portfolio content.
  */
-import type { SiteConfig } from "../types/config.ts";
+import type { SiteConfig } from "../types/index.ts";
 
 export const siteConfig: SiteConfig = {
   logo: "DevPortfolio",
@@ -21,21 +21,21 @@ export const siteConfig: SiteConfig = {
   education: [
     {
       degree: "Master of Science",
-      status: "Current",
-      statusType: "current",
       institution: "Hochschule Heilbronn",
-      duration: "Semester 3 / Expected 2025",
       description:
         "Specializing in advanced software architecture, concurrent systems, and high-performance computing.",
+      startDate: "2023-09-01",
+      endDate: "2024-08-31",
+      isActive: true,
     },
     {
       degree: "Bachelor of Science",
-      status: "Completed",
-      statusType: "completed",
       institution: "Hochschule Heilbronn",
-      duration: "7 Semesters",
       description:
         "Foundational computer science principles, data structures, algorithms, and applied software engineering.",
+      startDate: "2019-09-01",
+      endDate: "2023-02-28",
+      isActive: false,
     },
   ],
   skills: [

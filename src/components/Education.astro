@@ -1,5 +1,11 @@
 ---
-import { siteConfig } from "../data/config";
+/**
+ * @fileoverview Academic timeline component.
+ * Automatically calculates semesters and graduation dates.
+ */
+import { siteConfig } from "../data/config.ts";
+import { formatAcademicDuration } from "../utils/dateUtils.ts";
+
 const { education } = siteConfig;
 ---
 
@@ -11,26 +17,40 @@ const { education } = siteConfig;
 
   <div class="timeline">
     {
-      education.map((item) => (
-        <div class="timeline-item">
-          <div
-            class={`timeline-dot ${item.statusType === "current" ? "active" : "inactive"}`}
-          />
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <h3>{item.degree}</h3>
-              <span
-                class={`timeline-badge ${item.statusType === "current" ? "badge-active" : "badge-inactive"}`}
-              >
-                {item.status}
-              </span>
+      education.map((item) => {
+        // Compute dynamic strings at build time
+        const durationString = formatAcademicDuration(item);
+        const statusLabel = item.isActive ? "Current" : "Completed";
+
+        return (
+          <div class="timeline-item">
+            <div
+              class:list={[
+                "timeline-dot",
+                item.isActive ? "active" : "inactive",
+              ]}
+            />
+
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>{item.degree}</h3>
+                <span
+                  class:list={[
+                    "timeline-badge",
+                    item.isActive ? "badge-active" : "badge-inactive",
+                  ]}
+                >
+                  {statusLabel}
+                </span>
+              </div>
+
+              <p class="timeline-inst">{item.institution}</p>
+              <p class="timeline-date">{durationString}</p>
+              <p class="timeline-desc">{item.description}</p>
             </div>
-            <p class="timeline-inst">{item.institution}</p>
-            <p class="timeline-date">{item.duration}</p>
-            <p class="timeline-desc">{item.description}</p>
           </div>
-        </div>
-      ))
+        );
+      })
     }
   </div>
 </section>

@@ -1,14 +1,14 @@
 /**
- * @fileoverview Global configuration type definitions.
+ * @fileoverview Global type definitions.
  */
 
 export interface EducationItem {
   degree: string;
-  status: string;
-  statusType: "current" | "completed";
   institution: string;
-  duration: string;
   description: string;
+  startDate: string; // ISO date string e.g., '2024-03-01'
+  endDate?: string; // Serves as graduation date or expected graduation
+  isActive: boolean; // true for "Current", false for "Completed"
 }
 
 export interface SkillItem {
