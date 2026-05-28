@@ -69,6 +69,10 @@ h3,
   font-size: 2rem;
 }
 
+.icon-inline {
+  vertical-align: middle;
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;

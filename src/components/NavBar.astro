@@ -1,37 +1,63 @@
 ---
-import { siteConfig } from "../data/config";
+/**
+ * @fileoverview Navigation Bar Component.
+ * Handles routing across the site and dynamically adjusts for sub-pages.
+ */
+import { siteConfig } from "../data/config.ts";
 
-export interface NavLink {
-  label: string;
-  url: string;
+export interface Props {
+  // Default to true so you don't have to pass it on the index page
+  isMainPage?: boolean;
 }
 
+const { isMainPage = true } = Astro.props;
+
+// Destructure exactly what we need directly from the config
 const { nav } = siteConfig;
-const navLinks = [
-  { label: "About", url: "#about" },
-  { label: "Education", url: "#education" },
-  { label: "Skills", url: "#skills" },
-  { label: "Projects", url: "#projects" },
-] as NavLink[];
 ---
 
 <nav class="navbar">
   <div class="container navbar-content">
     <div class="logo">DevPortfolio</div>
 
-    <div class="nav-links">
+      <div class:list={["nav-links", { "main-page": isMainPage }]}>
       {
-        navLinks.map((link) => (
-          <a href={link.url} class="nav-link">
-            {link.label}
+        isMainPage ? (
+          <a href="#about" class="nav-link">
+            About
           </a>
-        ))
+          <a href="#education" class="nav-link">
+            Education
+          </a>
+          <a href="#skills" class="nav-link">
+            Skills
+          </a>
+          <a href="#projects" class="nav-link">
+            Projects
+          </a>
+        ) : (
+          <a href="/" class="home-link">
+            <span class="material-symbols-outlined" aria-hidden="true">
+              keyboard_double_arrow_left
+            </span>
+            HOME
+          </a>
+        )
       }
     </div>
 
-    <a href={nav.resumeUrl} class="btn btn-primary btn-sm" target="_blank"
-      >Resume</a
-    >
+    {
+      isMainPage && (
+        <a
+          href={nav.resumeUrl}
+          class="btn btn-primary btn-sm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Resume
+        </a>
+      )
+    }
   </div>
 </nav>
 
@@ -58,8 +84,10 @@ const navLinks = [
     letter-spacing: -0.02em;
   }
 
+  /* --- Navigation Links --- */
   .nav-links {
-    display: none;
+    display: none; /* Hidden by default on mobile */
+    align-items: center;
     gap: var(--spacing-lg);
     font-family: var(--font-code);
     font-size: 0.875rem;
@@ -75,7 +103,6 @@ const navLinks = [
     color: var(--theme-primary);
   }
 
-  /* Note: The active class is injected dynamically by scrollSpy.ts */
   .nav-links a.active {
     color: var(--theme-primary);
     font-weight: 700;
@@ -83,8 +110,23 @@ const navLinks = [
     padding-bottom: 4px;
   }
 
+  /* Specific styling for the 'HOME' back button */
+  .home-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* --- Responsive Display Logic --- */
+
+  /* 1. Always show the "HOME" back button, even on mobile */
+  .nav-links:not(.main-page) {
+    display: flex;
+  }
+
+  /* 2. Show the standard section links ONLY on desktop */
   @media (min-width: 768px) {
-    .nav-links {
+    .nav-links.main-page {
       display: flex;
     }
   }

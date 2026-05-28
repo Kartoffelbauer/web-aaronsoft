@@ -2,13 +2,13 @@
 import "../styles/theme.css";
 import "../styles/main.css";
 
-// 1. Define the expected shape of your props (TypeScript Best Practice)
+// Define the expected shape of your props (TypeScript Best Practice)
 export interface Props {
   title: string;
   description: string;
 }
 
-// 2. Extract the variables from the global Astro.props object
+// Extract the variables from the global Astro.props object
 const { title, description } = Astro.props;
 ---
 
