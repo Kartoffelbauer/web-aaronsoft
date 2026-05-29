@@ -1,4 +1,3 @@
-// src/data/config.ts
 /**
  * @fileoverview Configuration file for the portfolio content.
  */

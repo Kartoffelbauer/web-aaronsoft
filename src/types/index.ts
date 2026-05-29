@@ -1,4 +1,3 @@
-// src/types/index.ts
 /**
  * @fileoverview Global domain models and type definitions for the application.
  * Utilizes generic interfaces for highly scalable, DRY configuration typing.
