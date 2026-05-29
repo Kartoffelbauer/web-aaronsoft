@@ -1,87 +1,93 @@
 ---
-import "../styles/card.css";
+/**
+ * @file Social.astro
+ * @description Renders social media feed using the common SectionLayout.
+ */
 
-const socialPosts = [
-  {
-    name: "Alex Mercer",
-    headline: "System Architect @ DevCore | C++ | Java",
-    time: "2d • 🌐",
-    content:
-      "Excited to share a deep-dive update on my recent personal projects. Bridging the gap between graphics engines and distributed systems.",
-    image:
-      "https://placehold.co/600x320/151b23/38bdf8?text=Architecture+Diagram",
-    link: "#",
-    linkText: "View Case Study →",
-  },
-  {
-    name: "Alex Mercer",
-    headline: "System Architect @ DevCore | C++ | Java",
-    time: "1w • 🌐",
-    content:
-      "Just open-sourced my new physics simulation library. Built completely from scratch using standard C++20 features. Check out the repo!",
-    image: "https://placehold.co/600x320/151b23/10b981?text=Physics+Engine",
-    link: "https://github.com/yourusername/repo",
-    linkText: "View on GitHub",
-  },
-  {
-    name: "Alex Mercer",
-    headline: "System Architect @ DevCore | C++ | Java",
-    time: "3w • 🌐",
-    content:
-      "My thoughts on optimizing cache-friendliness in ECS frameworks. Wrote a quick breakdown of how memory alignment changed our frame rates.",
-    image: "https://placehold.co/600x320/151b23/f59e0b?text=ECS+Memory+Layout",
-    link: "#",
-    linkText: "Read Article →",
-  },
-];
+import SectionLayout from "../layouts/SectionLayout.astro";
+import "../styles/card.css";
+import { siteConfig } from "../data/config";
+import { getYearsString } from "../utils/dateUtils.ts";
+
+const { social } = siteConfig.sections;
 ---
 
-<section class="social-feed">
-  {
-    socialPosts.map((post) => (
-      <article class="social-card card">
-        <header class="card-header">
-          <div class="avatar">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-              />
-            </svg>
-          </div>
-          <div class="user-info">
-            <div class="name-row">
-              <strong>{post.name}</strong>
+<SectionLayout id={social.id} icon="share" title="Social Feed">
+  <div class="social-feed grid-4">
+    {
+      social.items.map((post) => {
+        const expString = getYearsString(post.startDate);
+
+        // Replaced <article> with <social-tracker> to ensure the custom element actually hooks onto the DOM.
+        return (
+          <social-tracker class="social-card card" data-start={post.startDate}>
+            <header class="card-header">
+              <div class="avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                </svg>
+              </div>
+              <div class="user-info">
+                <div class="name-row">
+                  <strong>{post.author}</strong>
+                </div>
+                <span class="headline">{post.headline}</span>
+                <span class="created-at">{expString}</span>
+              </div>
+              <a href={post.linkUrl} aria-label="View external link" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+              </a>
+            </header>
+
+            <div class="card-body">
+              <p>{post.content}</p>
+              <div class="img-wrapper">
+                <img src={post.imageUrl} alt="Post media graphic" loading="lazy" />
+              </div>
             </div>
-            <span class="headline">{post.headline}</span>
-            <span class="time">{post.time}</span>
-          </div>
-        </header>
 
-        <div class="card-body">
-          <p>{post.content}</p>
-          <div class="img-wrapper">
-            <img src={post.image} alt="Post media" loading="lazy" />
-          </div>
-        </div>
+            <footer class="card-footer">
+              <div class="tags">
+                {post.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </footer>
+          </social-tracker>
+        );
+      })
+    }
+  </div>
+</SectionLayout>
 
-        <footer class="card-footer">
-          <a href={post.link} class="cta-button">
-            {post.linkText}
-          </a>
-        </footer>
-      </article>
-    ))
+<script>
+  import { getYearsString } from "../utils/dateUtils.ts";
+
+  /**
+   * Custom element to hydrate dynamic timestamps.
+   */
+  class SocialTracker extends HTMLElement {
+    connectedCallback() {
+      const start = this.dataset.start;
+      if (start) {
+        this.querySelector(".created-at")!.textContent = getYearsString(start);
+      }
+    }
   }
-</section>
+
+  customElements.define("social-tracker", SocialTracker);
+</script>
 
 <style>
+  /* Ensure Web Component acts as a block-level container */
+  social-tracker {
+    display: block;
+  }
+
+  .social-feed {
+    margin-bottom: var(--spacing-lg);
+  }
+
   .card-header {
     display: flex;
     padding: var(--spacing-md);
@@ -118,7 +124,7 @@ const socialPosts = [
   }
 
   .headline,
-  .time {
+  .created-at {
     font-size: 12px;
     color: var(--theme-on-surface-variant);
   }
@@ -138,28 +144,8 @@ const socialPosts = [
   }
 
   .card-footer {
-    display: flex;
-    justify-content: flex-end;
     padding: 12px var(--spacing-md);
     border-top: 1px solid var(--theme-outline-variant);
     background: var(--theme-surface-container);
-  }
-
-  .cta-button {
-    display: inline-block;
-    padding: 8px var(--spacing-md);
-    background: var(--theme-surface-variant);
-    color: var(--theme-on-surface);
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    border: 1px solid var(--theme-outline-variant);
-    border-radius: var(--border-radius-base);
-    transition: all 0.2s ease;
-  }
-
-  .cta-button:hover {
-    background: var(--theme-surface-container-low);
-    border-color: var(--theme-outline);
   }
 </style>

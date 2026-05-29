@@ -1,20 +1,21 @@
 ---
-import "../styles/card.css";
+/**
+ * @file Projects.astro
+ * @description Renders the featured projects grid using the common SectionLayout.
+ */
 
+import SectionLayout from "../layouts/SectionLayout.astro";
+import "../styles/card.css";
 import { siteConfig } from "../data/config";
+
 const { projects } = siteConfig.sections;
 ---
 
-<section id={projects.id} class="section">
-  <div class="section-header">
-    <span class="material-symbols-outlined icon-primary">code_blocks</span>
-    <h2>Featured Work</h2>
-  </div>
-
-  <div class="project-list">
+<SectionLayout id={projects.id} icon="code_blocks" title="Featured Work">
+  <div class="grid-4">
     {
       projects.items.map((project) => (
-        <div class="card project-card">
+        <article class="card project-card">
           <div class="img-wrapper">
             <img
               src={project.imageUrl}
@@ -24,7 +25,7 @@ const { projects } = siteConfig.sections;
           </div>
 
           <div class="project-content">
-            <div class="project-header">
+            <header class="project-header">
               <h3>{project.title}</h3>
               <a
                 href={project.link}
@@ -36,29 +37,23 @@ const { projects } = siteConfig.sections;
                   open_in_new
                 </span>
               </a>
-            </div>
+            </header>
 
             <p class="project-desc">{project.description}</p>
 
-            <div class="project-tags">
+            <footer class="tags">
               {project.tags.map((tag) => (
                 <span class="tag">{tag}</span>
               ))}
-            </div>
+            </footer>
           </div>
-        </div>
+        </article>
       ))
     }
   </div>
-</section>
+</SectionLayout>
 
 <style>
-  .project-list {
-    display: grid;
-    gap: var(--spacing-lg);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-  }
-
   .project-content {
     padding: var(--spacing-md);
     display: flex;
@@ -76,22 +71,5 @@ const { projects } = siteConfig.sections;
   .project-desc {
     color: var(--theme-on-surface-variant);
     flex-grow: 1;
-  }
-
-  .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: auto;
-    padding-top: 16px;
-  }
-
-  .tag {
-    font-family: var(--font-code);
-    font-size: 0.8rem;
-    color: var(--theme-primary);
-    background: rgba(0, 90, 194, 0.1);
-    padding: 4px 8px;
-    border-radius: 4px;
   }
 </style>

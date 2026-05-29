@@ -1,22 +1,25 @@
 ---
+/**
+ * @file Education.astro
+ * @description Renders the academic timeline using the common SectionLayout.
+ * Utilizes a custom Web Component for client-side date hydration.
+ */
+
+import SectionLayout from "../layouts/SectionLayout.astro";
 import { siteConfig } from "../data/config.ts";
 import { getAcademicStatus } from "../utils/dateUtils.ts";
 
 const { education } = siteConfig.sections;
 ---
 
-<section id={education.id} class="section">
-  <div class="section-header">
-    <span class="material-symbols-outlined icon-primary">school</span>
-    <h2>Academic Journey</h2>
-  </div>
-
+<SectionLayout id={education.id} icon="school" title="Academic Journey">
   <div class="timeline">
     {
       education.items.map((item) => {
+        // Calculate initial state server-side
         const { durationText, statusLabel, isActive } = getAcademicStatus(
           item.startDate,
-          item.endDate,
+          item.endDate
         );
 
         return (
@@ -25,19 +28,12 @@ const { education } = siteConfig.sections;
             data-start={item.startDate}
             data-end={item.endDate}
           >
-            <div
-              class:list={["timeline-dot", isActive ? "active" : "inactive"]}
-            />
+            <div class:list={["timeline-dot", isActive ? "active" : "inactive"]} />
 
             <div class="timeline-content">
               <div class="timeline-header">
                 <h3>{item.degree}</h3>
-                <span
-                  class:list={[
-                    "timeline-badge",
-                    isActive ? "badge-active" : "badge-inactive",
-                  ]}
-                >
+                <span class:list={["timeline-badge", isActive ? "badge-active" : "badge-inactive"]}>
                   {statusLabel}
                 </span>
               </div>
@@ -51,12 +47,14 @@ const { education } = siteConfig.sections;
       })
     }
   </div>
-</section>
+</SectionLayout>
 
 <script>
   import { getAcademicStatus } from "../utils/dateUtils.ts";
 
-  // 2. Define the Custom Element behavior
+  /**
+   * Custom element to hydrate academic timeline dates safely on the client.
+   */
   class AcademicTracker extends HTMLElement {
     connectedCallback() {
       const start = this.dataset.start;
@@ -64,14 +62,10 @@ const { education } = siteConfig.sections;
 
       if (!start || !end) return;
 
-      const { durationText, statusLabel, isActive } = getAcademicStatus(
-        start,
-        end,
-      );
+      const { durationText, statusLabel, isActive } = getAcademicStatus(start, end);
 
-      // 3. Scoped DOM updates (no document.querySelector needed)
-      this.querySelector(".timeline-dot")!.className =
-        `timeline-dot ${isActive ? "active" : "inactive"}`;
+      // Scoped DOM updates limit reflows and prevent cross-component interference
+      this.querySelector(".timeline-dot")!.className = `timeline-dot ${isActive ? "active" : "inactive"}`;
 
       const badge = this.querySelector(".timeline-badge")!;
       badge.className = `timeline-badge ${isActive ? "badge-active" : "badge-inactive"}`;
@@ -81,17 +75,14 @@ const { education } = siteConfig.sections;
     }
   }
 
-  // 4. Register the component with the browser
   customElements.define("academic-tracker", AcademicTracker);
 </script>
 
 <style>
-  /* Ensure the custom element behaves like a block container */
   academic-tracker {
     display: block;
   }
 
-  /* --- Original Timeline CSS --- */
   .timeline {
     position: relative;
     display: flex;

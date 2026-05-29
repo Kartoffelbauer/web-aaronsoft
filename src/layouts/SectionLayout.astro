@@ -1,0 +1,47 @@
+---
+/**
+ * @file SectionLayout.astro
+ * @description A reusable layout wrapper for standard page sections. Enforces DRY structure
+ * for section headers, icons, and consistent spacing across the application.
+ */
+
+interface Props {
+  id: string;
+  icon: string;
+  title: string;
+  class?: string;
+}
+
+const { id, icon, title, class: className = "" } = Astro.props;
+---
+
+<section id={id} class={`section ${className}`.trim()}>
+  <header class="section-header">
+    <span class="material-symbols-outlined icon-primary" aria-hidden="true">
+      {icon}
+    </span>
+    <h2>{title}</h2>
+  </header>
+
+  <slot />
+</section>
+
+<style>
+  .section {
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-lg);
+    border-top: 1px solid color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .section-header h2 {
+    /* Fluid typography: 2rem (mobile) scales linearly to 3rem (desktop) */
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    letter-spacing: -0.02em;
+  }
+</style>

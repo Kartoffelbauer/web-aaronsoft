@@ -38,8 +38,6 @@ export interface HeroSection extends BaseSection {
   title: string;
   /** A brief, engaging summary of skills and current focus. */
   description: string;
-  /** Absolute or relative URL to the profile image. */
-  imageUrl: string;
   /** Absolute URL to the developer's LinkedIn profile. */
   linkedinUrl: string;
   /** Absolute URL to the developer's GitHub profile. */
@@ -100,6 +98,30 @@ export interface ProjectItem {
   tags: string[];
 }
 
+/**
+ * Represents a social post.
+ */
+export interface SocialItem {
+  /** The name of the author. */
+  author: string;
+  /** The headline of the post. */
+  headline: string;
+  /** * The time the post was created
+   * @example "2025-08-31"
+   */
+  startDate: string;
+  /** The main content of the post. */
+  content: string;
+  /** The image of the post. */
+  imageUrl: string;
+  /** Absolute URL to the post */
+  linkUrl: string;
+  /** The headline of the link button */
+  linkText: string;
+  /** An array of technologies or concepts utilized. @example ["React", "WebGL"] */
+  tags: string[];
+}
+
 // ============================================================================
 // 3. Master Configuration Model
 // ============================================================================
@@ -126,6 +148,7 @@ export interface SiteConfig {
     education: ListSection<EducationItem>;
     skills: ListSection<SkillItem>;
     projects: ListSection<ProjectItem>;
+    social: ListSection<SocialItem>;
   };
 
   /** * Mandatory legal information required for German Impressum and Privacy policies.

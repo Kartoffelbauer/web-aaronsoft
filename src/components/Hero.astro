@@ -1,5 +1,14 @@
 ---
+/**
+ * @file Hero.astro
+ * @description Primary landing section. Kept independent from SectionLayout
+ * as its structural grid and h1 hierarchy differ from standard page sections.
+ */
+
+import { Image } from "astro:assets";
 import { siteConfig } from "../data/config.ts";
+import profilePic from "../assets/img/profile.jpg";
+
 const { hero } = siteConfig.sections;
 ---
 
@@ -7,28 +16,24 @@ const { hero } = siteConfig.sections;
   <div class="hero-content">
     <h1>{hero.title}</h1>
     <p>{hero.description}</p>
-    <div class="hero-actions">
-      <a href={hero.linkedinUrl} class="btn btn-primary" target="_blank">
-        <span class="material-symbols-outlined" aria-hidden="true"
-          >open_in_new</span
-        > LinkedIn
+
+    <nav class="hero-actions" aria-label="Social Links">
+      <a href={hero.linkedinUrl} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+        <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+        LinkedIn
       </a>
-      <a
-        href={hero.githubUrl}
-        class="btn btn-outline"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href={hero.githubUrl} class="btn btn-outline" target="_blank" rel="noopener noreferrer">
         GitHub
       </a>
-    </div>
+    </nav>
   </div>
 
   <div class="hero-image-wrapper">
     <div class="image-border">
-      <img
-        src={hero.imageUrl}
-        alt="Profile picture"
+      <Image
+        src={profilePic}
+        alt="Portrait picture of the author"
+        width={360}
         class="profile-img"
         loading="eager"
       />
@@ -38,7 +43,8 @@ const { hero } = siteConfig.sections;
 
 <style>
   .hero-section {
-    padding: var(--spacing-lg) 0 var(--spacing-lg) 0;
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-xl);
     display: grid;
     gap: var(--spacing-xl);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));

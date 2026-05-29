@@ -29,6 +29,7 @@ h2,
 h3,
 .logo {
   font-family: var(--font-headline);
+  font-weight: 500;
   color: var(--theme-on-surface);
 }
 
@@ -39,26 +40,6 @@ h3,
   margin: 0 auto;
   /* Fluid padding: 16px (mobile) scales to 32px (desktop) */
   padding: 0 clamp(var(--spacing-md), 4vw, var(--spacing-lg));
-}
-
-.section {
-  padding-top: var(--spacing-md);
-  padding-bottom: var(--spacing-lg);
-  border-top: 1px solid
-    color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
-}
-
-.section-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-lg);
-}
-
-.section-header h2 {
-  /* Fluid typography: 2rem (mobile) scales linearly to 3rem (desktop) */
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
-  letter-spacing: -0.02em;
 }
 
 /* UI primitives (Buttons, Base Cards, Icons) */

@@ -1,18 +1,18 @@
 ---
-import "../styles/card.css";
+/**
+ * @file Skills.astro
+ * @description Renders a grid of core skills utilizing the SectionLayout.
+ */
 
+import SectionLayout from "../layouts/SectionLayout.astro";
+import "../styles/card.css";
 import { siteConfig } from "../data/config.ts";
 import { getExperienceString } from "../utils/dateUtils.ts";
 
 const { skills } = siteConfig.sections;
 ---
 
-<section id={skills.id} class="section">
-  <div class="section-header">
-    <span class="material-symbols-outlined icon-primary">terminal</span>
-    <h2>Core Expertise</h2>
-  </div>
-
+<SectionLayout id={skills.id} icon="terminal" title="Core Expertise">
   <div class="skill-list">
     {
       skills.items.map((skill) => {
@@ -27,18 +27,19 @@ const { skills } = siteConfig.sections;
       })
     }
   </div>
-</section>
+</SectionLayout>
 
 <script>
   import { getExperienceString } from "../utils/dateUtils.ts";
 
+  /**
+   * Custom element to calculate and hydrate years of experience dynamically.
+   */
   class SkillTracker extends HTMLElement {
     connectedCallback() {
       const start = this.dataset.start;
       if (start) {
-        // Hydrate instantly upon mounting
-        this.querySelector(".skill-exp")!.textContent =
-          getExperienceString(start);
+        this.querySelector(".skill-exp")!.textContent = getExperienceString(start);
       }
     }
   }

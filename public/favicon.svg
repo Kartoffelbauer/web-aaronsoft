@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <style>
+    /* Base Theme (Light Mode Default)
+      Uses DRY principles by sharing geometric properties across classes.
+    */
+    .background {
+      fill: #ffffff;
+    }
+
+    .bracket, .slash {
+      fill: none;
+      stroke-width: 48;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .bracket {
+      stroke: #1a1a1a;   /* Dark charcoal for high contrast on light backgrounds */
+    }
+
+    .slash {
+      stroke: #0d6efd;   /* Primary accent blue */
+    }
+
+    /* Adaptive Theme (Dark Mode Override)
+      Automatically applied when the user's OS or browser is set to Dark Mode.
+    */
+    @media (prefers-color-scheme: dark) {
+      .background {
+        fill: #121212;   /* Deep dark gray to prevent pure-black smearing */
+      }
+      .bracket {
+        stroke: #f8f9fa; /* Off-white for visual comfort */
+      }
+      .slash {
+        stroke: #6ea8fe; /* Lighter accent blue to maintain contrast ratio */
+      }
+    }
+  </style>
+
+  <rect class="background" x="16" y="16" width="480" height="480" rx="112" />
+
+  <g>
+    <polyline class="bracket" points="192,160 80,256 192,352" />
+
+    <line class="slash" x1="304" y1="128" x2="208" y2="384" />
+
+    <polyline class="bracket" points="320,160 432,256 320,352" />
+  </g>
+</svg>

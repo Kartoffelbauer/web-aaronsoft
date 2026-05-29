@@ -65,6 +65,14 @@ export function calculateYearsOfExperience(startDate: string): number {
 }
 
 /**
+ * Generates a formatted years string (e.g., "3 Years Exp").
+ */
+export function getYearsString(startDate: string): string {
+  const years = calculateYearsOfExperience(startDate);
+  return `${years} Year${years !== 1 ? "s" : ""}`;
+}
+
+/**
  * Generates a formatted experience string (e.g., "3 Years Exp").
  */
 export function getExperienceString(startDate: string): string {
