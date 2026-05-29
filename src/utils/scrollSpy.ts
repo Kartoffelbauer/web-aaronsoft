@@ -1,56 +1,92 @@
 /**
- * Utility for highlighting the active navigation link based on scroll position.
- * This ensures the navigation visually reflects what section the user is currently reading.
- * Uses passive event listeners for high performance.
+ * @fileoverview High-performance, highly-accurate ScrollSpy utility.
+ * Uses requestAnimationFrame to prevent layout thrashing while guaranteeing
+ * 100% accuracy during extremely fast scroll events.
  */
-export function initScrollSpy(): void {
+
+/**
+ * Initializes the ScrollSpy mechanism to update active navigation links.
+ * * @param navbarOffset - The offset in pixels to account for fixed headers and visual breathing room. Defaults to 128.
+ */
+export function initScrollSpy(navbarOffset: number = 128): void {
+  // 1. Select DOM elements
   const sections = Array.from(
-    document.querySelectorAll("section[id]"),
-  ) as HTMLElement[];
+    document.querySelectorAll<HTMLElement>("section[id]"),
+  );
   const navLinks = Array.from(
-    document.querySelectorAll(".nav-link"),
-  ) as HTMLAnchorElement[];
+    document.querySelectorAll<HTMLAnchorElement>(".nav-link"),
+  );
 
-  if (sections.length === 0 || navLinks.length === 0) return;
+  if (!sections.length || !navLinks.length) return;
 
-  const onScroll = () => {
-    // Calculate current scroll position factoring in the fixed navbar height (approx 64px) + padding
-    const scrollPosition = window.scrollY + 100;
+  // 2. Create a fast O(1) lookup map: sectionId -> HTMLAnchorElement
+  const linkMap = new Map<string, HTMLAnchorElement>();
+  navLinks.forEach((link) => {
+    const href = link.getAttribute("href");
+    if (href && href.startsWith("#")) {
+      linkMap.set(href.substring(1), link);
+    }
+  });
 
-    let currentSectionId = 0;
+  // 3. State management for the rAF loop
+  let isTicking = false;
 
-    sections.forEach((section, index) => {
-      const sectionTop = section.offsetTop;
+  /**
+   * The core calculation logic.
+   * Finds the section currently occupying the top of the viewport.
+   */
+  const updateActiveSection = () => {
+    let currentActiveId = "";
 
-      // Check if the current scroll position is within the bounds of this section
-      if (scrollPosition >= sectionTop) {
-        currentSectionId = index;
+    // Loop through sections to find which one is currently at the top
+    for (const section of sections) {
+      // getBoundingClientRect().top is the distance from the top of the viewport
+      const rect = section.getBoundingClientRect();
+
+      // If the top of the section is at or above our dynamic navbar line...
+      if (rect.top <= navbarOffset) {
+        currentActiveId = section.id;
+      } else {
+        // Because DOM sections are sequential, the moment we hit a section
+        // that is BELOW the navbar line, we know the PREVIOUS section is the active one.
+        // We can break the loop early for maximum performance.
+        break;
       }
-    });
-
-    // Edge case: if we've scrolled to the absolute bottom of the document,
-    // highlight the last section even if it's too short to reach the detection threshold.
-    const atBottom =
-      window.innerHeight + Math.round(window.scrollY) >=
-      document.body.offsetHeight - 10;
-    if (atBottom) {
-      currentSectionId = sections.length - 1;
     }
 
-    // Apply active classes to links matching the current section ID
-    navLinks.forEach((link) => {
-      const href = link.getAttribute("href");
-      if (href === `#${sections[currentSectionId].getAttribute("id")}`) {
-        link.classList.add("active");
-      } else {
-        link.classList.remove("active");
-      }
-    });
+    // Edge case: If the user scrolls to the absolute bottom of the document,
+    // force the last section to be active, even if it hasn't reached the navbar line.
+    const isAtBottom =
+      window.innerHeight + window.scrollY >= document.body.offsetHeight;
+    if (isAtBottom) {
+      currentActiveId = sections[sections.length - 1].id;
+    }
+
+    // Update the DOM classes (O(1) lookup)
+    navLinks.forEach((link) => link.classList.remove("active"));
+    if (currentActiveId) {
+      const activeLink = linkMap.get(currentActiveId);
+      if (activeLink) activeLink.classList.add("active");
+    }
+
+    // Unlock the scroll listener for the next frame
+    isTicking = false;
   };
 
-  // Attach passive scroll listener for optimal performance
+  /**
+   * Throttled scroll handler.
+   * Ensures our heavy calculation only runs once per screen refresh (typically 60fps).
+   */
+  const onScroll = () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(updateActiveSection);
+      isTicking = true;
+    }
+  };
+
+  // 4. Attach listener using `{ passive: true }` so scrolling isn't blocked by JS
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  // Trigger immediately to set initial state
-  onScroll();
+  // 5. Trigger immediately to set the initial active state on page load
+  updateActiveSection();
 }

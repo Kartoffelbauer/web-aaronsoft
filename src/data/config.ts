@@ -11,7 +11,7 @@ export const siteConfig: SiteConfig = {
   },
   sections: {
     hero: {
-      displayName: "About",
+      id: "About",
       title: "Software Engineer & Master's Student.",
       description:
         "Skilled developer focused on architecting high-performance applications, robust distributed systems, and low-level engine development. Currently based in Germany, bridging theoretical computer science with pragmatic engineering.",
@@ -21,7 +21,7 @@ export const siteConfig: SiteConfig = {
       githubUrl: "https://github.com",
     },
     education: {
-      displayName: "Education",
+      id: "Education",
       items: [
         {
           degree: "Master of Science",
@@ -42,7 +42,7 @@ export const siteConfig: SiteConfig = {
       ],
     },
     skills: {
-      displayName: "Skills",
+      id: "Skills",
       items: [
         { name: "C++", startDate: "2021-01-01" },
         { name: "C#", startDate: "2022-01-01" },
@@ -51,7 +51,7 @@ export const siteConfig: SiteConfig = {
       ],
     },
     projects: {
-      displayName: "Projects",
+      id: "Projects",
       items: [
         {
           title: "Game Engine Core",

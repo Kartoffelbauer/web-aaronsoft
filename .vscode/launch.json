@@ -15,7 +15,7 @@
       "name": "Client: Chrome",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:4321",
+      "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}",
       "userDataDir": false
     },
@@ -23,7 +23,7 @@
       "name": "Client: Firefox",
       "type": "firefox",
       "request": "launch",
-      "url": "http://localhost:4321",
+      "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}",
       "reAttach": true
     }

@@ -1,0 +1,165 @@
+---
+import "../styles/card.css";
+
+const socialPosts = [
+  {
+    name: "Alex Mercer",
+    headline: "System Architect @ DevCore | C++ | Java",
+    time: "2d • 🌐",
+    content:
+      "Excited to share a deep-dive update on my recent personal projects. Bridging the gap between graphics engines and distributed systems.",
+    image:
+      "https://placehold.co/600x320/151b23/38bdf8?text=Architecture+Diagram",
+    link: "#",
+    linkText: "View Case Study →",
+  },
+  {
+    name: "Alex Mercer",
+    headline: "System Architect @ DevCore | C++ | Java",
+    time: "1w • 🌐",
+    content:
+      "Just open-sourced my new physics simulation library. Built completely from scratch using standard C++20 features. Check out the repo!",
+    image: "https://placehold.co/600x320/151b23/10b981?text=Physics+Engine",
+    link: "https://github.com/yourusername/repo",
+    linkText: "View on GitHub",
+  },
+  {
+    name: "Alex Mercer",
+    headline: "System Architect @ DevCore | C++ | Java",
+    time: "3w • 🌐",
+    content:
+      "My thoughts on optimizing cache-friendliness in ECS frameworks. Wrote a quick breakdown of how memory alignment changed our frame rates.",
+    image: "https://placehold.co/600x320/151b23/f59e0b?text=ECS+Memory+Layout",
+    link: "#",
+    linkText: "Read Article →",
+  },
+];
+---
+
+<section class="social-feed">
+  {
+    socialPosts.map((post) => (
+      <article class="social-card card">
+        <header class="card-header">
+          <div class="avatar">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+              />
+            </svg>
+          </div>
+          <div class="user-info">
+            <div class="name-row">
+              <strong>{post.name}</strong>
+            </div>
+            <span class="headline">{post.headline}</span>
+            <span class="time">{post.time}</span>
+          </div>
+        </header>
+
+        <div class="card-body">
+          <p>{post.content}</p>
+          <div class="img-wrapper">
+            <img src={post.image} alt="Post media" loading="lazy" />
+          </div>
+        </div>
+
+        <footer class="card-footer">
+          <a href={post.link} class="cta-button">
+            {post.linkText}
+          </a>
+        </footer>
+      </article>
+    ))
+  }
+</section>
+
+<style>
+  .card-header {
+    display: flex;
+    padding: var(--spacing-md);
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--theme-surface-variant);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--theme-on-surface-variant);
+  }
+
+  .avatar svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .name-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--theme-on-surface);
+    font-family: var(--font-headline);
+  }
+
+  .headline,
+  .time {
+    font-size: 12px;
+    color: var(--theme-on-surface-variant);
+  }
+
+  .card-body p {
+    margin: 0;
+    padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--theme-on-surface);
+  }
+
+  .card-body img {
+    width: 100%;
+    display: block;
+    border-top: 1px solid var(--theme-outline-variant);
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px var(--spacing-md);
+    border-top: 1px solid var(--theme-outline-variant);
+    background: var(--theme-surface-container);
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 8px var(--spacing-md);
+    background: var(--theme-surface-variant);
+    color: var(--theme-on-surface);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--theme-outline-variant);
+    border-radius: var(--border-radius-base);
+    transition: all 0.2s ease;
+  }
+
+  .cta-button:hover {
+    background: var(--theme-surface-container-low);
+    border-color: var(--theme-outline);
+  }
+</style>

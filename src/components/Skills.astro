@@ -1,11 +1,13 @@
 ---
+import "../styles/card.css";
+
 import { siteConfig } from "../data/config.ts";
 import { getExperienceString } from "../utils/dateUtils.ts";
 
 const { skills } = siteConfig.sections;
 ---
 
-<section id={skills.displayName} class="section">
+<section id={skills.id} class="section">
   <div class="section-header">
     <span class="material-symbols-outlined icon-primary">terminal</span>
     <h2>Core Expertise</h2>

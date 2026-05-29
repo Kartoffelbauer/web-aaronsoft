@@ -13,20 +13,20 @@ export interface Props {
 const { isMainPage = true } = Astro.props;
 
 // Destructure exactly what we need directly from the config
-const { nav, sections } = siteConfig;
+const { logo, nav, sections } = siteConfig;
 ---
 
 <nav class="navbar">
   <div class="container navbar-content">
-    <div class="logo">DevPortfolio</div>
+    <div class="logo">{logo}</div>
 
     <div class:list={["nav-links", { "main-page": isMainPage }]}>
       {
         isMainPage ? (
           Object.values(sections).map((sectionData) => {
             return (
-              <a href={`#${sectionData.displayName}`} class="nav-link">
-                {sectionData.displayName}
+              <a href={`#${sectionData.id}`} class="nav-link">
+                {sectionData.id}
               </a>
             );
           })

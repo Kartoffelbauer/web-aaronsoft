@@ -1,10 +1,11 @@
 ---
-import { siteConfig } from "../data/config";
+import "../styles/card.css";
 
+import { siteConfig } from "../data/config";
 const { projects } = siteConfig.sections;
 ---
 
-<section id={projects.displayName} class="section">
+<section id={projects.id} class="section">
   <div class="section-header">
     <span class="material-symbols-outlined icon-primary">code_blocks</span>
     <h2>Featured Work</h2>
@@ -56,22 +57,6 @@ const { projects } = siteConfig.sections;
     display: grid;
     gap: var(--spacing-lg);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-  }
-
-  .project-card .img-wrapper {
-    height: 192px;
-    overflow: hidden;
-  }
-
-  .project-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-  }
-
-  .project-card:hover img {
-    transform: scale(110%);
   }
 
   .project-content {

@@ -111,18 +111,3 @@ h3,
   border-color: var(--theme-primary);
   color: var(--theme-primary);
 }
-
-/* Base Card */
-.card {
-  background: var(--theme-surface-container);
-  border: 1px solid var(--theme-outline-variant);
-  border-radius: 8px;
-  transition: border-color 0.2s;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.card:hover {
-  border-color: var(--theme-primary);
-}

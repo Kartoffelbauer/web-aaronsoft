@@ -31,7 +31,7 @@ npm run dev
 
 ```
 
-Navigate to `http://localhost:4321` to view the site. To add or modify content (skills, projects, etc.), simply edit the central `src/data/config.ts` file.
+Navigate to `http://localhost:3000` to view the site. To add or modify content (skills, projects, etc.), simply edit the central `src/data/config.ts` file.
 
 ## 🚀 Deployment
 

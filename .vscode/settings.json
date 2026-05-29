@@ -2,7 +2,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[astro]": {
-    "editor.defaultFormatter": "astro-build.astro-vscode",
+    "editor.defaultFormatter": "ms-vsliveshare.vsliveshare",
     "editor.formatOnSave": true
   },
   "[typescript]": {
@@ -12,7 +12,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "ms-vsliveshare.vsliveshare"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
