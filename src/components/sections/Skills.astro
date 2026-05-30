@@ -3,10 +3,10 @@
  * @fileoverview Renders a grid of core skills utilizing the SectionLayout.
  */
 
-import SectionLayout from "../layouts/SectionLayout.astro";
-import "../styles/card.css";
-import { siteConfig } from "../data/config.ts";
-import { getExperienceString } from "../utils/dateUtils.ts";
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import "../../styles/card.css";
+import { siteConfig } from "../../data/config.ts";
+import { getExperienceString } from "../../utils/dateUtils.ts";
 
 const { skills } = siteConfig.sections;
 ---
@@ -29,7 +29,7 @@ const { skills } = siteConfig.sections;
 </SectionLayout>
 
 <script>
-  import { getExperienceString } from "../utils/dateUtils.ts";
+  import { getExperienceString } from "../../utils/dateUtils.ts";
 
   /**
    * Custom element to calculate and hydrate years of experience dynamically.

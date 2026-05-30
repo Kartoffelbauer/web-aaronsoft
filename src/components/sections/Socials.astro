@@ -1,0 +1,28 @@
+---
+/**
+ * @file Social.astro
+ * @description Renders social media feed using the common SectionLayout and unified Card factory.
+ */
+
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import Card from "../widgets/Card.astro";
+import { siteConfig } from "../../data/config";
+
+const { social } = siteConfig.sections;
+---
+
+<SectionLayout id={social.id} icon="share" title="Social Feed">
+  <div class="social-feed grid-4">
+    {
+      social.items.map((post) => (
+        <Card type="social" payload={post} />
+      ))
+    }
+  </div>
+</SectionLayout>
+
+<style>
+  .social-feed {
+    margin-bottom: var(--spacing-lg);
+  }
+</style>

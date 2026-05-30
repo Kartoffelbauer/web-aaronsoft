@@ -42,17 +42,7 @@ h3,
   padding: 0 clamp(var(--spacing-md), 4vw, var(--spacing-lg));
 }
 
-/* UI primitives (Buttons, Base Cards, Icons) */
-
-/* Icons */
-.icon-primary {
-  color: var(--theme-primary);
-  font-size: 2rem;
-}
-
-.icon-inline {
-  vertical-align: middle;
-}
+/* UI primitives (Buttons, Base Cards) */
 
 /* Buttons */
 .btn {

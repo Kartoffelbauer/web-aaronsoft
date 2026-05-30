@@ -4,9 +4,9 @@
  * Utilizes a custom Web Component for client-side date hydration.
  */
 
-import SectionLayout from "../layouts/SectionLayout.astro";
-import { siteConfig } from "../data/config.ts";
-import { getAcademicStatus } from "../utils/dateUtils.ts";
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import { siteConfig } from "../../data/config.ts";
+import { getAcademicStatus } from "../../utils/dateUtils.ts";
 
 const { education } = siteConfig.sections;
 ---
@@ -49,7 +49,7 @@ const { education } = siteConfig.sections;
 </SectionLayout>
 
 <script>
-  import { getAcademicStatus } from "../utils/dateUtils.ts";
+  import { getAcademicStatus } from "../../utils/dateUtils.ts";
 
   /**
    * Custom element to hydrate academic timeline dates safely on the client.

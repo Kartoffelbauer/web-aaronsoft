@@ -1,0 +1,22 @@
+---
+/**
+ * @file Projects.astro
+ * @description Renders the featured projects grid using the common SectionLayout and unified Card factory.
+ */
+
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import Card from "../widgets/Card.astro";
+import { siteConfig } from "../../data/config";
+
+const { projects } = siteConfig.sections;
+---
+
+<SectionLayout id={projects.id} icon="code_blocks" title="Featured Work">
+  <div class="grid-4">
+    {
+      projects.items.map((project) => (
+        <Card type="project" payload={project} />
+      ))
+    }
+  </div>
+</SectionLayout>
