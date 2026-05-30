@@ -1,0 +1,62 @@
+---
+/**
+ * @fileoverview Renders a single project case study.
+ * Fully leverages BaseCard shared utilities to eliminate duplicate CSS.
+ */
+
+import BaseCard from "./BaseCard.astro";
+import type { ProjectItem } from "../../types/index.ts";
+
+export interface Props {
+  payload: ProjectItem;
+}
+
+const { payload } = Astro.props;
+---
+
+<BaseCard>
+  <div class="card-img-wrapper">
+    <img
+      src={payload.imageUrl}
+      alt={`Preview graphic for ${payload.title}`}
+      loading="lazy"
+    />
+  </div>
+
+  <div class="card-content project-padding">
+    <header class="project-header">
+      <h3>{payload.title}</h3>
+      <a href={payload.link} aria-label={`View ${payload.title}`} target="_blank" rel="noopener noreferrer">
+        <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+      </a>
+    </header>
+
+    <p class="project-desc">{payload.description}</p>
+
+    <footer class="card-tags project-footer">
+      {payload.tags.map((tag) => <span class="card-tag">{tag}</span>)}
+    </footer>
+  </div>
+</BaseCard>
+
+<style>
+  .project-padding {
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  .project-desc {
+    color: var(--theme-on-surface-variant);
+  }
+
+  .project-footer {
+    margin-top: auto; /* Pushes tags strictly to the bottom */
+    padding-top: 16px;
+  }
+</style>

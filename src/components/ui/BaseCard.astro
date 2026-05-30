@@ -1,0 +1,81 @@
+---
+/**
+ * @fileoverview Base container primitive for all card types.
+ * Encapsulates structural CSS, backgrounds, interactive hover states,
+ * and heavily shared internal UI layout components.
+ */
+
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"article"> {
+  as?: any;
+}
+
+const { as: Tag = "article", ...rest } = Astro.props;
+---
+
+<Tag class="base-card" {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  /* ==========================================================
+     1. SHELL STYLES (Strictly Scoped)
+     ========================================================== */
+  .base-card {
+    background: var(--theme-surface-container);
+    border: 1px solid var(--theme-outline-variant);
+    border-radius: 8px;
+    transition: border-color 0.2s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .base-card:hover {
+    border-color: var(--theme-primary);
+  }
+
+  /* ==========================================================
+     2. SHARED CHILD UTILITIES
+     ========================================================== */
+  .base-card :global(.card-img-wrapper) {
+    height: 192px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .base-card :global(.card-img-wrapper img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+
+  .base-card:hover :global(.card-img-wrapper img) {
+    transform: scale(1.1);
+  }
+
+  .base-card :global(.card-content) {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .base-card :global(.card-tags) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .base-card :global(.card-tag) {
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    color: var(--theme-primary);
+    background: color-mix(in srgb, var(--theme-primary) 10%, transparent);
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+</style>

@@ -26,6 +26,9 @@ const { id, icon, title, class: className = "" } = Astro.props;
 </section>
 
 <style>
+  /* ==========================================================
+    1. SHELL STYLES (Strictly Scoped)
+    ========================================================== */
   .section {
     padding-top: var(--spacing-md);
     padding-bottom: var(--spacing-lg);
@@ -44,12 +47,27 @@ const { id, icon, title, class: className = "" } = Astro.props;
     letter-spacing: -0.02em;
   }
 
-  .icon-primary {
+  /* ==========================================================
+    2. SHARED CHILD UTILITIES
+    ========================================================== */
+  .section :global(.icon-primary) {
     color: var(--theme-primary);
     font-size: 2rem;
   }
 
-  .icon-inline {
+  .section :global(.icon-inline) {
     vertical-align: middle;
+  }
+
+  .section :global(.grid-2) {
+    display: grid;
+    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  }
+
+  .section :global(.grid-4) {
+    display: grid;
+    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   }
 </style>

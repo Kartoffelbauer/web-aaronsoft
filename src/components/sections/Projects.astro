@@ -1,11 +1,10 @@
 ---
 /**
- * @file Projects.astro
  * @description Renders the featured projects grid using the common SectionLayout and unified Card factory.
  */
 
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import Card from "../widgets/Card.astro";
+import ProjectCard from "../ui/ProjectCard.astro";
 import { siteConfig } from "../../data/config";
 
 const { projects } = siteConfig.sections;
@@ -15,7 +14,7 @@ const { projects } = siteConfig.sections;
   <div class="grid-4">
     {
       projects.items.map((project) => (
-        <Card type="project" payload={project} />
+        <ProjectCard payload={project} />
       ))
     }
   </div>

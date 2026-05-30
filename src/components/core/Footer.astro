@@ -1,6 +1,6 @@
 ---
-import { siteConfig } from "../data/config.ts";
-import { getCurrentYear } from "../utils/dateUtils.ts";
+import { siteConfig } from "../../data/config.ts";
+import { getCurrentYear } from "../../utils/dateUtils.ts";
 
 const { logo } = siteConfig;
 ---
@@ -22,7 +22,7 @@ const { logo } = siteConfig;
 </footer>
 
 <script>
-  import { getCurrentYear } from "../utils/dateUtils.ts";
+  import { getCurrentYear } from "../../utils/dateUtils.ts";
 
   class CurrentYear extends HTMLElement {
     connectedCallback() {
