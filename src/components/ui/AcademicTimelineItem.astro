@@ -1,0 +1,156 @@
+---
+/**
+ * @fileoverview Individual academic timeline item.
+ * Renders server-side first, then utilizes a custom web component for client-side date hydration.
+ */
+import { getAcademicStatus } from "../../utils/dateUtils.ts";
+import type { EducationItem } from "../../types/index.ts";
+
+export interface Props {
+  item: EducationItem;
+}
+
+const { item } = Astro.props;
+
+// Calculate initial state server-side to prevent layout shifts before JS loads
+const { durationText, statusLabel, isActive } = getAcademicStatus(item.startDate, item.endDate);
+---
+
+<academic-tracker
+  class="timeline-item"
+  data-start={item.startDate}
+  data-end={item.endDate}
+>
+  <div class:list={["timeline-dot", isActive ? "active" : "inactive"]}></div>
+
+  <div class="timeline-content">
+    <div class="timeline-header">
+      <h3>{item.degree}</h3>
+      <span class:list={["timeline-badge", isActive ? "badge-active" : "badge-inactive"]}>
+        {statusLabel}
+      </span>
+    </div>
+
+    <p class="timeline-inst">{item.institution}</p>
+    <p class="timeline-date">{durationText}</p>
+    <p class="timeline-desc">{item.description}</p>
+  </div>
+</academic-tracker>
+
+<script>
+  import { getAcademicStatus } from "../../utils/dateUtils.ts";
+
+  /**
+   * Custom element to hydrate academic timeline dates safely on the client.
+   * Ensures 'isActive' states reflect the user's actual local time.
+   */
+  class AcademicTracker extends HTMLElement {
+    connectedCallback() {
+      const start = this.dataset.start;
+      const end = this.dataset.end;
+
+      if (!start || !end) return;
+
+      const { durationText, statusLabel, isActive } = getAcademicStatus(start, end);
+
+      // Scoped DOM updates limit reflows and prevent cross-component interference
+      const dot = this.querySelector(".timeline-dot");
+      if (dot) dot.className = `timeline-dot ${isActive ? "active" : "inactive"}`;
+
+      const badge = this.querySelector(".timeline-badge");
+      if (badge) {
+        badge.className = `timeline-badge ${isActive ? "badge-active" : "badge-inactive"}`;
+        badge.textContent = statusLabel;
+      }
+
+      const dateEl = this.querySelector(".timeline-date");
+      if (dateEl) dateEl.textContent = durationText;
+    }
+  }
+
+  // Prevent HMR (Hot Module Replacement) crashes in dev mode
+  if (!customElements.get("academic-tracker")) {
+    customElements.define("academic-tracker", AcademicTracker);
+  }
+</script>
+
+<style>
+  academic-tracker {
+    display: block;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 4px solid var(--theme-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .timeline-dot::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--theme-background);
+  }
+
+  .timeline-dot.active {
+    background: var(--theme-primary);
+  }
+
+  .timeline-dot.inactive {
+    background: var(--theme-outline);
+  }
+
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 4px;
+  }
+
+  .timeline-badge {
+    font-family: var(--font-code);
+    font-size: 0.875rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .badge-active {
+    color: var(--theme-primary);
+    background: color-mix(in srgb, var(--theme-primary) 10%, transparent);
+  }
+
+  .badge-inactive {
+    color: var(--theme-outline);
+    background: var(--theme-surface-variant);
+  }
+
+  .timeline-inst {
+    font-weight: 600;
+    color: var(--theme-on-surface-variant);
+  }
+
+  .timeline-date {
+    font-family: var(--font-code);
+    font-size: 0.875rem;
+    color: var(--theme-outline);
+  }
+
+  .timeline-desc {
+    color: var(--theme-on-surface-variant);
+    margin-top: 8px;
+    max-width: 600px;
+  }
+</style>

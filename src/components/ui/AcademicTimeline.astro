@@ -1,0 +1,40 @@
+---
+/**
+ * @fileoverview Container component for the academic timeline.
+ * Handles the mapping of data items and the structural connecting line between them.
+ */
+import AcademicTimelineItem from "./AcademicTimelineItem.astro";
+import type { EducationItem } from "../../types/index.ts";
+
+export interface Props {
+  items: EducationItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="timeline">
+  {items.map((item) => (
+    <AcademicTimelineItem item={item} />
+  ))}
+</div>
+
+<style>
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  /* The vertical connecting line */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
+  }
+</style>
