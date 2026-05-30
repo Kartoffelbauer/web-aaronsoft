@@ -4,69 +4,18 @@
  */
 
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import "../../styles/card.css";
+import SkillCard from "../ui/SkillCard.astro";
 import { siteConfig } from "../../data/config.ts";
-import { getExperienceString } from "../../utils/dateUtils.ts";
 
 const { skills } = siteConfig.sections;
 ---
 
 <SectionLayout id={skills.id} icon="terminal" title="Core Expertise">
-  <div class="skill-list">
+  <div class="skill-list grid-2">
     {
-      skills.items.map((skill) => {
-        const expString = getExperienceString(skill.startDate);
-
-        return (
-          <skill-tracker class="card skill-card" data-start={skill.startDate}>
-            <h3>{skill.name}</h3>
-            <span class="skill-exp">{expString}</span>
-          </skill-tracker>
-        );
-      })
+      skills.items.map((skill) => (
+        <SkillCard payload={skill} />
+      ))
     }
   </div>
 </SectionLayout>
-
-<script>
-  import { getExperienceString } from "../../utils/dateUtils.ts";
-
-  /**
-   * Custom element to calculate and hydrate years of experience dynamically.
-   */
-  class SkillTracker extends HTMLElement {
-    connectedCallback() {
-      const start = this.dataset.start;
-      if (start) {
-        this.querySelector(".skill-exp")!.textContent = getExperienceString(start);
-      }
-    }
-  }
-
-  customElements.define("skill-tracker", SkillTracker);
-</script>
-
-<style>
-  .skill-list {
-    display: grid;
-    gap: var(--spacing-md);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-  }
-
-  .skill-card {
-    padding: var(--spacing-md);
-  }
-
-  .skill-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 4px;
-  }
-
-  .skill-card span {
-    font-family: var(--font-code);
-    font-size: 0.75rem;
-    color: var(--theme-outline);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-</style>

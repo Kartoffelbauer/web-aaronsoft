@@ -23,7 +23,7 @@ const { payload } = Astro.props;
     />
   </div>
 
-  <div class="card-content project-padding">
+  <div class="card-content card-padding project-gap">
     <header class="project-header">
       <h3>{payload.title}</h3>
       <a href={payload.link} aria-label={`View ${payload.title}`} target="_blank" rel="noopener noreferrer">
@@ -40,8 +40,7 @@ const { payload } = Astro.props;
 </BaseCard>
 
 <style>
-  .project-padding {
-    padding: var(--spacing-md);
+  .project-gap {
     gap: var(--spacing-sm);
   }
 
@@ -56,7 +55,7 @@ const { payload } = Astro.props;
   }
 
   .project-footer {
-    margin-top: auto; /* Pushes tags strictly to the bottom */
+    margin-top: auto;
     padding-top: 16px;
   }
 </style>

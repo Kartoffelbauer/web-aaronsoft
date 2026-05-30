@@ -1,0 +1,60 @@
+---
+/**
+ * @fileoverview Renders a single technical skill card.
+ * Uses polymorphic component rendering to act as a custom web component.
+ */
+
+import BaseCard from "./BaseCard.astro";
+import { getExperienceString } from "../../utils/dateUtils.ts";
+import type { SkillItem } from "../../types/index.ts";
+
+export interface Props {
+  payload: SkillItem;
+}
+
+const { payload } = Astro.props;
+---
+
+<BaseCard as="skill-tracker" data-start={payload.startDate} class="card-padding">
+  <h3 class="skill-name">{payload.name}</h3>
+  <span class="skill-exp">{getExperienceString(payload.startDate)}</span>
+</BaseCard>
+
+<script>
+  import { getExperienceString } from "../../utils/dateUtils.ts";
+
+  /**
+   * Client-side hydration for dynamic years of experience.
+   * Calculates the time delta on the client so it remains accurate over time.
+   */
+  class SkillTracker extends HTMLElement {
+    connectedCallback() {
+      const start = this.dataset.start;
+      if (start) {
+        const expElement = this.querySelector(".skill-exp");
+        if (expElement) {
+          expElement.textContent = getExperienceString(start);
+        }
+      }
+    }
+  }
+
+  if (!customElements.get("skill-tracker")) {
+    customElements.define("skill-tracker", SkillTracker);
+  }
+</script>
+
+<style>
+  .skill-name {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+  }
+
+  .skill-exp {
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+    color: var(--theme-outline);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>

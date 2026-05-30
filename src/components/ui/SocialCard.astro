@@ -16,9 +16,9 @@ const { payload } = Astro.props;
 ---
 
 <BaseCard as="social-tracker" data-start={payload.startDate}>
-  <header class="card-header">
-    <div class="avatar">
-      <span class="material-symbols-outlined avatar" aria-hidden="true">
+  <header class="card-header card-padding">
+    <div class="avatar-wrapper">
+      <span class="material-symbols-outlined" aria-hidden="true">
         account_circle
       </span>
     </div>
@@ -44,7 +44,7 @@ const { payload } = Astro.props;
     </div>
   </div>
 
-  <footer class="card-footer card-tags">
+  <footer class="card-footer card-tags card-padding">
     {payload.tags.map((tag) => (
       <span class="card-tag">{tag}</span>
     ))}
@@ -74,17 +74,18 @@ const { payload } = Astro.props;
 <style>
   .card-header {
     display: flex;
-    padding: var(--spacing-md);
     gap: 12px;
   }
 
-  .avatar {
-    font-size: 2.5rem;
+  .avatar-wrapper {
+    display: grid;
+    place-items: center;
+    color: var(--theme-on-surface-variant);
   }
 
-  .avatar svg {
-    width: 28px;
-    height: 28px;
+  /* Properly targets the icon span */
+  .avatar-wrapper span {
+    font-size: 2.5rem;
   }
 
   .user-info {
@@ -120,7 +121,6 @@ const { payload } = Astro.props;
   }
 
   .card-footer {
-    padding: 12px var(--spacing-md);
     background: var(--theme-surface-container);
   }
 </style>

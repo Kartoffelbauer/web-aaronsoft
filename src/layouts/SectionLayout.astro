@@ -55,14 +55,10 @@ const { id, icon, title, class: className = "" } = Astro.props;
     font-size: 2rem;
   }
 
-  .section :global(.icon-inline) {
-    vertical-align: middle;
-  }
-
   .section :global(.grid-2) {
     display: grid;
-    gap: var(--spacing-lg);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
   }
 
   .section :global(.grid-4) {
