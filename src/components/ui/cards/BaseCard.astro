@@ -41,7 +41,7 @@ const { as: Tag = "article", class: className = "", ...rest } = Astro.props;
      2. SHARED CHILD UTILITIES
      ========================================================== */
   .base-card :global(.card-img-wrapper) {
-    height: 192px;
+    height: var(--card-base-height);
     overflow: hidden;
     flex-shrink: 0;
   }
@@ -72,15 +72,15 @@ const { as: Tag = "article", class: className = "", ...rest } = Astro.props;
   .base-card :global(.card-tags) {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: var(--spacing-sm);
   }
 
   .base-card :global(.card-tag) {
     font-family: var(--font-code);
-    font-size: 0.8rem;
+    font-size: var(--font-size-sm);
     color: var(--theme-primary);
     background: color-mix(in srgb, var(--theme-primary) 10%, transparent);
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-md);
   }
 </style>

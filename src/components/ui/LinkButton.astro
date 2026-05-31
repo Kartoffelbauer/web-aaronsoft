@@ -42,12 +42,12 @@ const classNames = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 12px 24px;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
     border-radius: var(--border-radius-base);
     font-family: var(--font-code);
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
 
     /* BEST PRACTICE: Explicitly remove default link styling */
     text-decoration: none;
@@ -59,7 +59,7 @@ const classNames = [
 
   /* Size Variants */
   .btn-sm {
-    padding: 8px 16px;
+    padding: var(--spacing-sm) var(--spacing-md);
   }
 
   /*

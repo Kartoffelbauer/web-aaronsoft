@@ -79,7 +79,7 @@ const { payload } = Astro.props;
 <style>
   .card-header {
     display: flex;
-    gap: 12px;
+    gap: var(--spacing-md);
   }
 
   .avatar-wrapper {
@@ -90,7 +90,7 @@ const { payload } = Astro.props;
 
   /* Properly targets the icon span */
   .avatar-wrapper span {
-    font-size: 2.5rem;
+    font-size: var(--font-size-xl);
   }
 
   .user-info {
@@ -109,14 +109,14 @@ const { payload } = Astro.props;
 
   .headline,
   .created-at {
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     color: var(--theme-on-surface-variant);
   }
 
   .social-text {
     margin: 0;
     padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
-    font-size: 14px;
+    font-size: var(--font-size-base);
     line-height: 1.5;
     color: var(--theme-on-surface);
   }

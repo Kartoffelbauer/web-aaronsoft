@@ -9,7 +9,7 @@
 
 import profilePic from "../../assets/img/profile.jpg";
 import { Image } from "astro:assets";
-import { LinkButton, Heading } from "../ui/index.astro";
+import { LinkButton } from "../ui/index.astro";
 import { siteConfig } from "../../data/config.ts";
 
 const { hero } = siteConfig.sections;
@@ -17,8 +17,8 @@ const { hero } = siteConfig.sections;
 
 <section id={hero.id} class="hero-section">
   <div class="hero-content">
-    <Heading as="h1">{hero.title}</Heading>
-    <p>{hero.description}</p>
+    <p class="title">{hero.title}</p>
+    <p class="description">{hero.description}</p>
 
     <nav class="hero-actions" aria-label="Social Links">
       <LinkButton
@@ -70,19 +70,19 @@ const { hero } = siteConfig.sections;
     /* 3. Fluid grid: dynamically creates columns based on available space */
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
     align-items: center;
-  }
 
-  .hero-content h1 {
-    font-size: 3rem;
-    line-height: 1.2;
-    font-weight: 300;
-    margin-bottom: var(--spacing-md);
-  }
+    .title {
+      font-size: var(--font-size-xxl);
+      line-height: 1.2;
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--spacing-md);
+    }
 
-  .hero-content p {
-    font-size: 1.125rem;
-    color: var(--theme-on-surface-variant);
-    margin-bottom: var(--spacing-lg);
+    .description {
+      font-size: var(--font-size-lg);
+      color: var(--theme-on-surface-variant);
+      margin-bottom: var(--spacing-lg);
+    }
   }
 
   .hero-actions {
@@ -109,9 +109,9 @@ const { hero } = siteConfig.sections;
   }
 
   .image-border {
-    padding: 8px;
+    padding: var(--spacing-sm);
     border: 1px solid var(--theme-outline-variant);
-    border-radius: 16px;
+    border-radius: var(--border-radius-md);
     background: var(--theme-surface-container);
   }
 
@@ -120,7 +120,7 @@ const { hero } = siteConfig.sections;
     max-width: 360px;
     aspect-ratio: 1;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: var(--border-radius-md);
     filter: grayscale(100%);
     transition: filter 0.5s ease;
   }

@@ -4,7 +4,7 @@
  * Handles routing across the site and dynamically adjusts for sub-pages.
  */
 
-import { Container, Icon, LinkButton } from "../ui/index.astro";
+import { Container, Icon, LinkButton, Logo } from "../ui/index.astro";
 import { siteConfig } from "../../data/config.ts";
 
 export interface Props {
@@ -20,7 +20,7 @@ const { logo, nav, sections } = siteConfig;
 
 <nav class="navbar">
   <Container class="navbar-content">
-    <div class="logo">{logo}</div>
+    <Logo logo={logo} />
 
     <div class:list={["nav-links", { "main-page": isMainPage }]}>
       {
@@ -71,12 +71,7 @@ const { logo, nav, sections } = siteConfig;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 64px;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-    letter-spacing: -0.02em;
+    height: var(--header-base-height);
   }
 
   /* --- Navigation Links --- */
@@ -85,12 +80,12 @@ const { logo, nav, sections } = siteConfig;
     align-items: center;
     gap: var(--spacing-lg);
     font-family: var(--font-code);
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
   }
 
   .nav-links a {
     color: var(--theme-on-surface-variant);
-    font-weight: 500;
+    font-size: var(--font-size-sm);
     transition: color 0.2s;
   }
 
@@ -100,7 +95,7 @@ const { logo, nav, sections } = siteConfig;
 
   .nav-links a.active {
     color: var(--theme-primary);
-    font-weight: 700;
+    font-size: var(--font-size-sm);
     border-bottom: 2px solid var(--theme-primary);
     vertical-align: bottom;
   }
@@ -109,7 +104,6 @@ const { logo, nav, sections } = siteConfig;
   .home-link {
     display: flex;
     align-items: center;
-    gap: 4px;
   }
 
   /* --- Responsive Display Logic --- */
