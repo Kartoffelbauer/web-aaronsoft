@@ -56,9 +56,14 @@ export function initScrollSpy(navbarOffset: number = 128): void {
 
     // Edge case: If the user scrolls to the absolute bottom of the document,
     // force the last section to be active, even if it hasn't reached the navbar line.
+    // 1. Use Math.ceil to safely handle fractional pixel scrolling
+    const scrollPosition = Math.ceil(window.innerHeight + window.scrollY);
+    // 2. Use documentElement.scrollHeight for the true scrollable height of the page
+    const documentHeight = document.documentElement.scrollHeight;
+    // 3. Check if at bottom AND ensure the page is actually tall enough to be scrollable
     const isAtBottom =
-      window.innerHeight + window.scrollY >= document.body.offsetHeight;
-    if (isAtBottom) {
+      scrollPosition >= documentHeight && documentHeight > window.innerHeight;
+    if (isAtBottom && sections.length > 0) {
       currentActiveId = sections[sections.length - 1].id;
     }
 

@@ -1,0 +1,45 @@
+---
+/**
+ * @fileoverview Auto-fitting CSS Grid primitive.
+ * Automatically handles responsive wrapping without requiring media queries.
+ */
+
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"div"> {
+  /** Allows polymorphic rendering */
+  as?: any;
+  /** Defines the grid configuration payload */
+  columns?: 2 | 4;
+}
+
+const {
+  as: Tag = "div",
+  columns = 2,
+  class: className = "",
+  ...rest
+} = Astro.props;
+---
+
+{/* We use a data-attribute to cleanly hook our scoped CSS to the prop value */}
+<Tag class={`grid ${className}`.trim()} data-columns={columns} {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  .grid {
+    display: grid;
+  }
+
+  /* 2-Column Variant (Previously .grid-2) */
+  .grid[data-columns="2"] {
+    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  }
+
+  /* 4-Column Variant (Previously .grid-4) */
+  .grid[data-columns="4"] {
+    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  }
+</style>

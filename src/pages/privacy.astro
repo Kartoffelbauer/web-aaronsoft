@@ -4,21 +4,16 @@
  * Assembles the layout and section components cleanly.
  */
 
-import BaseLayout from "../layouts/BaseLayout.astro";
-import NavBar from "../components/core/NavBar.astro";
-import Footer from "../components/core/Footer.astro";
-
-import "../styles/legal.css";
+import LegalLayout from "../layouts/LegalLayout.astro";
 
 import { siteConfig } from "../data/config.ts";
 const { personalData, hosterData } = siteConfig.legal;
 ---
 
-<BaseLayout
+<LegalLayout
   title=`Datenschutz­erklärung | ${siteConfig.logo}`
   description=`Datenschutz­erklärung von ${siteConfig.logo}`
 >
-  <NavBar isMainPage={false} />
   <main class="container legal-content privacy-content">
     <h1>Datenschutz&shy;erkl&auml;rung</h1>
     <h2>1. Datenschutz auf einen Blick</h2>
@@ -377,8 +372,7 @@ noreferrer">https://policies.google.com/privacy?hl=de</a
       Quelle: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a>
     </p>
   </main>
-  <Footer />
-</BaseLayout>
+</LegalLayout>
 
 <style>
   .privacy-content {

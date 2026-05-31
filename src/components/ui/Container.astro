@@ -1,0 +1,29 @@
+---
+/**
+ * @fileoverview Layout primitive for standardizing maximum width and fluid padding.
+ * Prevents content from stretching infinitely on ultra-wide displays.
+ */
+
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"div"> {
+  /** Allows the container to render as any valid HTML element (e.g., 'main', 'section') */
+  as?: any;
+}
+
+const { as: Tag = "div", class: className = "", ...rest } = Astro.props;
+---
+
+<Tag class={`container ${className}`.trim()} {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  .container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    /* Fluid padding: 16px (mobile) scales to 32px (desktop) */
+    padding: 0 clamp(var(--spacing-md), 4vw, var(--spacing-lg));
+  }
+</style>

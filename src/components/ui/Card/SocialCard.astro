@@ -5,8 +5,8 @@
  */
 
 import BaseCard from "./BaseCard.astro";
-import { getYearsString } from "../../utils/dateUtils.ts";
-import type { SocialItem } from "../../types/index.ts";
+import { getYearsString } from "../../../utils/dateUtils.ts";
+import type { SocialItem } from "../../../types/index.ts";
 
 export interface Props {
   payload: SocialItem;
@@ -31,8 +31,15 @@ const { payload } = Astro.props;
       <span class="created-at">{getYearsString(payload.startDate)}</span>
     </div>
 
-    <a href={payload.linkUrl} aria-label={`View external link to post by ${payload.author}`} target="_blank" rel="noopener noreferrer">
-      <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+    <a
+      href={payload.linkUrl}
+      aria-label={`View external link to post by ${payload.author}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true"
+        >open_in_new</span
+      >
     </a>
   </header>
 
@@ -45,14 +52,12 @@ const { payload } = Astro.props;
   </div>
 
   <footer class="card-footer card-tags card-padding">
-    {payload.tags.map((tag) => (
-      <span class="card-tag">{tag}</span>
-    ))}
+    {payload.tags.map((tag) => <span class="card-tag">{tag}</span>)}
   </footer>
 </BaseCard>
 
 <script>
-  import { getYearsString } from "../../utils/dateUtils.ts";
+  import { getYearsString } from "../../../utils/dateUtils.ts";
 
   class SocialTracker extends HTMLElement {
     connectedCallback() {

@@ -5,8 +5,8 @@
  */
 
 import BaseCard from "./BaseCard.astro";
-import { getExperienceString } from "../../utils/dateUtils.ts";
-import type { SkillItem } from "../../types/index.ts";
+import { getExperienceString } from "../../../utils/dateUtils.ts";
+import type { SkillItem } from "../../../types/index.ts";
 
 export interface Props {
   payload: SkillItem;
@@ -15,13 +15,17 @@ export interface Props {
 const { payload } = Astro.props;
 ---
 
-<BaseCard as="skill-tracker" data-start={payload.startDate} class="card-padding">
+<BaseCard
+  as="skill-tracker"
+  data-start={payload.startDate}
+  class="card-padding"
+>
   <h3 class="skill-name">{payload.name}</h3>
   <span class="skill-exp">{getExperienceString(payload.startDate)}</span>
 </BaseCard>
 
 <script>
-  import { getExperienceString } from "../../utils/dateUtils.ts";
+  import { getExperienceString } from "../../../utils/dateUtils.ts";
 
   /**
    * Client-side hydration for dynamic years of experience.

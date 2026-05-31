@@ -3,8 +3,8 @@
  * @fileoverview Individual academic timeline item.
  * Renders server-side first, then utilizes a custom web component for client-side date hydration.
  */
-import { getAcademicStatus } from "../../utils/dateUtils.ts";
-import type { EducationItem } from "../../types/index.ts";
+import { getAcademicStatus } from "../../../utils/dateUtils.ts";
+import type { EducationItem } from "../../../types/index.ts";
 
 export interface Props {
   item: EducationItem;
@@ -13,7 +13,10 @@ export interface Props {
 const { item } = Astro.props;
 
 // Calculate initial state server-side to prevent layout shifts before JS loads
-const { durationText, statusLabel, isActive } = getAcademicStatus(item.startDate, item.endDate);
+const { durationText, statusLabel, isActive } = getAcademicStatus(
+  item.startDate,
+  item.endDate,
+);
 ---
 
 <academic-tracker
@@ -26,7 +29,12 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(item.startDate
   <div class="timeline-content">
     <div class="timeline-header">
       <h3>{item.degree}</h3>
-      <span class:list={["timeline-badge", isActive ? "badge-active" : "badge-inactive"]}>
+      <span
+        class:list={[
+          "timeline-badge",
+          isActive ? "badge-active" : "badge-inactive",
+        ]}
+      >
         {statusLabel}
       </span>
     </div>
@@ -38,7 +46,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(item.startDate
 </academic-tracker>
 
 <script>
-  import { getAcademicStatus } from "../../utils/dateUtils.ts";
+  import { getAcademicStatus } from "../../../utils/dateUtils.ts";
 
   /**
    * Custom element to hydrate academic timeline dates safely on the client.
@@ -51,11 +59,15 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(item.startDate
 
       if (!start || !end) return;
 
-      const { durationText, statusLabel, isActive } = getAcademicStatus(start, end);
+      const { durationText, statusLabel, isActive } = getAcademicStatus(
+        start,
+        end,
+      );
 
       // Scoped DOM updates limit reflows and prevent cross-component interference
       const dot = this.querySelector(".timeline-dot");
-      if (dot) dot.className = `timeline-dot ${isActive ? "active" : "inactive"}`;
+      if (dot)
+        dot.className = `timeline-dot ${isActive ? "active" : "inactive"}`;
 
       const badge = this.querySelector(".timeline-badge");
       if (badge) {

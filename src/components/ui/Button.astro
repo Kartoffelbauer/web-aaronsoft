@@ -1,0 +1,86 @@
+---
+/**
+ * @fileoverview Polymorphic Button Primitive.
+ * Automatically renders as an <a> tag if an 'href' is provided,
+ * otherwise renders as a <button>.
+ */
+
+import type { HTMLAttributes } from "astro/types";
+
+// 1. Define the custom UI variants
+interface BaseProps {
+  variant?: "primary" | "outline";
+  size?: "md" | "sm";
+}
+
+// 2. TypeScript union to accept either anchor or button native attributes
+export type Props = BaseProps &
+  (HTMLAttributes<"button"> | HTMLAttributes<"a">);
+
+const {
+  variant = "primary",
+  size = "md",
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+// 3. Dynamic tag assignment based on the presence of a URL
+const Tag = "href" in rest ? "a" : "button";
+
+// 4. Construct the class list
+const classNames = [
+  "btn",
+  `btn-${variant}`,
+  size === "sm" ? "btn-sm" : "",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<Tag class={classNames} {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  /* Base Button Styles */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: var(--border-radius-base);
+    font-family: var(--font-code);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  /* Size Variants */
+  .btn-sm {
+    padding: 8px 16px;
+  }
+
+  /* Color Variants */
+  .btn-primary {
+    background: var(--theme-primary);
+    color: var(--theme-on-primary);
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .btn-outline {
+    border-color: var(--theme-outline);
+    color: var(--theme-on-surface);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--theme-primary);
+    color: var(--theme-primary);
+  }
+</style>

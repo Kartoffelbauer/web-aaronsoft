@@ -4,22 +4,17 @@
  * Assembles the layout and section components cleanly.
  */
 
-import BaseLayout from "../layouts/BaseLayout.astro";
-import NavBar from "../components/core/NavBar.astro";
-import Footer from "../components/core/Footer.astro";
-
-import "../styles/legal.css";
-
+import LegalLayout from "../layouts/LegalLayout.astro";
+import Container from "../components/ui/Container.astro";
 import { siteConfig } from "../data/config.ts";
 const { personalData } = siteConfig.legal;
 ---
 
-<BaseLayout
+<LegalLayout
   title=`Impressum | ${siteConfig.logo}`
   description=`Impressum von ${siteConfig.logo}`
 >
-  <NavBar isMainPage={false} />
-  <main class="container legal-content">
+  <Container class="legal-content">
     <h1>Impressum</h1>
 
     <p>
@@ -38,6 +33,5 @@ const { personalData } = siteConfig.legal;
     </p>
 
     <p>Quelle: <a href="https://www.e-recht24.de">eRecht24</a></p>
-  </main>
-  <Footer />
-</BaseLayout>
+  </Container>
+</LegalLayout>

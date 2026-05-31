@@ -32,7 +32,8 @@ const { id, icon, title, class: className = "" } = Astro.props;
   .section {
     padding-top: var(--spacing-md);
     padding-bottom: var(--spacing-lg);
-    border-top: 1px solid color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
+    border-top: 1px solid
+      color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
   }
   .section-header {
     display: flex;
@@ -53,17 +54,5 @@ const { id, icon, title, class: className = "" } = Astro.props;
   .section :global(.icon-primary) {
     color: var(--theme-primary);
     font-size: 2rem;
-  }
-
-  .section :global(.grid-2) {
-    display: grid;
-    gap: var(--spacing-md);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-  }
-
-  .section :global(.grid-4) {
-    display: grid;
-    gap: var(--spacing-lg);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   }
 </style>

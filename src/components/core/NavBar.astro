@@ -4,6 +4,8 @@
  * Handles routing across the site and dynamically adjusts for sub-pages.
  */
 import { siteConfig } from "../../data/config.ts";
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
 
 export interface Props {
   // Default to true so you don't have to pass it on the index page
@@ -17,7 +19,7 @@ const { logo, nav, sections } = siteConfig;
 ---
 
 <nav class="navbar">
-  <div class="container navbar-content">
+  <Container class="navbar-content">
     <div class="logo">{logo}</div>
 
     <div class:list={["nav-links", { "main-page": isMainPage }]}>
@@ -43,17 +45,17 @@ const { logo, nav, sections } = siteConfig;
 
     {
       isMainPage && (
-        <a
+        <Button
           href={nav.resumeUrl}
-          class="btn btn-primary btn-sm"
           target="_blank"
           rel="noopener noreferrer"
+          size="sm"
         >
           Resume
-        </a>
+        </Button>
       )
     }
-  </div>
+  </Container>
 </nav>
 
 <style>
