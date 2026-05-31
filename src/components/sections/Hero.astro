@@ -1,7 +1,10 @@
 ---
 /**
- * @fileoverview Primary landing section. Kept independent from SectionLayout
- * as its structural grid and h1 hierarchy differ from standard page sections.
+ * @fileoverview Primary landing section (Hero).
+ *
+ * Best Practice implementation utilizing CSS Container Queries for true fluid
+ * responsiveness, decoupling the layout from viewport media queries.
+ * Keeps structural grid and h1 hierarchy independent from standard layouts.
  */
 
 import { Image } from "astro:assets";
@@ -19,9 +22,9 @@ const { hero } = siteConfig.sections;
 
     <nav class="hero-actions" aria-label="Social Links">
       <Button href={hero.linkedinUrl} target="_blank" rel="noopener noreferrer">
-        <span class="material-symbols-outlined" aria-hidden="true"
-          >open_in_new</span
-        >
+        <span class="material-symbols-outlined" aria-hidden="true">
+          open_in_new
+        </span>
         LinkedIn
       </Button>
       <Button
@@ -50,10 +53,17 @@ const { hero } = siteConfig.sections;
 
 <style>
   .hero-section {
-    padding-top: var(--spacing-lg);
-    padding-bottom: var(--spacing-xl);
+    /* 1. Container context for responsive child elements */
+    container-type: inline-size;
+    container-name: hero;
+
+    /* 2. DRY: Use logical properties instead of individual top/bottom declarations */
+    padding-block: var(--spacing-lg) var(--spacing-xl);
+
     display: grid;
     gap: var(--spacing-xl);
+
+    /* 3. Fluid grid: dynamically creates columns based on available space */
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
     align-items: center;
   }
@@ -78,10 +88,17 @@ const { hero } = siteConfig.sections;
 
   .hero-image-wrapper {
     display: flex;
+    /* Mobile-first: Default alignment when stacked in a single column */
     justify-content: center;
   }
 
-  @media (min-width: 768px) {
+  /**
+   * CONTAINER QUERY ALIGNMENT FIX
+   * * Trigger the alignment change precisely when the grid snaps to two columns.
+   * Math: 400px (Col 1) + 400px (Col 2) + var(--spacing-xl) gap.
+   * * Note: Assuming var(--spacing-xl) evaluates to 64px, the snap is at 864px.
+   */
+  @container hero (min-width: 864px) {
     .hero-image-wrapper {
       justify-content: flex-end;
     }

@@ -4,6 +4,8 @@
  * for section headers, icons, and consistent spacing across the application.
  */
 
+import Icon from "../components/ui/Icon.astro";
+
 interface Props {
   id: string;
   icon: string;
@@ -16,9 +18,7 @@ const { id, icon, title, class: className = "" } = Astro.props;
 
 <section id={id} class={`section ${className}`.trim()}>
   <header class="section-header">
-    <span class="material-symbols-outlined icon-primary" aria-hidden="true">
-      {icon}
-    </span>
+    <Icon name={icon} />
     <h2>{title}</h2>
   </header>
 
@@ -26,9 +26,6 @@ const { id, icon, title, class: className = "" } = Astro.props;
 </section>
 
 <style>
-  /* ==========================================================
-    1. SHELL STYLES (Strictly Scoped)
-    ========================================================== */
   .section {
     padding-top: var(--spacing-md);
     padding-bottom: var(--spacing-lg);
@@ -46,13 +43,5 @@ const { id, icon, title, class: className = "" } = Astro.props;
     /* Fluid typography: 2rem (mobile) scales linearly to 3rem (desktop) */
     font-size: clamp(1.5rem, 5vw, 2.5rem);
     letter-spacing: -0.02em;
-  }
-
-  /* ==========================================================
-    2. SHARED CHILD UTILITIES
-    ========================================================== */
-  .section :global(.icon-primary) {
-    color: var(--theme-primary);
-    font-size: 2rem;
   }
 </style>

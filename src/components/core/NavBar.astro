@@ -3,9 +3,10 @@
  * @fileoverview Navigation Bar Component.
  * Handles routing across the site and dynamically adjusts for sub-pages.
  */
-import { siteConfig } from "../../data/config.ts";
-import Button from "../ui/Button.astro";
+import Icon from "../ui/Icon.astro";
 import Container from "../ui/Container.astro";
+import Button from "../ui/Button.astro";
+import { siteConfig } from "../../data/config.ts";
 
 export interface Props {
   // Default to true so you don't have to pass it on the index page
@@ -34,9 +35,7 @@ const { logo, nav, sections } = siteConfig;
           })
         ) : (
           <a href="/" class="home-link">
-            <span class="material-symbols-outlined" aria-hidden="true">
-              keyboard_double_arrow_left
-            </span>
+            <Icon name="keyboard_double_arrow_left" mode="secondary" />
             HOME
           </a>
         )

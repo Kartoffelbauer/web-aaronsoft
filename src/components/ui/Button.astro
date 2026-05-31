@@ -5,27 +5,24 @@
  * otherwise renders as a <button>.
  */
 
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLTag, Polymorphic } from "astro/types";
 
-// 1. Define the custom UI variants
-interface BaseProps {
+// 1. Define your component's custom props using Polymorphic.
+// This natively supports swapping between anchor and button attributes.
+type Props<Tag extends HTMLTag> = Polymorphic<{
+  as: Tag;
   variant?: "primary" | "outline";
   size?: "md" | "sm";
-}
-
-// 2. TypeScript union to accept either anchor or button native attributes
-export type Props = BaseProps &
-  (HTMLAttributes<"button"> | HTMLAttributes<"a">);
+}>;
 
 const {
+  // If an href is provided, default to 'a', otherwise 'button'
+  as: Tag = Astro.props.href ? "a" : "button",
   variant = "primary",
   size = "md",
   class: className = "",
   ...rest
 } = Astro.props;
-
-// 3. Dynamic tag assignment based on the presence of a URL
-const Tag = "href" in rest ? "a" : "button";
 
 // 4. Construct the class list
 const classNames = [
