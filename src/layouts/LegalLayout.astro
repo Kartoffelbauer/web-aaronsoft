@@ -1,4 +1,10 @@
 ---
+/**
+ * @fileoverview Base layout for legal pages.
+ * Handles the standard page shell (Nav, Footer) and provides
+ * encapsulated typographic defaults for slotted legal text.
+ */
+
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/ui/Container.astro";
 import NavBar from "../components/core/NavBar.astro";
@@ -9,27 +15,36 @@ const { title, description } = Astro.props;
 
 <BaseLayout title={title} description={description}>
   <NavBar isMainPage={false} />
-  <Container as="main" class="legal-content">
+
+  <Container mode="main" class="legal-content">
     <slot />
   </Container>
+
   <Footer />
 </BaseLayout>
 
-<style is:global>
-  .legal-content p {
-    margin-bottom: var(--spacing-md);
-  }
+<style>
+  .legal-content {
+    :global(p) {
+      margin-bottom: var(--spacing-md);
+    }
 
-  .legal-content a {
-    color: var(--theme-link);
-    text-decoration: underline;
-  }
+    /* DRY: Group anchor styles and utilize nesting for states */
+    :global(a) {
+      color: var(--theme-link);
+      text-decoration: underline;
+      /* Added best-practice transition for smoother UX */
+      transition: color 0.2s ease;
 
-  .legal-content a:visited {
-    color: var(--theme-link-visited);
-  }
+      &:visited {
+        color: var(--theme-link-visited);
+      }
 
-  .legal-content a:hover {
-    color: var(--theme-link-hover);
+      /* Group hover and focus-visible for accessibility */
+      &:hover,
+      &:focus-visible {
+        color: var(--theme-link-hover);
+      }
+    }
   }
 </style>

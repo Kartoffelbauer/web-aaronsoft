@@ -1,0 +1,89 @@
+---
+/**
+ * @fileoverview Link Button Primitive.
+ * Renders an <a> tag styled as a button.
+ * Strictly used for navigation, not for form submissions or on-page JS actions.
+ */
+
+import type { HTMLAttributes } from "astro/types";
+
+// 1. Extend native anchor attributes to inherit standard <a> props
+interface Props extends HTMLAttributes<"a"> {
+  variant?: "primary" | "outline";
+  size?: "md" | "sm";
+  // Enforce href as a required property since this is strictly an anchor
+  href: string | URL;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+// 2. Construct the class list cleanly
+const classNames = [
+  "btn",
+  `btn-${variant}`,
+  size === "sm" ? "btn-sm" : "",
+  className,
+].filter(Boolean);
+---
+
+<!-- 3. Hardcoded anchor tag replacing the dynamic <Tag> -->
+<a class:list={classNames} {...rest}>
+  <slot />
+</a>
+
+<style>
+  /* Base Button Styles */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: var(--border-radius-base);
+    font-family: var(--font-code);
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    /* BEST PRACTICE: Explicitly remove default link styling */
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  /* Size Variants */
+  .btn-sm {
+    padding: 8px 16px;
+  }
+
+  /*
+   * Color Variants
+   * BEST PRACTICE: Utilizing CSS Nesting for DRYer hover/focus states
+   */
+  .btn-primary {
+    background: var(--theme-primary);
+    color: var(--theme-on-primary);
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.9;
+    }
+  }
+
+  .btn-outline {
+    border-color: var(--theme-outline);
+    color: var(--theme-on-surface);
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--theme-primary);
+      color: var(--theme-primary);
+    }
+  }
+</style>

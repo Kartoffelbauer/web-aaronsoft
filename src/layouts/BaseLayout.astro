@@ -1,7 +1,7 @@
 ---
 import "../styles/reset.css";
-import "../styles/typography.css";
 import "../styles/theme.css";
+import "../styles/typography.css";
 
 // Define the expected shape of your props (TypeScript Best Practice)
 export interface Props {
@@ -17,7 +17,7 @@ const { title, description } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=width, initial-scale=1.0" />
+    <meta name="viewport" content="width=content-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -37,27 +37,15 @@ const { title, description } = Astro.props;
   </body>
 </html>
 
-<style is:global>
+<style>
   html {
     scroll-behavior: smooth;
     scroll-padding-top: var(--spacing-xl);
   }
 
   body {
-    /* Layout offsets */
-    padding-top: calc(var(--spacing-xl) + var(--spacing-lg));
-
-    /* Theme application */
     background-color: var(--theme-background);
     color: var(--theme-on-background);
     font-family: var(--font-body);
-  }
-
-  h1,
-  h2,
-  h3 {
-    font-family: var(--font-headline);
-    font-weight: 500;
-    color: var(--theme-on-surface);
   }
 </style>

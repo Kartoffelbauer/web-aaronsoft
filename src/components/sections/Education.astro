@@ -3,8 +3,9 @@
  * @fileoverview Renders the Education section by pulling from site config
  * and wrapping the timeline in the standard SectionLayout.
  */
+
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import AcademicTimeline from "../ui/Timeline/AcademicTimeline.astro";
+import { AcademicTimeline } from "../ui/index.astro";
 import { siteConfig } from "../../data/config.ts";
 
 const { education } = siteConfig.sections;

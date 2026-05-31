@@ -7,34 +7,38 @@
  * Keeps structural grid and h1 hierarchy independent from standard layouts.
  */
 
-import { Image } from "astro:assets";
-import { siteConfig } from "../../data/config.ts";
 import profilePic from "../../assets/img/profile.jpg";
-import Button from "../ui/Button.astro";
+import { Image } from "astro:assets";
+import { LinkButton, Heading } from "../ui/index.astro";
+import { siteConfig } from "../../data/config.ts";
 
 const { hero } = siteConfig.sections;
 ---
 
 <section id={hero.id} class="hero-section">
   <div class="hero-content">
-    <h1>{hero.title}</h1>
+    <Heading as="h1">{hero.title}</Heading>
     <p>{hero.description}</p>
 
     <nav class="hero-actions" aria-label="Social Links">
-      <Button href={hero.linkedinUrl} target="_blank" rel="noopener noreferrer">
+      <LinkButton
+        href={hero.linkedinUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <span class="material-symbols-outlined" aria-hidden="true">
           open_in_new
         </span>
         LinkedIn
-      </Button>
-      <Button
+      </LinkButton>
+      <LinkButton
         href={hero.githubUrl}
         target="_blank"
         rel="noopener noreferrer"
         variant="outline"
       >
         GitHub
-      </Button>
+      </LinkButton>
     </nav>
   </div>
 

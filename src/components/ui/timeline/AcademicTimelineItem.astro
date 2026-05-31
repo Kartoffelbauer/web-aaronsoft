@@ -3,6 +3,8 @@
  * @fileoverview Individual academic timeline item.
  * Renders server-side first, then utilizes a custom web component for client-side date hydration.
  */
+
+import Heading from "../Heading.astro";
 import { getAcademicStatus } from "../../../utils/dateUtils.ts";
 import type { EducationItem } from "../../../types/index.ts";
 
@@ -28,7 +30,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 
   <div class="timeline-content">
     <div class="timeline-header">
-      <h3>{item.degree}</h3>
+      <Heading as="h3">{item.degree}</Heading>
       <span
         class:list={[
           "timeline-badge",

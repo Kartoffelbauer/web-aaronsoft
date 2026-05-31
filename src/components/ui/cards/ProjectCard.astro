@@ -5,6 +5,7 @@
  */
 
 import BaseCard from "./BaseCard.astro";
+import Heading from "../Heading.astro";
 import type { ProjectItem } from "../../../types/index.ts";
 
 export interface Props {
@@ -25,7 +26,7 @@ const { payload } = Astro.props;
 
   <div class="card-content card-padding project-gap">
     <header class="project-header">
-      <h3>{payload.title}</h3>
+      <Heading as="h3">{payload.title}</Heading>
       <a
         href={payload.link}
         aria-label={`View ${payload.title}`}

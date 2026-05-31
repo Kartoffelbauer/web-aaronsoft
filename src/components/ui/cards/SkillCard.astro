@@ -5,6 +5,7 @@
  */
 
 import BaseCard from "./BaseCard.astro";
+import Heading from "../Heading.astro";
 import { getExperienceString } from "../../../utils/dateUtils.ts";
 import type { SkillItem } from "../../../types/index.ts";
 
@@ -20,7 +21,7 @@ const { payload } = Astro.props;
   data-start={payload.startDate}
   class="card-padding"
 >
-  <h3 class="skill-name">{payload.name}</h3>
+  <Heading as="h3" class="skill-name">{payload.name}</Heading>
   <span class="skill-exp">{getExperienceString(payload.startDate)}</span>
 </BaseCard>
 

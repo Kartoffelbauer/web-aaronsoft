@@ -5,8 +5,9 @@
  */
 
 import LegalLayout from "../layouts/LegalLayout.astro";
-import Container from "../components/ui/Container.astro";
+import { Container, Heading } from "../components/ui/index.astro";
 import { siteConfig } from "../data/config.ts";
+
 const { personalData } = siteConfig.legal;
 ---
 
@@ -15,7 +16,7 @@ const { personalData } = siteConfig.legal;
   description=`Impressum von ${siteConfig.logo}`
 >
   <Container class="legal-content">
-    <h1>Impressum</h1>
+    <Heading as="h1">Impressum</Heading>
 
     <p>
       {personalData.name}<br />
@@ -25,7 +26,7 @@ const { personalData } = siteConfig.legal;
       {personalData.address.country}
     </p>
 
-    <h2>Kontakt</h2>
+    <Heading as="h2">Kontakt</Heading>
     <p>
       Telefon: <a href={`tel:${personalData.phone}`}>{personalData.phone}</a><br
       />

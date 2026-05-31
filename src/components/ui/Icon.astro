@@ -29,13 +29,7 @@ interface Props extends HTMLAttributes<"span"> {
   mode?: "primary" | "inherit";
 }
 
-const {
-  name,
-  mode = "primary",
-  class: className,
-  /* Captures remaining standard HTML attributes */
-  ...rest
-} = Astro.props;
+const { name, mode = "primary", class: className, ...rest } = Astro.props;
 ---
 
 <span

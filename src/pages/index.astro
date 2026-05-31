@@ -13,8 +13,8 @@ import Skills from "../components/sections/Skills.astro";
 import Projects from "../components/sections/Projects.astro";
 import Footer from "../components/core/Footer.astro";
 import Socials from "../components/sections/Socials.astro";
-
 import { siteConfig } from "../data/config";
+
 const { hero } = siteConfig.sections;
 ---
 
@@ -23,7 +23,7 @@ const { hero } = siteConfig.sections;
   description={hero.description}
 >
   <NavBar />
-  <Container as="main">
+  <Container mode="main">
     <Hero />
     <Education />
     <Skills />

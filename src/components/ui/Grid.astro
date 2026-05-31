@@ -1,28 +1,37 @@
 ---
 /**
- * @fileoverview Auto-fitting CSS Grid primitive.
- * Automatically handles responsive wrapping without requiring media queries.
+ * @file Grid.astro
+ * @description A polymorphic, auto-fitting CSS Grid primitive.
+ * Handles responsive wrapping automatically without media queries using `auto-fit`.
  */
 
 import type { HTMLAttributes } from "astro/types";
 
+/**
+ * Component properties.
+ * Inherits all standard HTML attributes for a standard `<div>` (e.g., `id`, `aria-label`),
+ * but can render as any HTML element via the `as` prop.
+ */
 export interface Props extends HTMLAttributes<"div"> {
-  /** Allows polymorphic rendering */
+  /** * Allows polymorphic rendering. Changes the underlying HTML element
+   * to maintain semantic HTML without losing grid styles.
+   * * @default "div"
+   * @example "section", "main", "ul"
+   */
   as?: any;
-  /** Defines the grid configuration payload */
+
+  /** * Defines the grid configuration and layout threshold.
+   * - `2`: Uses medium spacing (`--spacing-md`), wraps at 200px minimum width.
+   * - `4`: Uses large spacing (`--spacing-lg`), wraps at 340px minimum width.
+   * * @default 2
+   */
   columns?: 2 | 4;
 }
 
-const {
-  as: Tag = "div",
-  columns = 2,
-  class: className = "",
-  ...rest
-} = Astro.props;
+const { as: Tag = "div", columns = 2, class: className, ...rest } = Astro.props;
 ---
 
-{/* We use a data-attribute to cleanly hook our scoped CSS to the prop value */}
-<Tag class={`grid ${className}`.trim()} data-columns={columns} {...rest}>
+<Tag class:list={["grid", className]} data-columns={columns} {...rest}>
   <slot />
 </Tag>
 
@@ -31,13 +40,13 @@ const {
     display: grid;
   }
 
-  /* 2-Column Variant (Previously .grid-2) */
+  /* 2-Column Variant */
   .grid[data-columns="2"] {
     gap: var(--spacing-md);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
   }
 
-  /* 4-Column Variant (Previously .grid-4) */
+  /* 4-Column Variant */
   .grid[data-columns="4"] {
     gap: var(--spacing-lg);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));

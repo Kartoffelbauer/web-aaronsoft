@@ -4,7 +4,7 @@
  * for section headers, icons, and consistent spacing across the application.
  */
 
-import Icon from "../components/ui/Icon.astro";
+import { Icon, Heading } from "../components/ui/index.astro";
 
 interface Props {
   id: string;
@@ -16,10 +16,10 @@ interface Props {
 const { id, icon, title, class: className = "" } = Astro.props;
 ---
 
-<section id={id} class={`section ${className}`.trim()}>
+<section id={id} class:list={["section", { className }]}>
   <header class="section-header">
     <Icon name={icon} />
-    <h2>{title}</h2>
+    <Heading as="h2">{title}</Heading>
   </header>
 
   <slot />
@@ -27,21 +27,15 @@ const { id, icon, title, class: className = "" } = Astro.props;
 
 <style>
   .section {
-    padding-top: var(--spacing-md);
-    padding-bottom: var(--spacing-lg);
+    padding: var(--spacing-md) 0 var(--spacing-lg) 0;
     border-top: 1px solid
       color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
   }
+
   .section-header {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-lg);
-  }
-
-  .section-header h2 {
-    /* Fluid typography: 2rem (mobile) scales linearly to 3rem (desktop) */
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
-    letter-spacing: -0.02em;
   }
 </style>
