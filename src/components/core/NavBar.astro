@@ -4,7 +4,7 @@
  * Handles routing across the site and dynamically adjusts for sub-pages.
  */
 
-import { Container, Icon, LinkButton, Logo } from "../ui/index.astro";
+import { Container } from "../ui/index.astro";
 import { siteConfig } from "../../data/config.ts";
 
 export interface Props {
@@ -20,7 +20,7 @@ const { logo, nav, sections } = siteConfig;
 
 <nav class="navbar">
   <Container class="navbar-content">
-    <Logo logo={logo} />
+    <div class="logo">{logo}</div>
 
     <div class:list={["nav-links", { "main-page": isMainPage }]}>
       {
@@ -34,7 +34,9 @@ const { logo, nav, sections } = siteConfig;
           })
         ) : (
           <a href="/" class="home-link">
-            <Icon name="keyboard_double_arrow_left" mode="inherit" />
+            <span class="material-symbols-outlined icon" aria-hidden="true">
+              keyboard_double_arrow_left
+            </span>
             HOME
           </a>
         )
@@ -43,14 +45,16 @@ const { logo, nav, sections } = siteConfig;
 
     {
       isMainPage && (
-        <LinkButton
+        <a
           href={nav.resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          size="sm"
+          class="btn"
+          data-size="sm"
+          data-variant="primary"
         >
           Resume
-        </LinkButton>
+        </a>
       )
     }
   </Container>

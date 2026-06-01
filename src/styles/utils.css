@@ -1,0 +1,138 @@
+/* Logo Styles */
+.logo {
+  color: var(--theme-primary);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-headline);
+  font-size: var(--font-size-xl);
+}
+
+/* Base Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  font-family: var(--font-code);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+
+  /* ==========================================================
+     SIZE VARIANTS
+     ========================================================== */
+  &[data-size="sm"] {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+
+  /* ==========================================================
+     COLOR VARIANTS
+     ========================================================== */
+  &[data-variant="primary"] {
+    background: var(--theme-primary);
+    color: var(--theme-on-primary);
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.9;
+    }
+  }
+
+  &[data-variant="outline"] {
+    border-color: var(--theme-outline);
+    color: var(--theme-on-surface);
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--theme-primary);
+      color: var(--theme-primary);
+    }
+  }
+}
+
+/* Base Icon */
+.icon {
+  /* ==========================================================
+     1. BASE STYLES (The "Inherit" Default)
+     ========================================================== */
+  /* Verhindert, dass das Icon im Flex-Layout gequetscht wird */
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Der 1em-Trick: Passt sich exakt der Schriftgröße des Parent-Elements an */
+  width: 1em;
+  height: 1em;
+  font-size: 1em;
+
+  /* 'currentColor' ist besser als 'inherit', da es auch SVG-Fills und Borders erfasst */
+  color: currentColor;
+  fill: currentColor;
+
+  /* ==========================================================
+     2. COLOR VARIANTS (Overrides currentColor)
+     ========================================================== */
+  &[data-variant="primary"] {
+    color: var(--theme-primary, #2563eb);
+  }
+}
+
+/**
+ * ==========================================================
+ * GLOBAL TYPOGRAPHY
+ * Decouples semantic HTML tags from visual sizing.
+ * Allows using <h2 class="h4"> for SEO/Design alignment.
+ * ==========================================================
+ */
+
+/* 1. Shared Base Styles (DRY) */
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {variant
+  font-family: var(--font-headline);
+  font-weight: 500;
+  color: var(--theme-on-surface);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* 2. Visual Size Variants */
+h1,
+.h1 {
+  font-size: var(--font-size-xxl);
+}
+h2,
+.h2 {
+  font-size: var(--font-size-xl);
+}
+h3,
+.h3 {
+  font-size: var(--font-size-lg);
+}
+h4,
+.h4 {
+  font-size: var(--font-size-md);
+} /* Sofern du md definiert hast, ansonsten base */
+h5,
+.h5 {
+  font-size: var(--font-size-base);
+}
+h6,
+.h6 {
+  font-size: var(--font-size-sm);
+}

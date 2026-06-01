@@ -4,7 +4,6 @@
  * Renders server-side first, then utilizes a custom web component for client-side date hydration.
  */
 
-import Heading from "../Heading.astro";
 import { getAcademicStatus } from "../../../utils/dateUtils.ts";
 import type { EducationItem } from "../../../types/index.ts";
 
@@ -30,7 +29,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 
   <div class="timeline-content">
     <div class="timeline-header">
-      <Heading as="h3">{item.degree}</Heading>
+      <h3 class:list="h3">{item.degree}</h3>
       <span
         class:list={[
           "timeline-badge",

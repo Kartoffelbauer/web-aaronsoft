@@ -5,8 +5,6 @@
  * Header elements are optional.
  */
 
-import { Icon, Heading } from "../components/ui/index.astro";
-
 interface Props {
   id: string;
   icon?: string; // Make optional
@@ -21,8 +19,16 @@ const { id, icon, title, class: className = "" } = Astro.props;
   {
     title && (
       <header class="section-header">
-        {icon && <Icon name={icon} />}
-        <Heading as="h2">{title}</Heading>
+        {icon && (
+          <span
+            class:list={["material-symbols-outlined", `icon`, className]}
+            aria-hidden="true"
+            data-variant="primary"
+          >
+            {icon}
+          </span>
+        )}
+        <h2 class="h2">{title}</h2>
       </header>
     )
   }

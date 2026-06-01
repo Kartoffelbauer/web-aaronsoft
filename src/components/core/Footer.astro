@@ -1,5 +1,5 @@
 ---
-import { Container, Logo } from "../ui/index.astro";
+import { Container } from "../ui/index.astro";
 import { siteConfig } from "../../data/config.ts";
 import { getCurrentYear } from "../../utils/dateUtils.ts";
 
@@ -8,7 +8,7 @@ const { logo } = siteConfig;
 
 <footer class="footer">
   <Container class="footer-content">
-    <Logo logo={logo} />
+    <div class="logo">{logo}</div>
 
     <div class="footer-copyright">
       &copy; <current-year>{getCurrentYear()}</current-year> Software Engineer Portfolio.

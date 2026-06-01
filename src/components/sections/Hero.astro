@@ -7,7 +7,6 @@
 
 import profilePic from "../../assets/img/profile.jpg";
 import { Image } from "astro:assets";
-import { LinkButton, Heading } from "../ui/index.astro";
 import SectionLayout from "../../layouts/SectionLayout.astro";
 import { siteConfig } from "../../data/config.ts";
 
@@ -17,28 +16,31 @@ const { hero } = siteConfig.sections;
 <SectionLayout id={hero.id}>
   <div class="hero-content-grid">
     <div class="hero-text">
-      <Heading as="h1" class="title">{hero.title}</Heading>
+      <h1 class="title">{hero.title}</h1>
       <p class="description">{hero.description}</p>
 
       <nav class="hero-actions" aria-label="Social Links">
-        <LinkButton
+        <a
           href={hero.linkedinUrl}
           target="_blank"
           rel="noopener noreferrer"
+          class="btn"
+          data-variant="primary"
         >
           <span class="material-symbols-outlined" aria-hidden="true"
             >open_in_new</span
           >
           LinkedIn
-        </LinkButton>
-        <LinkButton
+        </a>
+        <a
           href={hero.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          variant="outline"
+          data-variant="outline"
+          class="btn"
         >
           GitHub
-        </LinkButton>
+        </a>
       </nav>
     </div>
 
