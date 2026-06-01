@@ -14,24 +14,31 @@ const { personalData } = siteConfig.legal;
   title=`Impressum | ${siteConfig.logo}`
   description=`Impressum von ${siteConfig.logo}`
 >
-  <div class="legal-content">
-    <h1>Impressum</h1>
+  <h1>Impressum</h1>
 
-    <p>
-      {personalData.name}<br />
-      {personalData.address.street}<br />
-      {personalData.address.zip}
-      {personalData.address.city}<br />
-      {personalData.address.country}
-    </p>
+  <p>
+    {personalData.name}<br />
+    {personalData.address.street}<br />
+    {personalData.address.zip}
+    {personalData.address.city}<br />
+    {personalData.address.country}
+  </p>
 
-    <h2>Kontakt</h2>
-    <p>
-      Telefon: <a href={`tel:${personalData.phone}`}>{personalData.phone}</a><br
-      />
-      E-Mail: <a href={`mailto:${personalData.email}`}>{personalData.email}</a>
-    </p>
+  <h2>Kontakt</h2>
+  <p>
+    Telefon: <a class="link" href={`tel:${personalData.phone}`}
+      >{personalData.phone}</a
+    ><br />
+    E-Mail: <a class="link" href={`mailto:${personalData.email}`}
+      >{personalData.email}</a
+    >
+  </p>
 
-    <p>Quelle: <a href="https://www.e-recht24.de">eRecht24</a></p>
-  </div>
+  <p>Quelle: <a class="link" href="https://www.e-recht24.de">eRecht24</a></p>
 </LegalLayout>
+
+<style>
+  p {
+    margin-bottom: var(--spacing-md);
+  }
+</style>

@@ -15,35 +15,9 @@ const { title, description } = Astro.props;
 <BaseLayout title={title} description={description}>
   <NavBar isMainPage={false} />
 
-  <main class="container legal-content">
+  <main class="container">
     <slot />
   </main>
 
   <Footer />
 </BaseLayout>
-
-<style>
-  .legal-content {
-    :global(p) {
-      margin-bottom: var(--spacing-md);
-    }
-
-    /* Group anchor styles and utilize nesting for states */
-    :global(a) {
-      color: var(--theme-link);
-      text-decoration: underline;
-      /* Added best-practice transition for smoother UX */
-      transition: color 0.2s ease;
-
-      &:visited {
-        color: var(--theme-link-visited);
-      }
-
-      /* Group hover and focus-visible for accessibility */
-      &:hover,
-      &:focus-visible {
-        color: var(--theme-link-hover);
-      }
-    }
-  }
-</style>

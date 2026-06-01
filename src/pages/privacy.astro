@@ -14,7 +14,7 @@ const { personalData, hosterData } = siteConfig.legal;
   title=`Datenschutz­erklärung | ${siteConfig.logo}`
   description=`Datenschutz­erklärung von ${siteConfig.logo}`
 >
-  <div class="legal-content privacy-content">
+  <div class="legal-prose">
     <h1>Datenschutz&shy;erkl&auml;rung</h1>
     <h2>1. Datenschutz auf einen Blick</h2>
     <h3>Allgemeine Hinweise</h3>
@@ -360,32 +360,72 @@ const { personalData, hosterData } = siteConfig.legal;
         href="https://developers.google.com/fonts/faq"
         target="_blank"
         rel="noopener
-noreferrer">https://developers.google.com/fonts/faq</a
+      class="
+        link"
+        noreferrer">https://developers.google.com/fonts/faq</a
       > und in der Datenschutzerkl&auml;rung von Google: <a
         href="https://policies.google.com/privacy?hl=de"
         target="_blank"
         rel="noopener
-noreferrer">https://policies.google.com/privacy?hl=de</a
+noreferrer"
+        class="link">https://policies.google.com/privacy?hl=de</a
       >.
     </p>
     <p>
-      Quelle: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a>
+      Quelle: <a class="link" href="https://www.e-recht24.de"
+        >https://www.e-recht24.de</a
+      >
     </p>
   </div>
 </LegalLayout>
 
 <style>
-  .privacy-content {
-    p {
-      text-align: justify;
+  /**
+   * Scoped Typography Sandbox
+   * Ensures the legal text is highly readable without leaking
+   * global styles to other components on the website.
+   */
+  .legal-prose {
+    /* 1. Container constraints */
+    max-width: 65ch;
+    margin-inline: auto;
+
+    /* 2. Base typography */
+    font-size: var(--font-size-base);
+    color: var(--theme-on-surface);
+    line-height: 1.7;
+
+    /* 3. Nested child elements */
+    & p {
+      margin-bottom: var(--spacing-md);
+      /* text-align: justify; <-- Absichtlich weggelassen (Accessibility) */
     }
 
-    ul {
+    & ul {
       padding-bottom: var(--spacing-md);
       padding-left: var(--spacing-lg);
 
-      li {
+      & li {
         padding-left: var(--spacing-md);
+      }
+    }
+
+    & h1,
+    & h2,
+    & h3 {
+      margin-top: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    /* Optional: Link Styling if you have links in the text */
+    & a {
+      color: var(--theme-primary);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+
+      &:hover,
+      &:focus-visible {
+        opacity: 0.8;
       }
     }
   }

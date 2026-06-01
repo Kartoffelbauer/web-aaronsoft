@@ -166,3 +166,19 @@ main.container {
   font-weight: var(--font-weight-medium);
   font-family: var(--font-headline);
 }
+
+.link {
+  color: var(--theme-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px; /* Makes underlines look much cleaner */
+  transition: color 0.2s ease;
+
+  &:visited {
+    color: var(--theme-link-visited, var(--theme-primary));
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--theme-link-hover, var(--theme-primary));
+  }
+}
