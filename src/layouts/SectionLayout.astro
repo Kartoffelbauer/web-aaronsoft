@@ -1,26 +1,31 @@
 ---
 /**
- * @fileoverview A reusable layout wrapper for standard page sections. Enforces DRY structure
- * for section headers, icons, and consistent spacing across the application.
+ * @fileoverview Reusable layout wrapper for page sections.
+ * Enforces DRY structure and consistent spacing.
+ * Header elements are optional.
  */
 
 import { Icon, Heading } from "../components/ui/index.astro";
 
 interface Props {
   id: string;
-  icon: string;
-  title: string;
+  icon?: string; // Make optional
+  title?: string; // Make optional
   class?: string;
 }
 
 const { id, icon, title, class: className = "" } = Astro.props;
 ---
 
-<section id={id} class:list={["section", { className }]}>
-  <header class="section-header">
-    <Icon name={icon} />
-    <Heading as="h2">{title}</Heading>
-  </header>
+<section id={id} class:list={["section", className]}>
+  {
+    title && (
+      <header class="section-header">
+        {icon && <Icon name={icon} />}
+        <Heading as="h2">{title}</Heading>
+      </header>
+    )
+  }
 
   <slot />
 </section>
@@ -28,8 +33,15 @@ const { id, icon, title, class: className = "" } = Astro.props;
 <style>
   .section {
     padding: var(--spacing-md) 0 var(--spacing-lg) 0;
+    /* Only apply border if it's not the first section on the page (optional but recommended) */
     border-top: 1px solid
       color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
+  }
+
+  /* Remove border for the very first section (Hero) */
+  .section:first-of-type {
+    border-top: none;
+    padding-bottom: var(--spacing-xl);
   }
 
   .section-header {

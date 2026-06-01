@@ -1,88 +1,81 @@
 ---
 /**
  * @fileoverview Primary landing section (Hero).
- *
- * Best Practice implementation utilizing CSS Container Queries for true fluid
- * responsiveness, decoupling the layout from viewport media queries.
- * Keeps structural grid and h1 hierarchy independent from standard layouts.
+ * Integrated with SectionLayout for global spacing consistency.
+ * Retains Container Queries for isolated, fluid internal grid behavior.
  */
 
 import profilePic from "../../assets/img/profile.jpg";
 import { Image } from "astro:assets";
-import { LinkButton } from "../ui/index.astro";
+import { LinkButton, Heading } from "../ui/index.astro";
+import SectionLayout from "../../layouts/SectionLayout.astro";
 import { siteConfig } from "../../data/config.ts";
 
 const { hero } = siteConfig.sections;
 ---
 
-<section id={hero.id} class="hero-section">
-  <div class="hero-content">
-    <p class="title">{hero.title}</p>
-    <p class="description">{hero.description}</p>
+<SectionLayout id={hero.id}>
+  <div class="hero-content-grid">
+    <div class="hero-text">
+      <Heading as="h1" class="title">{hero.title}</Heading>
+      <p class="description">{hero.description}</p>
 
-    <nav class="hero-actions" aria-label="Social Links">
-      <LinkButton
-        href={hero.linkedinUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span class="material-symbols-outlined" aria-hidden="true">
-          open_in_new
-        </span>
-        LinkedIn
-      </LinkButton>
-      <LinkButton
-        href={hero.githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        variant="outline"
-      >
-        GitHub
-      </LinkButton>
-    </nav>
-  </div>
+      <nav class="hero-actions" aria-label="Social Links">
+        <LinkButton
+          href={hero.linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true"
+            >open_in_new</span
+          >
+          LinkedIn
+        </LinkButton>
+        <LinkButton
+          href={hero.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="outline"
+        >
+          GitHub
+        </LinkButton>
+      </nav>
+    </div>
 
-  <div class="hero-image-wrapper">
-    <div class="image-border">
-      <Image
-        src={profilePic}
-        alt="Portrait of the author"
-        width={360}
-        class="profile-img"
-        loading="eager"
-      />
+    <div class="hero-image-wrapper">
+      <div class="image-border">
+        <Image
+          src={profilePic}
+          alt="Portrait of the author"
+          width={360}
+          class="profile-img"
+          loading="eager"
+        />
+      </div>
     </div>
   </div>
-</section>
+</SectionLayout>
 
 <style>
-  .hero-section {
-    /* 1. Container context for responsive child elements */
+  .hero-content-grid {
     container-type: inline-size;
     container-name: hero;
 
-    /* 2. DRY: Use logical properties instead of individual top/bottom declarations */
-    padding-block: var(--spacing-lg) var(--spacing-xl);
-
     display: grid;
-    gap: var(--spacing-xl);
-
-    /* 3. Fluid grid: dynamically creates columns based on available space */
+    gap: var(--spacing-lg);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
     align-items: center;
+  }
 
-    .title {
-      font-size: var(--font-size-xxl);
-      line-height: 1.2;
-      font-weight: var(--font-weight-bold);
-      margin-bottom: var(--spacing-md);
-    }
+  .title {
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+  }
 
-    .description {
-      font-size: var(--font-size-lg);
-      color: var(--theme-on-surface-variant);
-      margin-bottom: var(--spacing-lg);
-    }
+  .description {
+    font-size: var(--font-size-lg);
+    color: var(--theme-on-surface-variant);
+    margin-bottom: var(--spacing-lg);
   }
 
   .hero-actions {
@@ -92,16 +85,9 @@ const { hero } = siteConfig.sections;
 
   .hero-image-wrapper {
     display: flex;
-    /* Mobile-first: Default alignment when stacked in a single column */
-    justify-content: center;
+    justify-content: center; /* Mobile-first default */
   }
 
-  /**
-   * CONTAINER QUERY ALIGNMENT FIX
-   * * Trigger the alignment change precisely when the grid snaps to two columns.
-   * Math: 400px (Col 1) + 400px (Col 2) + var(--spacing-xl) gap.
-   * * Note: Assuming var(--spacing-xl) evaluates to 64px, the snap is at 864px.
-   */
   @container hero (min-width: 864px) {
     .hero-image-wrapper {
       justify-content: flex-end;
@@ -113,19 +99,20 @@ const { hero } = siteConfig.sections;
     border: 1px solid var(--theme-outline-variant);
     border-radius: var(--border-radius-md);
     background: var(--theme-surface-container);
-  }
 
-  .profile-img {
-    width: 100%;
-    max-width: 360px;
-    aspect-ratio: 1;
-    object-fit: cover;
-    border-radius: var(--border-radius-md);
-    filter: grayscale(100%);
-    transition: filter 0.5s ease;
-  }
+    /* Scoped child styles via nesting */
+    & .profile-img {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: var(--border-radius-md);
+      filter: grayscale(100%);
+      transition: filter 0.5s ease;
 
-  .profile-img:hover {
-    filter: grayscale(0%);
+      &:hover {
+        filter: grayscale(0%);
+      }
+    }
   }
 </style>
