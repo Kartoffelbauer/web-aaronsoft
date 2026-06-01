@@ -4,14 +4,14 @@
  */
 
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import { Grid, SocialCard } from "../ui/index.astro";
+import { SocialCard } from "../ui/index.astro";
 import { siteConfig } from "../../data/config";
 
 const { social } = siteConfig.sections;
 ---
 
 <SectionLayout id={social.id} icon="share" title="Social Feed">
-  <Grid columns={4}>
+  <div class="grid" data-columns="4">
     {social.items.map((post) => <SocialCard payload={post} />)}
-  </Grid>
+  </div>
 </SectionLayout>

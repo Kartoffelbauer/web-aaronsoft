@@ -4,14 +4,14 @@
  */
 
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import { Grid, SkillCard } from "../ui/index.astro";
+import { SkillCard } from "../ui/index.astro";
 import { siteConfig } from "../../data/config.ts";
 
 const { skills } = siteConfig.sections;
 ---
 
 <SectionLayout id={skills.id} icon="terminal" title="Core Expertise">
-  <Grid columns={2}>
+  <div class="grid" data-columns="2">
     {skills.items.map((skill) => <SkillCard payload={skill} />)}
-  </Grid>
+  </div>
 </SectionLayout>

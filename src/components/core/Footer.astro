@@ -1,5 +1,4 @@
 ---
-import { Container } from "../ui/index.astro";
 import { siteConfig } from "../../data/config.ts";
 import { getCurrentYear } from "../../utils/dateUtils.ts";
 
@@ -7,7 +6,7 @@ const { logo } = siteConfig;
 ---
 
 <footer class="footer">
-  <Container class="footer-content">
+  <div class="container footer-content">
     <div class="logo">{logo}</div>
 
     <div class="footer-copyright">
@@ -19,7 +18,7 @@ const { logo } = siteConfig;
       <a href="/impress">Impressum</a>
       <a href="/privacy">Datenschutz</a>
     </div>
-  </Container>
+  </div>
 </footer>
 
 <script>

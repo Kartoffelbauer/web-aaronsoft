@@ -4,14 +4,14 @@
  */
 
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import { Grid, ProjectCard } from "../ui/index.astro";
+import { ProjectCard } from "../ui/index.astro";
 import { siteConfig } from "../../data/config";
 
 const { projects } = siteConfig.sections;
 ---
 
 <SectionLayout id={projects.id} icon="code_blocks" title="Featured Work">
-  <Grid columns={4}>
+  <div class="grid" data-columns="4">
     {projects.items.map((project) => <ProjectCard payload={project} />)}
-  </Grid>
+  </div>
 </SectionLayout>
