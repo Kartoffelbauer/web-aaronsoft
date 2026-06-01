@@ -41,20 +41,24 @@ const { logo } = siteConfig;
   .footer {
     background: var(--theme-surface-container-lowest);
     border-top: 1px solid var(--theme-outline-variant);
-    padding: var(--spacing-md) 0;
   }
 
   .footer-content {
     display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
+    justify-content: center;
+    gap: var(--spacing-sm);
     align-items: center;
+    flex-direction: column;
+    height: var(--shell-height-md);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 950px) {
     .footer-content {
-      flex-direction: row;
+      padding: 0 var(--spacing-lg);
       justify-content: space-between;
+      gap: var(--spacing-md);
+      flex-direction: row;
+      height: var(--shell-height-base);
     }
   }
 

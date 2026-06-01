@@ -49,11 +49,12 @@
   --font-size-xl: 2rem;
   --font-size-xxl: 3rem;
 
-  /* Header */
-  --header-base-height: 64px;
+  /* Shell */
+  --shell-height-base: 64px;
+  --shell-height-md: 128px;
 
   /* Card */
-  --card-base-height: 192px;
+  --card-height-base: 192px;
 }
 
 @media (prefers-color-scheme: dark) {

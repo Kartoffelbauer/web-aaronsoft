@@ -6,7 +6,7 @@
 
 /* ==========================================================================
    1. BASE / TYPOGRAPHY
-   Global resets and native HTML element styling.
+   Global element styling.
    ========================================================================== */
 
 /**
@@ -62,6 +62,18 @@ a {
   }
 }
 
+/* Main variant ensures distance from the global header/nav */
+main {
+  padding-top: calc(var(--spacing-xl) + var(--spacing-lg));
+  min-height: calc(100vh - var(--shell-height-md));
+}
+
+@media (min-width: 950px) {
+  main {
+    min-height: calc(100vh - var(--shell-height-base));
+  }
+}
+
 /* ==========================================================================
    2. LAYOUT / GRID SYSTEM
    Structural classes for page layouts and alignment.
@@ -76,11 +88,6 @@ a {
   margin: 0 auto;
   padding-left: clamp(var(--spacing-md, 1rem), 4vw, var(--spacing-lg, 2rem));
   padding-right: clamp(var(--spacing-md, 1rem), 4vw, var(--spacing-lg, 2rem));
-}
-
-/* Main variant ensures distance from the global header/nav */
-main.container {
-  padding-top: calc(var(--spacing-xl) + var(--spacing-lg));
 }
 
 /**
