@@ -15,9 +15,9 @@ const { title, description } = Astro.props;
 <BaseLayout title={title} description={description}>
   <NavBar isMainPage={false} />
 
-  <div class="container legal-content" data-variant="main">
+  <main class="container legal-content">
     <slot />
-  </div>
+  </main>
 
   <Footer />
 </BaseLayout>
@@ -28,7 +28,7 @@ const { title, description } = Astro.props;
       margin-bottom: var(--spacing-md);
     }
 
-    /* DRY: Group anchor styles and utilize nesting for states */
+    /* Group anchor styles and utilize nesting for states */
     :global(a) {
       color: var(--theme-link);
       text-decoration: underline;

@@ -14,8 +14,8 @@ const { personalData } = siteConfig.legal;
   title=`Impressum | ${siteConfig.logo}`
   description=`Impressum von ${siteConfig.logo}`
 >
-  <div class="main legal-content" data-variant="main">
-    <h1 class="h1">Impressum</h1>
+  <div class="legal-content">
+    <h1>Impressum</h1>
 
     <p>
       {personalData.name}<br />
@@ -25,7 +25,7 @@ const { personalData } = siteConfig.legal;
       {personalData.address.country}
     </p>
 
-    <h2 class="h2">Kontakt</h2>
+    <h2>Kontakt</h2>
     <p>
       Telefon: <a href={`tel:${personalData.phone}`}>{personalData.phone}</a><br
       />
