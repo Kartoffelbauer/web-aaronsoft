@@ -386,19 +386,13 @@ noreferrer"
    * global styles to other components on the website.
    */
   .legal-prose {
-    /* 1. Container constraints */
-    max-width: 65ch;
-    margin-inline: auto;
-
-    /* 2. Base typography */
     font-size: var(--font-size-base);
     color: var(--theme-on-surface);
     line-height: 1.7;
 
-    /* 3. Nested child elements */
     & p {
       margin-bottom: var(--spacing-md);
-      /* text-align: justify; <-- Absichtlich weggelassen (Accessibility) */
+      text-align: justify;
     }
 
     & ul {
