@@ -2,7 +2,6 @@
 /**
  * @fileoverview Reusable layout wrapper for page sections.
  * Enforces DRY structure and consistent spacing.
- * Header elements are optional.
  */
 
 interface Props {
@@ -18,10 +17,10 @@ const { id, icon, title, class: className = "" } = Astro.props;
 <section id={id} class:list={["section", className]}>
   {
     title && (
-      <header class="section-header">
+      <header class="flex items-center gap-sm mb-lg">
         {icon && (
           <span
-            class:list={["material-symbols-outlined", `icon`, className]}
+            class:list={["material-symbols-outlined icon", className]}
             aria-hidden="true"
             data-variant="primary"
           >
@@ -37,23 +36,15 @@ const { id, icon, title, class: className = "" } = Astro.props;
 </section>
 
 <style>
+  /* Scoped styling strictly handles component-specific margins and borders */
   .section {
-    padding: var(--spacing-md) 0 var(--spacing-lg) 0;
-    /* Only apply border if it's not the first section on the page (optional but recommended) */
-    border-top: 1px solid
-      color-mix(in srgb, var(--theme-outline-variant) 30%, transparent);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--theme-divider);
   }
 
   /* Remove border for the very first section (Hero) */
   .section:first-of-type {
+    margin-bottom: var(--spacing-md);
     border-top: none;
-    padding-bottom: var(--spacing-xl);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-lg);
   }
 </style>

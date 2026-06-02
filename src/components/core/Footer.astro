@@ -1,4 +1,8 @@
 ---
+/**
+ * @fileoverview Global Footer Component.
+ * Utilizes utility framework for responsive layout and typography.
+ */
 import { siteConfig } from "../../data/config.ts";
 import { getCurrentYear } from "../../utils/dateUtils.ts";
 
@@ -6,17 +10,27 @@ const { logo } = siteConfig;
 ---
 
 <footer class="footer">
-  <div class="container footer-content">
+  <div
+    class="container flex flex-col items-center justify-center gap-sm lg:flex-row lg:justify-between lg:gap-md footer-content"
+  >
     <div class="logo">{logo}</div>
 
-    <div class="footer-copyright">
+    <div class="text-surface-variant">
       &copy; <current-year>{getCurrentYear()}</current-year> Software Engineer Portfolio.
       Built with precision.
     </div>
 
-    <div class="footer-links">
-      <a href="/impress">Impressum</a>
-      <a href="/privacy">Datenschutz</a>
+    <div class="flex gap-md font-code text-base">
+      <a
+        href="/impress"
+        class="text-surface-variant hover:text-surface-variant hover:text-primary"
+        >Impressum</a
+      >
+      <a
+        href="/privacy"
+        class="text-surface-variant hover:text-surface-variant hover:text-primary"
+        >Datenschutz</a
+      >
     </div>
   </div>
 </footer>
@@ -38,46 +52,20 @@ const { logo } = siteConfig;
     display: inline;
   }
 
+  /* Scoped styles now ONLY handle unique structural dimensions and backgrounds */
   .footer {
     background: var(--theme-surface-container-lowest);
     border-top: 1px solid var(--theme-outline-variant);
   }
 
   .footer-content {
-    display: flex;
-    padding: 0 var(--spacing-lg);
-    justify-content: center;
-    gap: var(--spacing-sm);
-    align-items: center;
-    flex-direction: column;
     height: var(--shell-height-md);
   }
 
   @media (min-width: 950px) {
     .footer-content {
-      justify-content: space-between;
-      gap: var(--spacing-md);
-      flex-direction: row;
+      padding: 0 var(--spacing-lg);
       height: var(--shell-height-base);
     }
-  }
-
-  .footer-copyright {
-    color: var(--theme-on-surface-variant);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: var(--spacing-md);
-    font-family: var(--font-code);
-    font-size: var(--font-size-base);
-  }
-
-  .footer-links a {
-    color: var(--theme-on-surface-variant);
-  }
-
-  .footer-links a:hover {
-    color: var(--theme-primary);
   }
 </style>

@@ -1,38 +1,45 @@
 ---
 /**
  * @fileoverview Navigation Bar Component.
- * Handles routing across the site and dynamically adjusts for sub-pages.
+ * Handles routing across the site. Styling relies on global utility classes.
  */
-
 import { siteConfig } from "../../data/config.ts";
 
 export interface Props {
-  // Default to true so you don't have to pass it on the index page
   isMainPage?: boolean;
 }
 
 const { isMainPage = true } = Astro.props;
-
-// Destructure exactly what we need directly from the config
 const { logo, nav, sections } = siteConfig;
 ---
 
 <nav class="navbar">
-  <div class="container navbar-content">
+  <div
+    class="container flex items-center justify-between gap-md navbar-content"
+  >
     <div class="logo">{logo}</div>
 
-    <div class:list={["nav-links", { "main-page": isMainPage }]}>
+    <div
+      class:list={[
+        "items-center gap-lg font-code text-sm",
+        isMainPage ? "hidden md:flex" : "flex",
+      ]}
+    >
       {
         isMainPage ? (
-          Object.values(sections).map((sectionData) => {
-            return (
-              <a href={`#${sectionData.id}`} class="nav-link">
-                {sectionData.id}
-              </a>
-            );
-          })
+          Object.values(sections).map((sectionData) => (
+            <a
+              href={`#${sectionData.id}`}
+              class="text-surface-variant hover:text-surface-variant hover:text-primary nav-link"
+            >
+              {sectionData.id}
+            </a>
+          ))
         ) : (
-          <a href="/" class="home-link">
+          <a
+            href="/"
+            class="flex items-center text-surface-variant hover:text-surface-variant hover:text-primary"
+          >
             <span class="material-symbols-outlined icon" aria-hidden="true">
               keyboard_double_arrow_left
             </span>
@@ -60,6 +67,7 @@ const { logo, nav, sections } = siteConfig;
 </nav>
 
 <style>
+  /* Scoped styles now ONLY handle the fixed, frosted-glass header effect and active state */
   .navbar {
     position: fixed;
     top: 0;
@@ -71,53 +79,16 @@ const { logo, nav, sections } = siteConfig;
   }
 
   .navbar-content {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--spacing-md);
-    align-items: center;
     height: var(--shell-height-base);
   }
 
-  /* --- Navigation Links --- */
-  .nav-links {
-    display: none; /* Hidden by default on mobile */
-    align-items: center;
-    gap: var(--spacing-lg);
-    font-family: var(--font-code);
-    font-size: var(--font-size-sm);
-  }
-
-  .nav-links a {
+  .navbar-content a {
     text-decoration: none;
-    color: var(--theme-on-surface-variant);
   }
 
-  .nav-links a:hover {
-    color: var(--theme-primary);
-  }
-
-  .nav-links a.active {
+  /* Specific component state overrides */
+  .nav-link.active {
     color: var(--theme-primary);
     border-bottom: 2px solid var(--theme-primary);
-  }
-
-  /* Specific styling for the 'HOME' back button */
-  .home-link {
-    display: flex;
-    align-items: center;
-  }
-
-  /* --- Responsive Display Logic --- */
-
-  /* 1. Always show the "HOME" back button, even on mobile */
-  .nav-links:not(.main-page) {
-    display: flex;
-  }
-
-  /* 2. Show the standard section links ONLY on desktop */
-  @media (min-width: 800px) {
-    .nav-links.main-page {
-      display: flex;
-    }
   }
 </style>

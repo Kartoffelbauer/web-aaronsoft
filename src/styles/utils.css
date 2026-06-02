@@ -1,18 +1,29 @@
 /**
- * @fileoverview Global Stylesheet
- * Architecture follows a strict Base -> Layout -> Component structure.
- * Utilizes CSS variables and data-attributes for state/variant management.
+ * @fileoverview utils.css
+ * Core Utility Framework (Tailwind-inspired).
  */
 
 /* ==========================================================================
-   1. BASE / TYPOGRAPHY
-   Global element styling.
+   1. BASE (HTML Elements)
    ========================================================================== */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--spacing-xl);
+}
 
-/**
- * Shared heading base styles.
- * Decouples semantic HTML from visual sizing.
- */
+body {
+  background-color: var(--theme-background);
+  color: var(--theme-on-background);
+  font-family: var(--font-body);
+}
+
+/* Main variant ensures distance from the global header/nav and grows to push footers down */
+main {
+  flex-grow: 1;
+  padding-top: calc(var(--shell-height-base) + var(--spacing-lg));
+  padding-bottom: var(--spacing-lg);
+}
+
 h1,
 h2,
 h3,
@@ -23,10 +34,9 @@ h6 {
   color: var(--theme-on-surface);
   font-weight: var(--font-weight-medium);
   font-family: var(--font-headline);
-  line-height: 1.6;
+  line-height: var(--line-height-base);
 }
 
-/* Visual size mappings for standard tags */
 h1 {
   font-size: var(--font-size-xxl);
 }
@@ -51,64 +61,136 @@ a {
   text-decoration: underline;
   text-underline-offset: 4px;
   transition: color 0.2s ease;
-
-  &:visited {
-    color: var(--theme-link-visited, var(--theme-primary));
-  }
-
-  &:hover,
-  &:focus-visible {
-    color: var(--theme-link-hover, var(--theme-primary));
-  }
 }
-
-/* Main variant ensures distance from the global header/nav */
-main {
-  flex-grow: 1;
-  padding-top: calc(var(--spacing-xl) + var(--spacing-lg));
+a:visited {
+  color: var(--theme-link-visited, var(--theme-primary));
+}
+a:hover,
+a:focus-visible {
+  color: var(--theme-link-hover, var(--theme-primary));
 }
 
 /* ==========================================================================
-   2. LAYOUT / GRID SYSTEM
-   Structural classes for page layouts and alignment.
+   2. LAYOUT & FLEXBOX UTILITIES
    ========================================================================== */
-
-/**
- * Main page wrapper with fluid horizontal padding.
- */
 .container {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding-left: clamp(var(--spacing-md, 1rem), 4vw, var(--spacing-lg, 2rem));
-  padding-right: clamp(var(--spacing-md, 1rem), 4vw, var(--spacing-lg, 2rem));
+  padding-inline: clamp(var(--spacing-md, 1rem), 4vw, var(--spacing-lg, 2rem));
 }
 
-/**
- * Fluid grid system utilizing auto-fit for responsive column generation.
- */
+.flex {
+  display: flex;
+}
+.hidden {
+  display: none;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+
+/* Height & Grow Utilities --- */
+.min-h-screen {
+  min-height: 100dvh;
+}
+.grow {
+  flex-grow: 1;
+}
+
+/* Fluid Grid */
 .grid {
   display: grid;
-
-  &[data-columns="2"] {
-    gap: var(--spacing-md);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-  }
-
-  &[data-columns="4"] {
-    gap: var(--spacing-lg);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-  }
+}
+.grid-cols-2 {
+  gap: var(--spacing-md);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+}
+.grid-cols-4 {
+  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
 }
 
 /* ==========================================================================
-   3. COMPONENTS
-   Reusable, isolated UI elements using data-attributes for variants.
+   3. SPACING UTILITIES (Gaps & Margins)
    ========================================================================== */
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+.gap-md {
+  gap: var(--spacing-md);
+}
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+.gap-xl {
+  gap: var(--spacing-xl);
+}
 
-/**
- * Base Button Component
- */
+.mb-sm {
+  margin-bottom: var(--spacing-sm);
+}
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
+
+.mt-sm {
+  margin-top: var(--spacing-sm);
+}
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+
+/* ==========================================================================
+   4. TYPOGRAPHY & COLOR UTILITIES
+   ========================================================================== */
+.font-code {
+  font-family: var(--font-code);
+}
+.font-headline {
+  font-family: var(--font-headline);
+}
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+.text-base {
+  font-size: var(--font-size-base);
+}
+.text-justify {
+  text-align: justify;
+}
+
+.text-surface-variant,
+.hover\:text-surface-variant:visited {
+  color: var(--theme-on-surface-variant);
+}
+
+.text-primary,
+.hover\:text-primary:hover {
+  color: var(--theme-primary);
+}
+
+/* ==========================================================================
+   5. GLOBAL COMPONENTS
+   ========================================================================== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -123,40 +205,29 @@ main {
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+.btn[data-size="sm"] {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+.btn[data-variant="primary"] {
+  background: var(--theme-primary);
+  color: var(--theme-on-primary);
+}
+.btn[data-variant="primary"]:hover {
+  opacity: 0.9;
+}
+.btn[data-variant="outline"] {
+  border-color: var(--theme-outline);
+  color: var(--theme-on-surface);
 
-  /* -- Size Variants -- */
-  &[data-size="sm"] {
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-size: var(--font-size-sm);
-  }
-
-  /* -- Color Variants -- */
-  &[data-variant="primary"] {
-    background: var(--theme-primary);
-    color: var(--theme-on-primary);
-
-    &:hover,
-    &:focus-visible {
-      opacity: 0.9;
-    }
-  }
-
-  &[data-variant="outline"] {
-    border-color: var(--theme-outline);
-    color: var(--theme-on-surface);
-
-    &:hover,
-    &:focus-visible {
-      color: var(--theme-primary);
-      border-color: var(--theme-primary);
-    }
+  &:hover,
+  &:focus-visible {
+    color: var(--theme-primary);
+    border-color: var(--theme-primary);
   }
 }
 
-/**
- * Base Icon Component
- * Uses the 1em trick to seamlessly inherit font-size and color from its parent.
- */
 .icon {
   display: inline-flex;
   align-items: center;
@@ -167,19 +238,59 @@ main {
   color: currentColor;
   fill: currentColor;
   font-size: 1em;
-
-  /* -- Color Variants -- */
-  &[data-variant="primary"] {
-    color: var(--theme-primary, #2563eb);
-  }
 }
 
-/**
- * Logo Component
- */
 .logo {
   color: var(--theme-primary);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-medium);
   font-family: var(--font-headline);
+  text-decoration: none;
+}
+
+/**
+ * PROSE COMPONENT (Rich Text formatting)
+ * Use this wrapper for Legal pages, markdown, or long-form content.
+ */
+.prose {
+  font-size: var(--font-size-base);
+  color: var(--theme-on-surface);
+  line-height: var(--line-height-relaxed);
+}
+.prose p {
+  margin-bottom: var(--spacing-md);
+  text-align: justify;
+}
+.prose ul {
+  padding-bottom: var(--spacing-md);
+  padding-left: var(--spacing-lg);
+}
+.prose li {
+  padding-left: var(--spacing-md);
+}
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE MODIFIERS
+   ========================================================================== */
+@media (min-width: 768px) {
+  .md\:flex {
+    display: flex;
+  }
+}
+@media (min-width: 950px) {
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+  .lg\:justify-between {
+    justify-content: space-between;
+  }
+  .lg\:gap-md {
+    gap: var(--spacing-md);
+  }
 }

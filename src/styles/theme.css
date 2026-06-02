@@ -20,11 +20,20 @@
   --theme-link: #005ac2;
   --theme-link-visited: #6610f2;
   --theme-link-hover: #004499;
+  --theme-divider: color-mix(
+    in srgb,
+    var(--theme-outline-variant) 30%,
+    transparent
+  );
 
   /* Typography */
   --font-headline: "Inter", sans-serif;
   --font-code: "Fira Code", monospace;
   --font-body: "Inter", sans-serif;
+
+  /* Line Height */
+  --line-height-base: 1.6;
+  --line-height-relaxed: 1.7;
 
   /* Spacing */
   --spacing-sm: 8px;

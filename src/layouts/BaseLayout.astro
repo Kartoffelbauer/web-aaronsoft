@@ -4,13 +4,11 @@ import "../styles/theme.css";
 import "../styles/utils.css";
 import "../styles/typography.css";
 
-// Define the expected shape of your props (TypeScript Best Practice)
 export interface Props {
   title: string;
   description: string;
 }
 
-// Extract the variables from the global Astro.props object
 const { title, description } = Astro.props;
 ---
 
@@ -23,33 +21,16 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
-  <body>
+
+  <body class="flex flex-col min-h-screen">
     <slot />
 
     <script>
       import { initScrollSpy } from "../utils/scrollSpy";
 
-      // Wrap the call in an arrow function to drop the Event object
-      // and explicitly pass our 128px navbar offset.
       document.addEventListener("DOMContentLoaded", () => {
         initScrollSpy(128);
       });
     </script>
   </body>
 </html>
-
-<style>
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: var(--spacing-xl);
-  }
-
-  body {
-    background-color: var(--theme-background);
-    color: var(--theme-on-background);
-    font-family: var(--font-body);
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-  }
-</style>

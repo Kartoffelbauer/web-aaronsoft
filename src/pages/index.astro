@@ -18,16 +18,19 @@ const { hero } = siteConfig.sections;
 ---
 
 <BaseLayout
-  title=`${hero.title} | ${siteConfig.logo}`
+  title={`${hero.title} | ${siteConfig.logo}`}
   description={hero.description}
 >
   <NavBar />
-  <main class="container">
+
+  <!-- Flex column with gap-xl provides uniform spacing between all major sections automatically -->
+  <main class="container flex flex-col gap-lg">
     <Hero />
     <Education />
     <Skills />
     <Projects />
     <Socials />
   </main>
+
   <Footer />
 </BaseLayout>
