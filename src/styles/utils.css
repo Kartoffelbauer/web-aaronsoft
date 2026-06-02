@@ -64,14 +64,8 @@ a {
 
 /* Main variant ensures distance from the global header/nav */
 main {
+  flex-grow: 1;
   padding-top: calc(var(--spacing-xl) + var(--spacing-lg));
-  min-height: calc(100vh - var(--shell-height-md));
-}
-
-@media (min-width: 950px) {
-  main {
-    min-height: calc(100vh - var(--shell-height-base));
-  }
 }
 
 /* ==========================================================================

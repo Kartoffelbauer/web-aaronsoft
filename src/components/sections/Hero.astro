@@ -1,120 +1,25 @@
 ---
-/**
- * @fileoverview Primary landing section (Hero).
- * Integrated with SectionLayout for global spacing consistency.
- * Retains Container Queries for isolated, fluid internal grid behavior.
- */
-
-import profilePic from "../../assets/img/profile.jpg";
-import { Image } from "astro:assets";
 import SectionLayout from "../../layouts/SectionLayout.astro";
+import UiHero from "../ui/Hero.astro";
+import profilePic from "../../assets/img/profile.jpg";
 import { siteConfig } from "../../data/config.ts";
 
 const { hero } = siteConfig.sections;
 ---
 
 <SectionLayout id={hero.id}>
-  <div class="hero-content-grid">
-    <div class="hero-text">
-      <h1 class="title">{hero.title}</h1>
-      <p class="description">{hero.description}</p>
-
-      <nav class="hero-actions" aria-label="Social Links">
-        <a
-          href={hero.linkedinUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn"
-          data-variant="primary"
-        >
-          <span class="material-symbols-outlined" aria-hidden="true"
-            >open_in_new</span
-          >
-          LinkedIn
-        </a>
-        <a
-          href={hero.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          data-variant="outline"
-          class="btn"
-        >
-          GitHub
-        </a>
-      </nav>
-    </div>
-
-    <div class="hero-image-wrapper">
-      <div class="image-border">
-        <Image
-          src={profilePic}
-          alt="Portrait of the author"
-          width={360}
-          class="profile-img"
-          loading="eager"
-        />
-      </div>
-    </div>
-  </div>
+  <UiHero
+    title={hero.title}
+    description={hero.description}
+    image={profilePic}
+    imageAlt="Portrait of the author"
+    primaryAction={{
+      label: "LinkedIn",
+      url: hero.linkedinUrl,
+    }}
+    secondaryAction={{
+      label: "GitHub",
+      url: hero.githubUrl,
+    }}
+  />
 </SectionLayout>
-
-<style>
-  .hero-content-grid {
-    container-type: inline-size;
-    container-name: hero;
-
-    display: grid;
-    gap: var(--spacing-lg);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
-    align-items: center;
-  }
-
-  .title {
-    line-height: 1.2;
-    margin-bottom: var(--spacing-md);
-  }
-
-  .description {
-    font-size: var(--font-size-lg);
-    color: var(--theme-on-surface-variant);
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: var(--spacing-md);
-  }
-
-  .hero-image-wrapper {
-    display: flex;
-    justify-content: center; /* Mobile-first default */
-  }
-
-  @container hero (min-width: 864px) {
-    .hero-image-wrapper {
-      justify-content: flex-end;
-    }
-  }
-
-  .image-border {
-    padding: var(--spacing-sm);
-    border: 1px solid var(--theme-outline-variant);
-    border-radius: var(--border-radius-md);
-    background: var(--theme-surface-container);
-
-    /* Scoped child styles via nesting */
-    & .profile-img {
-      width: 100%;
-      max-width: 360px;
-      aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: var(--border-radius-md);
-      filter: grayscale(100%);
-      transition: filter 0.5s ease;
-
-      &:hover {
-        filter: grayscale(0%);
-      }
-    }
-  }
-</style>
