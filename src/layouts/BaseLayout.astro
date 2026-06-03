@@ -1,8 +1,8 @@
 ---
-import "../styles/reset.css";
-import "../styles/theme.css";
-import "../styles/utils.css";
-import "../styles/typography.css";
+import '../styles/reset.css';
+import '../styles/theme.css';
+import '../styles/utils.css';
+import '../styles/typography.css';
 
 export interface Props {
   title: string;
@@ -26,9 +26,9 @@ const { title, description } = Astro.props;
     <slot />
 
     <script>
-      import { initScrollSpy } from "../utils/scrollSpy";
+      import { initScrollSpy } from '../utils/scrollSpy';
 
-      document.addEventListener("DOMContentLoaded", () => {
+      document.addEventListener('DOMContentLoaded', () => {
         initScrollSpy(128);
       });
     </script>

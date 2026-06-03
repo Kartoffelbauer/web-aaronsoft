@@ -11,10 +11,10 @@
 export function initScrollSpy(navbarOffset: number = 128): void {
   // 1. Select DOM elements
   const sections = Array.from(
-    document.querySelectorAll<HTMLElement>("section[id]"),
+    document.querySelectorAll<HTMLElement>('section[id]')
   );
   const navLinks = Array.from(
-    document.querySelectorAll<HTMLAnchorElement>(".nav-link"),
+    document.querySelectorAll<HTMLAnchorElement>('.nav-link')
   );
 
   if (!sections.length || !navLinks.length) return;
@@ -22,8 +22,8 @@ export function initScrollSpy(navbarOffset: number = 128): void {
   // 2. Create a fast O(1) lookup map: sectionId -> HTMLAnchorElement
   const linkMap = new Map<string, HTMLAnchorElement>();
   navLinks.forEach((link) => {
-    const href = link.getAttribute("href");
-    if (href && href.startsWith("#")) {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
       linkMap.set(href.substring(1), link);
     }
   });
@@ -36,7 +36,7 @@ export function initScrollSpy(navbarOffset: number = 128): void {
    * Finds the section currently occupying the top of the viewport.
    */
   const updateActiveSection = () => {
-    let currentActiveId = "";
+    let currentActiveId = '';
 
     // Loop through sections to find which one is currently at the top
     for (const section of sections) {
@@ -68,10 +68,10 @@ export function initScrollSpy(navbarOffset: number = 128): void {
     }
 
     // Update the DOM classes (O(1) lookup)
-    navLinks.forEach((link) => link.classList.remove("active"));
+    navLinks.forEach((link) => link.classList.remove('active'));
     if (currentActiveId) {
       const activeLink = linkMap.get(currentActiveId);
-      if (activeLink) activeLink.classList.add("active");
+      if (activeLink) activeLink.classList.add('active');
     }
 
     // Unlock the scroll listener for the next frame
@@ -90,7 +90,7 @@ export function initScrollSpy(navbarOffset: number = 128): void {
   };
 
   // 4. Attach listener using `{ passive: true }` so scrolling isn't blocked by JS
-  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   // 5. Trigger immediately to set the initial active state on page load
   updateActiveSection();

@@ -27,9 +27,9 @@
   );
 
   /* Typography */
-  --font-headline: "Inter", sans-serif;
-  --font-code: "Fira Code", monospace;
-  --font-body: "Inter", sans-serif;
+  --font-headline: 'Inter', sans-serif;
+  --font-code: 'Fira Code', monospace;
+  --font-body: 'Inter', sans-serif;
 
   /* Line Height */
   --line-height-base: 1.6;

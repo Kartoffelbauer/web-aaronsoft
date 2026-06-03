@@ -4,9 +4,9 @@
  * Uses polymorphic component rendering to act as the web component itself.
  */
 
-import BaseCard from "./BaseCard.astro";
-import { getYearsString } from "../../../utils/dateUtils";
-import type { SocialItem } from "../../../types/index";
+import BaseCard from './BaseCard.astro';
+import { getYearsString } from '../../../utils/dateUtils';
+import type { SocialItem } from '../../../types/index';
 
 export interface Props {
   payload: SocialItem;
@@ -57,13 +57,13 @@ const { payload } = Astro.props;
 </BaseCard>
 
 <script>
-  import { getYearsString } from "../../../utils/dateUtils";
+  import { getYearsString } from '../../../utils/dateUtils';
 
   class SocialTracker extends HTMLElement {
     connectedCallback() {
       const start = this.dataset.start;
       if (start) {
-        const timeElement = this.querySelector(".created-at");
+        const timeElement = this.querySelector('.created-at');
         if (timeElement) {
           timeElement.textContent = getYearsString(start);
         }
@@ -71,8 +71,8 @@ const { payload } = Astro.props;
     }
   }
 
-  if (!customElements.get("social-tracker")) {
-    customElements.define("social-tracker", SocialTracker);
+  if (!customElements.get('social-tracker')) {
+    customElements.define('social-tracker', SocialTracker);
   }
 </script>
 

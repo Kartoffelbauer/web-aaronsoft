@@ -4,9 +4,9 @@
  * Uses polymorphic component rendering to act as a custom web component.
  */
 
-import BaseCard from "./BaseCard.astro";
-import { getExperienceString } from "../../../utils/dateUtils";
-import type { SkillItem } from "../../../types/index.ts";
+import BaseCard from './BaseCard.astro';
+import { getExperienceString } from '../../../utils/dateUtils';
+import type { SkillItem } from '../../../types/index.ts';
 
 export interface Props {
   payload: SkillItem;
@@ -25,7 +25,7 @@ const { payload } = Astro.props;
 </BaseCard>
 
 <script>
-  import { getExperienceString } from "../../../utils/dateUtils";
+  import { getExperienceString } from '../../../utils/dateUtils';
 
   /**
    * Client-side hydration for dynamic years of experience.
@@ -35,7 +35,7 @@ const { payload } = Astro.props;
     connectedCallback() {
       const start = this.dataset.start;
       if (start) {
-        const expElement = this.querySelector(".skill-exp");
+        const expElement = this.querySelector('.skill-exp');
         if (expElement) {
           expElement.textContent = getExperienceString(start);
         }
@@ -43,8 +43,8 @@ const { payload } = Astro.props;
     }
   }
 
-  if (!customElements.get("skill-tracker")) {
-    customElements.define("skill-tracker", SkillTracker);
+  if (!customElements.get('skill-tracker')) {
+    customElements.define('skill-tracker', SkillTracker);
   }
 </script>
 

@@ -11,7 +11,7 @@ function isCurrentlyActive(endDate: string): boolean {
 function calculateSemesters(
   startDate: string,
   endDate: string,
-  isActive: boolean,
+  isActive: boolean
 ): number {
   const start = new Date(startDate);
   const end = isActive ? new Date() : new Date(endDate);
@@ -35,14 +35,14 @@ export function getAcademicStatus(startDate: string, endDate: string) {
     const expectedYear = new Date(endDate).getFullYear();
     return {
       durationText: `Semester ${semesters} / Expected ${expectedYear}`,
-      statusLabel: "Current",
+      statusLabel: 'Current',
       isActive: true,
     };
   }
 
   return {
     durationText: `${semesters} Semesters`,
-    statusLabel: "Completed",
+    statusLabel: 'Completed',
     isActive: false,
   };
 }
@@ -69,7 +69,7 @@ export function calculateYearsOfExperience(startDate: string): number {
  */
 export function getYearsString(startDate: string): string {
   const years = calculateYearsOfExperience(startDate);
-  return `${years} Year${years !== 1 ? "s" : ""}`;
+  return `${years} Year${years !== 1 ? 's' : ''}`;
 }
 
 /**
@@ -77,7 +77,7 @@ export function getYearsString(startDate: string): string {
  */
 export function getExperienceString(startDate: string): string {
   const years = calculateYearsOfExperience(startDate);
-  return `${years} Year${years !== 1 ? "s" : ""} Exp`;
+  return `${years} Year${years !== 1 ? 's' : ''} Exp`;
 }
 
 /**

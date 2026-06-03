@@ -2,14 +2,14 @@
 /**
  * @fileoverview Base layout for legal pages.
  */
-import BaseLayout from "../layouts/BaseLayout.astro";
-import NavBar from "../components/core/NavBar.astro";
-import Footer from "../components/core/Footer.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NavBar from '../components/core/NavBar.astro';
+import Footer from '../components/core/Footer.astro';
 
 const { title, description } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout {title} {description}>
   <NavBar isMainPage={false} />
 
   <main class="container">

@@ -3,7 +3,7 @@
  * @fileoverview Navigation Bar Component.
  * Handles routing across the site. Styling relies on global utility classes.
  */
-import { siteConfig } from "../../data/config";
+import { siteConfig } from '../../data/config';
 
 export interface Props {
   isMainPage?: boolean;
@@ -21,8 +21,8 @@ const { logo, nav, sections } = siteConfig;
 
     <div
       class:list={[
-        "items-center gap-lg font-code text-sm",
-        isMainPage ? "hidden md:flex" : "flex",
+        'items-center gap-lg font-code text-sm',
+        isMainPage ? 'hidden md:flex' : 'flex',
       ]}
     >
       {

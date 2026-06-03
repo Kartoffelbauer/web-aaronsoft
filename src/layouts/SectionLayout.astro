@@ -11,16 +11,16 @@ interface Props {
   class?: string;
 }
 
-const { id, icon, title, class: className = "" } = Astro.props;
+const { id, icon, title, class: className = '' } = Astro.props;
 ---
 
-<section id={id} class:list={["section", className]}>
+<section {id} class:list={['section', className]}>
   {
     title && (
       <header class="flex items-center gap-sm mb-lg">
         {icon && (
           <span
-            class:list={["material-symbols-outlined icon", className]}
+            class:list={['material-symbols-outlined icon', className]}
             aria-hidden="true"
             data-variant="primary"
           >

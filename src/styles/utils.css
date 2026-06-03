@@ -206,18 +206,18 @@ a:focus-visible {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.btn[data-size="sm"] {
+.btn[data-size='sm'] {
   padding: var(--spacing-sm) var(--spacing-md);
   font-size: var(--font-size-sm);
 }
-.btn[data-variant="primary"] {
+.btn[data-variant='primary'] {
   background: var(--theme-primary);
   color: var(--theme-on-primary);
 }
-.btn[data-variant="primary"]:hover {
+.btn[data-variant='primary']:hover {
   opacity: 0.9;
 }
-.btn[data-variant="outline"] {
+.btn[data-variant='outline'] {
   border-color: var(--theme-outline);
   color: var(--theme-on-surface);
 

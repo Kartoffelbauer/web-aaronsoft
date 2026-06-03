@@ -4,8 +4,8 @@
  * Renders server-side first, then utilizes a custom web component for client-side date hydration.
  */
 
-import { getAcademicStatus } from "../../../utils/dateUtils";
-import type { EducationItem } from "../../../types/index";
+import { getAcademicStatus } from '../../../utils/dateUtils';
+import type { EducationItem } from '../../../types/index';
 
 export interface Props {
   item: EducationItem;
@@ -16,7 +16,7 @@ const { item } = Astro.props;
 // Calculate initial state server-side to prevent layout shifts before JS loads
 const { durationText, statusLabel, isActive } = getAcademicStatus(
   item.startDate,
-  item.endDate,
+  item.endDate
 );
 ---
 
@@ -25,15 +25,15 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
   data-start={item.startDate}
   data-end={item.endDate}
 >
-  <div class:list={["timeline-dot", isActive ? "active" : "inactive"]}></div>
+  <div class:list={['timeline-dot', isActive ? 'active' : 'inactive']}></div>
 
   <div class="timeline-content">
     <div class="timeline-header">
       <h3 class:list="h3">{item.degree}</h3>
       <span
         class:list={[
-          "timeline-badge",
-          isActive ? "badge-active" : "badge-inactive",
+          'timeline-badge',
+          isActive ? 'badge-active' : 'badge-inactive',
         ]}
       >
         {statusLabel}
@@ -47,7 +47,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 </academic-tracker>
 
 <script>
-  import { getAcademicStatus } from "../../../utils/dateUtils";
+  import { getAcademicStatus } from '../../../utils/dateUtils';
 
   /**
    * Custom element to hydrate academic timeline dates safely on the client.
@@ -62,28 +62,28 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 
       const { durationText, statusLabel, isActive } = getAcademicStatus(
         start,
-        end,
+        end
       );
 
       // Scoped DOM updates limit reflows and prevent cross-component interference
-      const dot = this.querySelector(".timeline-dot");
+      const dot = this.querySelector('.timeline-dot');
       if (dot)
-        dot.className = `timeline-dot ${isActive ? "active" : "inactive"}`;
+        dot.className = `timeline-dot ${isActive ? 'active' : 'inactive'}`;
 
-      const badge = this.querySelector(".timeline-badge");
+      const badge = this.querySelector('.timeline-badge');
       if (badge) {
-        badge.className = `timeline-badge ${isActive ? "badge-active" : "badge-inactive"}`;
+        badge.className = `timeline-badge ${isActive ? 'badge-active' : 'badge-inactive'}`;
         badge.textContent = statusLabel;
       }
 
-      const dateEl = this.querySelector(".timeline-date");
+      const dateEl = this.querySelector('.timeline-date');
       if (dateEl) dateEl.textContent = durationText;
     }
   }
 
   // Prevent HMR (Hot Module Replacement) crashes in dev mode
-  if (!customElements.get("academic-tracker")) {
-    customElements.define("academic-tracker", AcademicTracker);
+  if (!customElements.get('academic-tracker')) {
+    customElements.define('academic-tracker', AcademicTracker);
   }
 </script>
 
@@ -111,7 +111,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
   }
 
   .timeline-dot::after {
-    content: "";
+    content: '';
     width: 6px;
     height: 6px;
     border-radius: 50%;
