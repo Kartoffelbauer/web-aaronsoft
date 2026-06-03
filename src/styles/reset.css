@@ -1,3 +1,8 @@
+/*
+ * @fileoverview Reset stylesheet to normalize browser defaults across elements.
+ * Keep this file minimal and deterministic to avoid layout inconsistencies.
+ */
+
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,

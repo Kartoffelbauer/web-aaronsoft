@@ -1,3 +1,8 @@
+/*
+ * @fileoverview Typography definitions and font-face declarations used
+ * across the site. Declare font-faces here and keep type scale consistent.
+ */
+
 /* fira-code-300 - latin */
 @font-face {
   font-display: swap;
