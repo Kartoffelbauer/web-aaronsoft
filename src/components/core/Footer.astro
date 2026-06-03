@@ -3,8 +3,8 @@
  * @fileoverview Global Footer Component.
  * Utilizes utility framework for responsive layout and typography.
  */
-import { siteConfig } from '../../data/config';
-import { getCurrentYear } from '../../utils/dateUtils';
+import { siteConfig } from '@/data/config';
+import { getCurrentYear } from '@/utils/dateUtils';
 
 const { logo } = siteConfig;
 ---
@@ -36,7 +36,7 @@ const { logo } = siteConfig;
 </footer>
 
 <script>
-  import { getCurrentYear } from '../../utils/dateUtils';
+  import { getCurrentYear } from '@/utils/dateUtils';
 
   class CurrentYear extends HTMLElement {
     connectedCallback() {

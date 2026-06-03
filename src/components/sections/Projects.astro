@@ -3,9 +3,9 @@
  * @description Renders the featured projects grid using the common SectionLayout and unified Card factory.
  */
 
-import { siteConfig } from '../../data/config';
-import SectionLayout from '../../layouts/SectionLayout.astro';
-import { ProjectCard } from '../ui/index.astro';
+import { ProjectCard } from '@/components/ui/index.astro';
+import { siteConfig } from '@/data/config';
+import SectionLayout from '@/layouts/SectionLayout.astro';
 
 const { projects } = siteConfig.sections;
 ---

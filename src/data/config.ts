@@ -1,7 +1,7 @@
 /**
  * @fileoverview Configuration file for the portfolio content.
  */
-import type { SiteConfig } from '../types/index.ts';
+import type { SiteConfig } from '@/types/index';
 
 export const siteConfig: SiteConfig = {
   logo: 'DevPortfolio',

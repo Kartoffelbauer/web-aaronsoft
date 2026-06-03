@@ -4,8 +4,9 @@
  * Uses polymorphic component rendering to act as a custom web component.
  */
 
-import type { SkillItem } from '../../../types/index.ts';
-import { getExperienceString } from '../../../utils/dateUtils';
+import type { SkillItem } from '@/types/index.ts';
+import { getExperienceString } from '@/utils/dateUtils';
+
 import BaseCard from './BaseCard.astro';
 
 export interface Props {
@@ -25,7 +26,7 @@ const { payload } = Astro.props;
 </BaseCard>
 
 <script>
-  import { getExperienceString } from '../../../utils/dateUtils';
+  import { getExperienceString } from '@/utils/dateUtils';
 
   /**
    * Client-side hydration for dynamic years of experience.

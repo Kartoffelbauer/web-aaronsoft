@@ -4,8 +4,9 @@
  * Uses polymorphic component rendering to act as the web component itself.
  */
 
-import type { SocialItem } from '../../../types/index';
-import { getYearsString } from '../../../utils/dateUtils';
+import type { SocialItem } from '@/types/index';
+import { getYearsString } from '@/utils/dateUtils';
+
 import BaseCard from './BaseCard.astro';
 
 export interface Props {
@@ -57,7 +58,7 @@ const { payload } = Astro.props;
 </BaseCard>
 
 <script>
-  import { getYearsString } from '../../../utils/dateUtils';
+  import { getYearsString } from '@/utils/dateUtils';
 
   class SocialTracker extends HTMLElement {
     connectedCallback() {
