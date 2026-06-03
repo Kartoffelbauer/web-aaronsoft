@@ -4,9 +4,9 @@
  * Uses polymorphic component rendering to act as a custom web component.
  */
 
-import BaseCard from './BaseCard.astro';
-import { getExperienceString } from '../../../utils/dateUtils';
 import type { SkillItem } from '../../../types/index.ts';
+import { getExperienceString } from '../../../utils/dateUtils';
+import BaseCard from './BaseCard.astro';
 
 export interface Props {
   payload: SkillItem;

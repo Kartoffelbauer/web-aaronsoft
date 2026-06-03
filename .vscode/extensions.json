@@ -3,6 +3,7 @@
     "astro-build.astro-vscode",
     "firefox-devtools.vscode-firefox-debug",
     "esbenp.prettier-vscode",
+    "heybourn.headwind",
     "YoavBls.pretty-ts-errors",
     "usernamehw.errorlens",
     "christian-kohler.path-intellisense",

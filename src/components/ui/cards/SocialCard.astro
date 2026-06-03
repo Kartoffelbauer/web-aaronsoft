@@ -4,9 +4,9 @@
  * Uses polymorphic component rendering to act as the web component itself.
  */
 
-import BaseCard from './BaseCard.astro';
-import { getYearsString } from '../../../utils/dateUtils';
 import type { SocialItem } from '../../../types/index';
+import { getYearsString } from '../../../utils/dateUtils';
+import BaseCard from './BaseCard.astro';
 
 export interface Props {
   payload: SocialItem;
