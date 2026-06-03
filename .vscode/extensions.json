@@ -1,7 +1,12 @@
 {
   "recommendations": [
     "astro-build.astro-vscode",
+    "firefox-devtools.vscode-firefox-debug",
     "esbenp.prettier-vscode",
-    "firefox-devtools.vscode-firefox-debug"
+    "YoavBls.pretty-ts-errors",
+    "usernamehw.errorlens",
+    "christian-kohler.path-intellisense",
+    "kisstkondoros.vscode-gutter-preview",
+    "oderwat.indent-rainbow"
   ]
 }

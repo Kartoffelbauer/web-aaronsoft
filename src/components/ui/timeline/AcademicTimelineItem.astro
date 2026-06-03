@@ -4,8 +4,8 @@
  * Renders server-side first, then utilizes a custom web component for client-side date hydration.
  */
 
-import { getAcademicStatus } from "../../../utils/dateUtils.ts";
-import type { EducationItem } from "../../../types/index.ts";
+import { getAcademicStatus } from "../../../utils/dateUtils";
+import type { EducationItem } from "../../../types/index";
 
 export interface Props {
   item: EducationItem;
@@ -47,7 +47,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 </academic-tracker>
 
 <script>
-  import { getAcademicStatus } from "../../../utils/dateUtils.ts";
+  import { getAcademicStatus } from "../../../utils/dateUtils";
 
   /**
    * Custom element to hydrate academic timeline dates safely on the client.

@@ -5,8 +5,8 @@
  */
 
 import BaseCard from "./BaseCard.astro";
-import { getYearsString } from "../../../utils/dateUtils.ts";
-import type { SocialItem } from "../../../types/index.ts";
+import { getYearsString } from "../../../utils/dateUtils";
+import type { SocialItem } from "../../../types/index";
 
 export interface Props {
   payload: SocialItem;
@@ -57,7 +57,7 @@ const { payload } = Astro.props;
 </BaseCard>
 
 <script>
-  import { getYearsString } from "../../../utils/dateUtils.ts";
+  import { getYearsString } from "../../../utils/dateUtils";
 
   class SocialTracker extends HTMLElement {
     connectedCallback() {
