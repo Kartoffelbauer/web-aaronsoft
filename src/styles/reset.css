@@ -58,6 +58,6 @@ h6 {
 
 /* 8. Neutralize links */
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }

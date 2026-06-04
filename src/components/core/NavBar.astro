@@ -71,11 +71,11 @@ const { logo, nav, sections } = siteConfig;
   .navbar {
     position: fixed;
     top: 0;
-    width: 100%;
     z-index: 50;
-    background: color-mix(in srgb, var(--theme-surface) 80%, transparent);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--theme-outline-variant);
+    background: color-mix(in srgb, var(--theme-surface) 80%, transparent);
+    width: 100%;
   }
 
   .navbar-content {
@@ -88,7 +88,7 @@ const { logo, nav, sections } = siteConfig;
 
   /* Specific component state overrides */
   .nav-link.active {
-    color: var(--theme-primary);
     border-bottom: 2px solid var(--theme-primary);
+    color: var(--theme-primary);
   }
 </style>

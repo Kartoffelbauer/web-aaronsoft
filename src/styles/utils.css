@@ -33,8 +33,8 @@ h6 {
   margin: 0;
   color: var(--theme-on-surface);
   font-weight: var(--font-weight-medium);
-  font-family: var(--font-headline);
   line-height: var(--line-height-base);
+  font-family: var(--font-headline);
 }
 
 h1 {
@@ -57,10 +57,10 @@ h6 {
 }
 
 a {
+  transition: color 0.2s ease;
   color: var(--theme-primary);
   text-decoration: underline;
   text-underline-offset: 4px;
-  transition: color 0.2s ease;
 }
 a:visited {
   color: var(--theme-link-visited, var(--theme-primary));
@@ -74,10 +74,10 @@ a:focus-visible {
    2. LAYOUT & FLEXBOX UTILITIES
    ========================================================================== */
 .container {
-  width: 100%;
-  max-width: 1100px;
   margin: 0 auto;
   padding-inline: clamp(var(--spacing-md, 1rem), 4vw, var(--spacing-lg, 2rem));
+  width: 100%;
+  max-width: 1100px;
 }
 
 .flex {
@@ -115,12 +115,12 @@ a:focus-visible {
   display: grid;
 }
 .grid-cols-2 {
-  gap: var(--spacing-md);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: var(--spacing-md);
 }
 .grid-cols-4 {
-  gap: var(--spacing-lg);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: var(--spacing-lg);
 }
 
 /* ==========================================================================
@@ -193,18 +193,18 @@ a:focus-visible {
    ========================================================================== */
 .btn {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-lg);
+  transition: all 0.2s ease;
+  cursor: pointer;
   border: 1px solid transparent;
   border-radius: var(--border-radius-base);
-  font-size: var(--font-size-base);
+  padding: var(--spacing-md) var(--spacing-lg);
   font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-base);
   font-family: var(--font-code);
   text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 .btn[data-size='sm'] {
   padding: var(--spacing-sm) var(--spacing-md);
@@ -223,27 +223,27 @@ a:focus-visible {
 
   &:hover,
   &:focus-visible {
-    color: var(--theme-primary);
     border-color: var(--theme-primary);
+    color: var(--theme-primary);
   }
 }
 
 .icon {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  fill: currentColor;
   width: 1em;
   height: 1em;
   color: currentColor;
-  fill: currentColor;
   font-size: 1em;
 }
 
 .logo {
   color: var(--theme-primary);
-  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xl);
   font-family: var(--font-headline);
   text-decoration: none;
 }
@@ -253,8 +253,8 @@ a:focus-visible {
  * Use this wrapper for Legal pages, markdown, or long-form content.
  */
 .prose {
-  font-size: var(--font-size-base);
   color: var(--theme-on-surface);
+  font-size: var(--font-size-base);
   line-height: var(--line-height-relaxed);
 }
 .prose p {

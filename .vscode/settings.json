@@ -11,6 +11,7 @@
     "source.removeUnused": "explicit",
     "source.addMissingImports": "explicit"
   },
+  "sortcss.sortOnSave": true,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "js/ts.suggest.paths": false,

@@ -96,8 +96,8 @@ const { payload } = Astro.props;
 
   .user-info {
     display: flex;
-    flex-direction: column;
     flex: 1;
+    flex-direction: column;
     justify-content: center;
   }
 
@@ -110,16 +110,16 @@ const { payload } = Astro.props;
 
   .headline,
   .created-at {
-    font-size: var(--font-size-sm);
     color: var(--theme-on-surface-variant);
+    font-size: var(--font-size-sm);
   }
 
   .social-text {
     margin: 0;
     padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
+    color: var(--theme-on-surface);
     font-size: var(--font-size-base);
     line-height: 1.5;
-    color: var(--theme-on-surface);
   }
 
   .social-img-fix {

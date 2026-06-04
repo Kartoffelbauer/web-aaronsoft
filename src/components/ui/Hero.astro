@@ -91,27 +91,27 @@ const {
      1. FLUID GRID LAYOUT
      ========================================================== */
   .hero-grid {
-    container-type: inline-size;
-    container-name: hero;
-
     display: grid;
-    gap: var(--spacing-lg);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    grid-template-columns: repeat(auto-sfit, minmax(min(100%, 400px), 1fr));
     align-items: center;
+    gap: var(--spacing-lg);
+
+    container-name: hero;
+    container-type: inline-size;
   }
 
   /* ==========================================================
      2. TYPOGRAPHY & ACTIONS
      ========================================================== */
   .title {
-    line-height: 1.2;
     margin-bottom: var(--spacing-md);
+    line-height: 1.2;
   }
 
   .description {
-    font-size: var(--font-size-lg);
-    color: var(--theme-on-surface-variant);
     margin-bottom: var(--spacing-lg);
+    color: var(--theme-on-surface-variant);
+    font-size: var(--font-size-lg);
   }
 
   .hero-actions {
@@ -134,19 +134,19 @@ const {
   }
 
   .image-border {
-    padding: var(--spacing-sm);
     border: 1px solid var(--theme-outline-variant);
     border-radius: var(--border-radius-md);
     background: var(--theme-surface-container);
+    padding: var(--spacing-sm);
 
     & .profile-img {
-      width: 100%;
-      max-width: 360px;
-      aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: var(--border-radius-md);
       filter: grayscale(100%);
       transition: filter 0.5s ease;
+      border-radius: var(--border-radius-md);
+      aspect-ratio: 1;
+      width: 100%;
+      max-width: 360px;
+      object-fit: cover;
 
       &:hover {
         filter: grayscale(0%);
