@@ -3,6 +3,7 @@
  * @fileoverview Navigation Bar Component.
  * Handles routing across the site. Styling relies on global utility classes.
  */
+import { DevLogo } from '@/components/ui/index.astro';
 import { siteConfig } from '@/data/config';
 
 export interface Props {
@@ -17,12 +18,7 @@ const { logo, nav, sections } = siteConfig;
   class="fixed top-0 z-50 w-full border-b border-outline-variant glass-effect"
 >
   <div class="container flex items-center justify-between gap-md h-shell">
-    <a
-      href="/"
-      class="text-primary font-medium text-xl font-headline no-underline"
-    >
-      {logo}
-    </a>
+    <DevLogo title={logo} />
 
     <div
       class:list={[

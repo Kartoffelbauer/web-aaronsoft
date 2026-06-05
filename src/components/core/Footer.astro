@@ -6,6 +6,8 @@
 import { siteConfig } from '@/data/config';
 import { getCurrentYear } from '@/utils/dateUtils';
 
+import { DevLogo } from '../ui/index.astro';
+
 const { logo } = siteConfig;
 ---
 
@@ -13,12 +15,7 @@ const { logo } = siteConfig;
   <div
     class="container flex flex-col items-center justify-center gap-sm py-md md:flex-row md:justify-between lg:px-lg"
   >
-    <a
-      href="/"
-      class="text-primary font-medium text-xl font-headline no-underline"
-    >
-      {logo}
-    </a>
+    <DevLogo title={logo} />
 
     <div class="text-surface-variant text-center">
       &copy; <current-year class="inline">{getCurrentYear()}</current-year> Software
@@ -43,16 +40,16 @@ const { logo } = siteConfig;
       </a>
     </nav>
   </div>
-</footer>
 
-<script>
-  import { getCurrentYear } from '@/utils/dateUtils';
+  <script>
+    import { getCurrentYear } from '@/utils/dateUtils';
 
-  class CurrentYear extends HTMLElement {
-    connectedCallback() {
-      this.textContent = getCurrentYear();
+    class CurrentYear extends HTMLElement {
+      connectedCallback() {
+        this.textContent = getCurrentYear();
+      }
     }
-  }
 
-  customElements.define('current-year', CurrentYear);
-</script>
+    customElements.define('current-year', CurrentYear);
+  </script>
+</footer>

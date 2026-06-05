@@ -1,0 +1,16 @@
+---
+/**
+ * @fileoverview Reusable Developer Logo UI Component.
+ * Designed for consistent branding across the portfolio.
+ */
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<a href="/" class="text-primary font-medium text-xl font-headline no-underline">
+  {title}
+</a>
