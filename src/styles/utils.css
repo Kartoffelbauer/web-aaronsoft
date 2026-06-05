@@ -1,6 +1,7 @@
 /**
  * @fileoverview utils.css
  * Core Utility Framework (Tailwind-inspired).
+ * Follows best practices for maintainable, DRY utility classes.
  */
 
 /* ==========================================================================
@@ -80,6 +81,7 @@ a:focus-visible {
   max-width: 1100px;
 }
 
+/* Flexbox */
 .flex {
   display: flex;
 }
@@ -101,16 +103,34 @@ a:focus-visible {
 .justify-between {
   justify-content: space-between;
 }
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-self-center {
+  justify-self: center;
+}
+.justify-self-end {
+  justify-self: flex-end;
+}
+.justify-self-start {
+  justify-self: flex-start;
+}
 
-/* Height & Grow Utilities --- */
+/* Sizing & Grow */
 .min-h-screen {
   min-height: 100dvh;
 }
 .grow {
   flex-grow: 1;
 }
+.w-full {
+  width: 100%;
+}
+.max-w-sm {
+  max-width: 360px;
+}
 
-/* Fluid Grid */
+/* Grid */
 .grid {
   display: grid;
 }
@@ -124,8 +144,9 @@ a:focus-visible {
 }
 
 /* ==========================================================================
-   3. SPACING UTILITIES (Gaps & Margins)
+   3. SPACING UTILITIES (Gaps, Margins, Padding)
    ========================================================================== */
+/* Gaps */
 .gap-sm {
   gap: var(--spacing-sm);
 }
@@ -139,6 +160,7 @@ a:focus-visible {
   gap: var(--spacing-xl);
 }
 
+/* Margins */
 .mb-sm {
   margin-bottom: var(--spacing-sm);
 }
@@ -159,9 +181,21 @@ a:focus-visible {
   margin-top: var(--spacing-lg);
 }
 
+/* Padding */
+.p-sm {
+  padding: var(--spacing-sm);
+}
+.p-md {
+  padding: var(--spacing-md);
+}
+.p-lg {
+  padding: var(--spacing-lg);
+}
+
 /* ==========================================================================
    4. TYPOGRAPHY & COLOR UTILITIES
    ========================================================================== */
+/* Typography */
 .font-code {
   font-family: var(--font-code);
 }
@@ -174,8 +208,19 @@ a:focus-visible {
 .text-base {
   font-size: var(--font-size-base);
 }
+.text-lg {
+  font-size: var(--font-size-lg);
+}
 .text-justify {
   text-align: justify;
+}
+.leading-tight {
+  line-height: 1.2;
+}
+
+/* Colors & Backgrounds */
+.bg-surface-container {
+  background-color: var(--theme-surface-container);
 }
 
 .text-surface-variant,
@@ -189,7 +234,40 @@ a:focus-visible {
 }
 
 /* ==========================================================================
-   5. GLOBAL COMPONENTS
+   5. BORDERS, EFFECTS & MEDIA
+   ========================================================================== */
+/* Borders */
+.border {
+  border: 1px solid transparent;
+}
+.border-outline-variant {
+  border-color: var(--theme-outline-variant);
+}
+.rounded-md {
+  border-radius: var(--border-radius-md);
+}
+
+/* Object Fit & Ratios */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+.object-cover {
+  object-fit: cover;
+}
+
+/* Filters & Transitions */
+.grayscale {
+  filter: grayscale(100%);
+}
+.hover\:grayscale-0:hover {
+  filter: grayscale(0%);
+}
+.transition-filter {
+  transition: filter 0.5s ease;
+}
+
+/* ==========================================================================
+   6. GLOBAL COMPONENTS
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -241,7 +319,7 @@ a:focus-visible {
 }
 
 .logo {
-  color: var(--theme-primary);
+  color: var(--theme-primary) !important;
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-xl);
   font-family: var(--font-headline);
@@ -250,7 +328,6 @@ a:focus-visible {
 
 /**
  * PROSE COMPONENT (Rich Text formatting)
- * Use this wrapper for Legal pages, markdown, or long-form content.
  */
 .prose {
   color: var(--theme-on-surface);
@@ -276,11 +353,14 @@ a:focus-visible {
 }
 
 /* ==========================================================================
-   6. RESPONSIVE MODIFIERS
+   7. RESPONSIVE MODIFIERS
    ========================================================================== */
 @media (min-width: 768px) {
   .md\:flex {
     display: flex;
+  }
+  .md\:justify-end {
+    justify-content: flex-end;
   }
 }
 @media (min-width: 950px) {
@@ -289,6 +369,9 @@ a:focus-visible {
   }
   .lg\:justify-between {
     justify-content: space-between;
+  }
+  .lg\:justify-self-end {
+    justify-self: flex-end;
   }
   .lg\:gap-md {
     gap: var(--spacing-md);

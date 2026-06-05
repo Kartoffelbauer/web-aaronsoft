@@ -4,7 +4,7 @@
  * including avatar, headline and primary call-to-action.
  */
 import profilePic from '@/assets/img/profile.jpg';
-import UiHero from '@/components/ui/Hero.astro';
+import DevHero from '@/components/ui/DevHero.astro';
 import { siteConfig } from '@/data/config';
 import SectionLayout from '@/layouts/SectionLayout.astro';
 
@@ -12,18 +12,11 @@ const { hero } = siteConfig.sections;
 ---
 
 <SectionLayout id={hero.id}>
-  <UiHero
+  <DevHero
     title={hero.title}
     description={hero.description}
     image={profilePic}
-    imageAlt="Portrait of the author"
-    primaryAction={{
-      label: 'LinkedIn',
-      url: hero.linkedinUrl,
-    }}
-    secondaryAction={{
-      label: 'GitHub',
-      url: hero.githubUrl,
-    }}
+    linkedinUrl={hero.linkedinUrl}
+    githubUrl={hero.githubUrl}
   />
 </SectionLayout>

@@ -1,0 +1,66 @@
+---
+/**
+ * @fileoverview Reusable Hero UI Component.
+ */
+
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+export interface Props {
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  linkedinUrl: string;
+  githubUrl: string;
+}
+
+const { title, description, image, linkedinUrl, githubUrl } = Astro.props;
+---
+
+<header class="grid items-center gap-lg hero-grid">
+  <div>
+    <h1 class="mb-md leading-tight">{title}</h1>
+    <p class="mb-lg text-lg text-surface-variant">{description}</p>
+    <nav class="flex gap-md" aria-label="Primary Actions">
+      <a
+        href={linkedinUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn"
+        data-variant="primary"
+      >
+        <span class="material-symbols-outlined icon" aria-hidden="true">
+          open_in_new
+        </span>
+        LinkedIn
+      </a>
+      <a
+        href={githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn"
+        data-variant="outline"
+      >
+        GitHub
+      </a>
+    </nav>
+  </div>
+
+  <div
+    class="border border-outline-variant rounded-md bg-surface-container p-sm justify-self-center lg:justify-self-end"
+  >
+    <Image
+      src={image}
+      alt="Protfolio"
+      width={360}
+      class="w-full max-w-sm aspect-square object-cover rounded-md grayscale transition-filter hover:grayscale-0"
+      loading="eager"
+    />
+  </div>
+</header>
+
+<style>
+  .hero-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  }
+</style>

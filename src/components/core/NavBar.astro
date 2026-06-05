@@ -17,7 +17,9 @@ const { logo, nav, sections } = siteConfig;
   <div
     class="container flex items-center justify-between gap-md navbar-content"
   >
-    <div class="logo">{logo}</div>
+    <a href="/" class="logo" aria-label="To startpage">
+      {logo}
+    </a>
 
     <div
       class:list={[
