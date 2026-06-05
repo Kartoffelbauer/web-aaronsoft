@@ -1,7 +1,7 @@
 /**
  * @fileoverview utils.css
  * Core Utility Framework (Tailwind-inspired).
- * Follows best practices for maintainable, DRY utility classes.
+ * Follows strict utility-first architecture and DRY principles.
  */
 
 /* ==========================================================================
@@ -18,7 +18,6 @@ body {
   font-family: var(--font-body);
 }
 
-/* Main variant ensures distance from the global header/nav and grows to push footers down */
 main {
   flex-grow: 1;
   padding-top: calc(var(--shell-height-base) + var(--spacing-lg));
@@ -72,7 +71,7 @@ a:focus-visible {
 }
 
 /* ==========================================================================
-   2. LAYOUT & FLEXBOX UTILITIES
+   2. LAYOUT & POSITIONING
    ========================================================================== */
 .container {
   margin: 0 auto;
@@ -81,12 +80,36 @@ a:focus-visible {
   max-width: 1100px;
 }
 
-/* Flexbox */
-.flex {
-  display: flex;
+.fixed {
+  position: fixed;
 }
+.top-0 {
+  top: 0;
+}
+.z-50 {
+  z-index: 50;
+}
+
 .hidden {
   display: none;
+}
+.inline {
+  display: inline;
+}
+
+.object-cover {
+  object-fit: cover;
+}
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* ==========================================================================
+   3. FLEXBOX & GRID
+   ========================================================================== */
+/* Flex Display & Direction */
+.flex {
+  display: flex;
 }
 .flex-col {
   flex-direction: column;
@@ -94,6 +117,11 @@ a:focus-visible {
 .flex-row {
   flex-direction: row;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* Flex Alignment */
 .items-center {
   align-items: center;
 }
@@ -106,6 +134,8 @@ a:focus-visible {
 .justify-end {
   justify-content: flex-end;
 }
+
+/* Grid Alignments */
 .justify-self-center {
   justify-self: center;
 }
@@ -116,36 +146,31 @@ a:focus-visible {
   justify-self: flex-start;
 }
 
-/* Sizing & Grow */
-.min-h-screen {
-  min-height: 100dvh;
-}
-.grow {
-  flex-grow: 1;
-}
-.w-full {
-  width: 100%;
-}
-.max-w-sm {
-  max-width: 360px;
-}
-
-/* Grid */
+/* Grid Definition */
 .grid {
   display: grid;
 }
 .grid-cols-fluid-sm {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--grid-fluid-sm)), 1fr)
+  );
 }
 .grid-cols-fluid-md {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--grid-fluid-md)), 1fr)
+  );
 }
 .grid-cols-fluid-lg {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--grid-fluid-lg)), 1fr)
+  );
 }
 
 /* ==========================================================================
-   3. SPACING UTILITIES (Gaps, Margins, Padding)
+   4. SPACING (Margins, Padding, Gap)
    ========================================================================== */
 /* Gaps */
 .gap-sm {
@@ -171,7 +196,6 @@ a:focus-visible {
 .mb-lg {
   margin-bottom: var(--spacing-lg);
 }
-
 .mt-sm {
   margin-top: var(--spacing-sm);
 }
@@ -192,17 +216,59 @@ a:focus-visible {
 .p-lg {
   padding: var(--spacing-lg);
 }
+.py-md {
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+}
+.py-lg {
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+}
+.pt-md {
+  padding-top: var(--spacing-md);
+}
+
+/* Pseudo-classes */
+.first-of-type\:mb-md:first-of-type {
+  margin-bottom: var(--spacing-md);
+}
 
 /* ==========================================================================
-   4. TYPOGRAPHY & COLOR UTILITIES
+   5. SIZING (Width, Height, Grow)
    ========================================================================== */
-/* Typography */
+.w-full {
+  width: 100%;
+}
+.max-w-sm {
+  max-width: 360px;
+}
+
+.min-h-screen {
+  min-height: 100dvh;
+}
+.h-shell {
+  height: var(--shell-height-base);
+}
+.h-shell-md {
+  height: var(--shell-height-md);
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+/* ==========================================================================
+   6. TYPOGRAPHY
+   ========================================================================== */
+/* Font Family */
 .font-code {
   font-family: var(--font-code);
 }
 .font-headline {
   font-family: var(--font-headline);
 }
+
+/* Font Size & Weight */
 .text-sm {
   font-size: var(--font-size-sm);
 }
@@ -212,51 +278,76 @@ a:focus-visible {
 .text-lg {
   font-size: var(--font-size-lg);
 }
+.text-xl {
+  font-size: var(--font-size-xl);
+}
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+/* Alignment & Spacing */
 .text-justify {
   text-align: justify;
+}
+.text-center {
+  text-align: center;
 }
 .leading-tight {
   line-height: 1.2;
 }
-
-/* Colors & Backgrounds */
-.bg-surface-container {
-  background-color: var(--theme-surface-container);
+.no-underline {
+  text-decoration: none;
 }
 
+/* Colors (Using high specificity to safely override generic link colors) */
 .text-surface-variant,
+a.text-surface-variant,
 .hover\:text-surface-variant:visited {
   color: var(--theme-on-surface-variant);
 }
 
 .text-primary,
+a.text-primary,
 .hover\:text-primary:hover {
   color: var(--theme-primary);
 }
 
 /* ==========================================================================
-   5. BORDERS, EFFECTS & MEDIA
+   7. VISUALS (Backgrounds, Borders, Effects)
    ========================================================================== */
-/* Borders */
+/* Backgrounds */
+.bg-surface-container {
+  background-color: var(--theme-surface-container);
+}
+.bg-surface-lowest {
+  background-color: var(--theme-surface-container-lowest);
+}
+
+/* Borders & Radius */
 .border {
   border: 1px solid transparent;
 }
+.border-b {
+  border-bottom: 1px solid transparent;
+}
+.border-t {
+  border-top: 1px solid transparent;
+}
 .border-outline-variant {
   border-color: var(--theme-outline-variant);
+}
+.border-divider {
+  border-color: var(--theme-divider);
+}
+
+.first-of-type\:border-none:first-of-type {
+  border-top: none;
 }
 .rounded-md {
   border-radius: var(--border-radius-md);
 }
 
-/* Object Fit & Ratios */
-.aspect-square {
-  aspect-ratio: 1 / 1;
-}
-.object-cover {
-  object-fit: cover;
-}
-
-/* Filters & Transitions */
+/* Filters */
 .grayscale {
   filter: grayscale(100%);
 }
@@ -268,7 +359,7 @@ a:focus-visible {
 }
 
 /* ==========================================================================
-   6. GLOBAL COMPONENTS
+   8. COMPONENTS
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -319,17 +410,6 @@ a:focus-visible {
   font-size: 1em;
 }
 
-.logo {
-  color: var(--theme-primary) !important;
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-xl);
-  font-family: var(--font-headline);
-  text-decoration: none;
-}
-
-/**
- * PROSE COMPONENT (Rich Text formatting)
- */
 .prose {
   color: var(--theme-on-surface);
   font-size: var(--font-size-base);
@@ -354,16 +434,23 @@ a:focus-visible {
 }
 
 /* ==========================================================================
-   7. RESPONSIVE MODIFIERS
+   9. RESPONSIVE MODIFIERS
    ========================================================================== */
 @media (min-width: 768px) {
   .md\:flex {
     display: flex;
   }
+  .md\:flex-row {
+    flex-direction: row;
+  }
+  .md\:justify-between {
+    justify-content: space-between;
+  }
   .md\:justify-end {
     justify-content: flex-end;
   }
 }
+
 @media (min-width: 950px) {
   .lg\:flex-row {
     flex-direction: row;

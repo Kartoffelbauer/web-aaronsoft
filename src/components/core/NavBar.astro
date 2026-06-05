@@ -13,11 +13,14 @@ const { isMainPage = true } = Astro.props;
 const { logo, nav, sections } = siteConfig;
 ---
 
-<nav class="navbar">
-  <div
-    class="container flex items-center justify-between gap-md navbar-content"
-  >
-    <a href="/" class="logo" aria-label="To startpage">
+<nav
+  class="fixed top-0 z-50 w-full border-b border-outline-variant glass-effect"
+>
+  <div class="container flex items-center justify-between gap-md h-shell">
+    <a
+      href="/"
+      class="text-primary font-medium text-xl font-headline no-underline"
+    >
       {logo}
     </a>
 
@@ -32,7 +35,7 @@ const { logo, nav, sections } = siteConfig;
           Object.values(sections).map((sectionData) => (
             <a
               href={`#${sectionData.id}`}
-              class="text-surface-variant hover:text-surface-variant hover:text-primary nav-link"
+              class="text-surface-variant hover:text-surface-variant hover:text-primary nav-link no-underline"
             >
               {sectionData.id}
             </a>
@@ -40,7 +43,7 @@ const { logo, nav, sections } = siteConfig;
         ) : (
           <a
             href="/"
-            class="flex items-center text-surface-variant hover:text-surface-variant hover:text-primary"
+            class="flex items-center text-surface-variant hover:text-surface-variant hover:text-primary no-underline"
           >
             <span class="material-symbols-outlined icon" aria-hidden="true">
               keyboard_double_arrow_left
@@ -69,26 +72,11 @@ const { logo, nav, sections } = siteConfig;
 </nav>
 
 <style>
-  /* Scoped styles now ONLY handle the fixed, frosted-glass header effect and active state */
-  .navbar {
-    position: fixed;
-    top: 0;
-    z-index: 50;
+  .glass-effect {
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--theme-outline-variant);
     background: color-mix(in srgb, var(--theme-surface) 80%, transparent);
-    width: 100%;
   }
 
-  .navbar-content {
-    height: var(--shell-height-base);
-  }
-
-  .navbar-content a {
-    text-decoration: none;
-  }
-
-  /* Specific component state overrides */
   .nav-link.active {
     border-bottom: 2px solid var(--theme-primary);
     color: var(--theme-primary);
