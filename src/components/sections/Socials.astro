@@ -11,7 +11,7 @@ const { social } = siteConfig.sections;
 ---
 
 <SectionLayout id={social.id} icon="share" title="Social Feed">
-  <div class="grid grid-cols-4" data-columns="4">
+  <div class="grid grid-cols-fluid-md gap-md" data-columns="4">
     {social.items.map((post) => <SocialCard payload={post} />)}
   </div>
 </SectionLayout>

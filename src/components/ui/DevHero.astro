@@ -17,7 +17,7 @@ export interface Props {
 const { title, description, image, linkedinUrl, githubUrl } = Astro.props;
 ---
 
-<header class="grid items-center gap-lg hero-grid">
+<header class="grid grid-cols-fluid-lg items-center gap-lg">
   <div>
     <h1 class="mb-md leading-tight">{title}</h1>
     <p class="mb-lg text-lg text-surface-variant">{description}</p>
