@@ -398,18 +398,6 @@ a.text-primary,
   }
 }
 
-.icon {
-  display: inline-flex;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-  fill: currentColor;
-  width: 1em;
-  height: 1em;
-  color: currentColor;
-  font-size: 1em;
-}
-
 .prose {
   color: var(--theme-on-surface);
   font-size: var(--font-size-base);
