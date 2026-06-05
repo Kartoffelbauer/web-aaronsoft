@@ -3,10 +3,10 @@
  * @fileoverview Global Footer Component.
  * Utilizes mobile-first utility classes to strictly control stacking behavior.
  */
+import { DevLogo } from '@/components/ui/index.astro';
+import LinkButton from '@/components/ui/LinkButton.astro';
 import { siteConfig } from '@/data/config';
 import { getCurrentYear } from '@/utils/dateUtils';
-
-import { DevLogo } from '../ui/index.astro';
 
 const { logo } = siteConfig;
 ---
@@ -26,18 +26,16 @@ const { logo } = siteConfig;
       class="flex items-center justify-center gap-md font-code text-base"
       aria-label="Legal Navigation"
     >
-      <a
-        href="/impress"
-        class="text-surface-variant hover:text-surface-variant hover:text-primary"
-      >
+      <LinkButton href="/impress" variant="link" aria-label="View Imprint">
         Impressum
-      </a>
-      <a
+      </LinkButton>
+      <LinkButton
         href="/privacy"
-        class="text-surface-variant hover:text-surface-variant hover:text-primary"
+        variant="link"
+        aria-label="View Privacy Policy"
       >
         Datenschutz
-      </a>
+      </LinkButton>
     </nav>
   </div>
 

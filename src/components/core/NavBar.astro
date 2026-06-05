@@ -4,6 +4,7 @@
  * Handles routing across the site. Styling relies on global utility classes.
  */
 import { DevLogo } from '@/components/ui/index.astro';
+import LinkButton from '@/components/ui/LinkButton.astro';
 import { siteConfig } from '@/data/config';
 
 export interface Props {
@@ -29,39 +30,40 @@ const { logo, nav, sections } = siteConfig;
       {
         isMainPage ? (
           Object.values(sections).map((sectionData) => (
-            <a
+            <LinkButton
               href={`#${sectionData.id}`}
-              class="text-surface-variant hover:text-surface-variant hover:text-primary nav-link no-underline"
+              variant="text"
+              size="small"
+              class="nav-link"
             >
               {sectionData.id}
-            </a>
+            </LinkButton>
           ))
         ) : (
-          <a
+          <LinkButton
             href="/"
-            class="flex items-center text-surface-variant hover:text-surface-variant hover:text-primary no-underline"
+            variant="text"
+            size="small"
+            icon="keyboard_double_arrow_left"
+            aria-label="Navigate to Home"
           >
-            <span class="material-symbols-outlined" aria-hidden="true">
-              keyboard_double_arrow_left
-            </span>
             HOME
-          </a>
+          </LinkButton>
         )
       }
     </div>
 
     {
       isMainPage && (
-        <a
+        <LinkButton
           href={nav.resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="btn"
-          data-size="sm"
-          data-variant="primary"
+          size="small"
+          aria-label="View Resume"
         >
           Resume
-        </a>
+        </LinkButton>
       )
     }
   </div>

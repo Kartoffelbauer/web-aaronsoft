@@ -1,17 +1,25 @@
 ---
 /**
  * @fileoverview Reusable Developer Hero UI Component.
- * Designed for showcasing developer profiles and projects.
+ * Displays an introductory title, description, call-to-action buttons,
+ * and a profile image in a responsive fluid grid.
  */
 
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
+import LinkButton from './LinkButton.astro';
+
 export interface Props {
+  /** The primary headline for the hero section (e.g., Developer Name or Role). */
   title: string;
+  /** A brief introductory text or bio. */
   description: string;
+  /** Astro image metadata object for the profile picture. */
   image: ImageMetadata;
+  /** Full URL to the developer's LinkedIn profile. */
   linkedinUrl: string;
+  /** Full URL to the developer's GitHub profile. */
   githubUrl: string;
 }
 
@@ -22,28 +30,32 @@ const { title, description, image, linkedinUrl, githubUrl } = Astro.props;
   <div>
     <h1 class="mb-md leading-tight">{title}</h1>
     <p class="mb-lg text-lg text-surface-variant">{description}</p>
+
     <nav class="flex gap-md" aria-label="Primary Actions">
-      <a
+      <LinkButton
         href={linkedinUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="btn"
-        data-variant="primary"
+        variant="primary"
+        size="base"
+        aria-label="View LinkedIn Profile"
       >
         <span class="material-symbols-outlined icon" aria-hidden="true">
           open_in_new
         </span>
         LinkedIn
-      </a>
-      <a
+      </LinkButton>
+
+      <LinkButton
         href={githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="btn"
-        data-variant="outline"
+        variant="outline"
+        size="base"
+        aria-label="View GitHub Profile"
       >
         GitHub
-      </a>
+      </LinkButton>
     </nav>
   </div>
 
@@ -52,7 +64,7 @@ const { title, description, image, linkedinUrl, githubUrl } = Astro.props;
   >
     <Image
       src={image}
-      alt="Protfolio"
+      alt="Portfolio"
       width={360}
       class="w-full max-w-sm aspect-square object-cover rounded-md grayscale transition-filter hover:grayscale-0"
       loading="eager"

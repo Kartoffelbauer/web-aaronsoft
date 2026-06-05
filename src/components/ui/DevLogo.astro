@@ -1,16 +1,27 @@
 ---
 /**
  * @fileoverview Reusable Developer Logo UI Component.
- * Designed for consistent branding across the portfolio.
+ * Serves as the primary brand text/link across the site (e.g., in NavBar/Footer).
+ * Relies entirely on global utility classes for consistent branding.
  */
 
 export interface Props {
+  /** The text to display as the logo (e.g., developer's name or brand name). */
   title: string;
+  /** Optional utility classes to override or extend the default logo styling. */
+  class?: string;
 }
 
-const { title } = Astro.props;
+const { title, class: customClass = '' } = Astro.props;
 ---
 
-<a href="/" class="text-primary font-medium text-xl font-headline no-underline">
+<a
+  href="/"
+  class:list={[
+    'text-primary font-medium text-xl font-headline no-underline',
+    customClass,
+  ]}
+  aria-label="Go to homepage"
+>
   {title}
 </a>

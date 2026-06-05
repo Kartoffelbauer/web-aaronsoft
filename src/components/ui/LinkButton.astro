@@ -1,0 +1,82 @@
+---
+/**
+ * @fileoverview Polymorphic Button Component.
+ * Renders an `<a>` if an `href` is provided, otherwise renders a `<button>`.
+ * Strictly driven by global utility classes to enforce DRY architecture.
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+
+// BEST PRACTICE: Extend BOTH anchor and button attributes safely
+export interface Props extends HTMLAttributes<'a'> {
+  href?: string;
+  /**
+   * primary: Solid background button
+   * outline: Transparent background with border
+   * text: No border, no background, NO underline (plain text)
+   * link: No border, no background, HAS underline (standard web link)
+   */
+  variant?: 'primary' | 'outline' | 'text' | 'link';
+  size?: 'base' | 'small';
+  icon?: string;
+  class?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'base',
+  icon,
+  class: customClass = '',
+  ...rest
+} = Astro.props;
+
+// Determine underlying semantic HTML tag
+
+// 1. Core structural classes shared across all variants
+const baseClasses =
+  'inline-flex justify-center items-center gap-sm transition-all cursor-pointer font-code disabled-state';
+
+// 2. Padding & Border logic
+// Both 'text' and 'link' variants drop the heavy button padding/borders
+const isPlain = variant === 'text' || variant === 'link';
+const structureClasses = isPlain
+  ? ''
+  : size === 'small'
+    ? 'px-md py-sm border rounded-base'
+    : 'px-lg py-md border rounded-base';
+
+// 3. Text sizing logic
+const sizeClasses = size === 'small' ? 'text-sm' : 'text-base';
+
+// 4. Color, background, and interaction maps
+const variantMap = {
+  primary:
+    'bg-primary border-transparent text-on-primary hover:text-on-primary focus-visible:text-on-primary visited:text-on-primary hover:opacity-90 font-medium no-underline',
+  outline:
+    'border-outline text-on-surface hover:border-primary hover:text-primary focus-visible:border-primary font-medium no-underline',
+  text: 'border-transparent text-surface-variant hover:text-primary focus-visible:text-primary visited:text-surface-variant no-underline',
+  link: 'border-transparent text-surface-variant hover:text-primary focus-visible:text-primary visited:text-surface-variant',
+};
+---
+
+<a
+  {href}
+  class:list={[
+    baseClasses,
+    structureClasses,
+    sizeClasses,
+    variantMap[variant],
+    customClass,
+  ]}
+  {...rest}
+>
+  {
+    icon && (
+      <span class="material-symbols-outlined icon" aria-hidden="true">
+        {icon}
+      </span>
+    )
+  }
+  <slot />
+</a>

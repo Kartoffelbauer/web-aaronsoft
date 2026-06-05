@@ -1,11 +1,11 @@
 /**
  * @fileoverview utils.css
  * Core Utility Framework (Tailwind-inspired).
- * Follows strict utility-first architecture and DRY principles.
+ * Follows strict utility-first architecture, DRY principles, and logical taxonomy.
  */
 
 /* ==========================================================================
-   1. BASE (HTML Elements)
+   1. BASE (HTML Element Resets & Defaults)
    ========================================================================== */
 html {
   scroll-behavior: smooth;
@@ -18,12 +18,14 @@ body {
   font-family: var(--font-body);
 }
 
+/* Application shell wrapper */
 main {
   flex-grow: 1;
   padding-top: calc(var(--shell-height-base) + var(--spacing-lg));
   padding-bottom: var(--spacing-lg);
 }
 
+/* Headings */
 h1,
 h2,
 h3,
@@ -56,6 +58,7 @@ h6 {
   font-size: var(--font-size-sm);
 }
 
+/* Links */
 a {
   transition: color 0.2s ease;
   color: var(--theme-primary);
@@ -71,8 +74,9 @@ a:focus-visible {
 }
 
 /* ==========================================================================
-   2. LAYOUT & POSITIONING
+   2. LAYOUT & DISPLAY
    ========================================================================== */
+/* Container */
 .container {
   margin: 0 auto;
   padding-inline: clamp(var(--spacing-md, 1rem), 4vw, var(--spacing-lg, 2rem));
@@ -80,6 +84,24 @@ a:focus-visible {
   max-width: 1100px;
 }
 
+/* Display */
+.hidden {
+  display: none;
+}
+.inline {
+  display: inline;
+}
+.flex {
+  display: flex;
+}
+.inline-flex {
+  display: inline-flex;
+}
+.grid {
+  display: grid;
+}
+
+/* Positioning */
 .fixed {
   position: fixed;
 }
@@ -90,27 +112,10 @@ a:focus-visible {
   z-index: 50;
 }
 
-.hidden {
-  display: none;
-}
-.inline {
-  display: inline;
-}
-
-.object-cover {
-  object-fit: cover;
-}
-.aspect-square {
-  aspect-ratio: 1 / 1;
-}
-
 /* ==========================================================================
    3. FLEXBOX & GRID
    ========================================================================== */
-/* Flex Display & Direction */
-.flex {
-  display: flex;
-}
+/* Flex Direction & Wrap */
 .flex-col {
   flex-direction: column;
 }
@@ -121,7 +126,7 @@ a:focus-visible {
   flex-wrap: wrap;
 }
 
-/* Flex Alignment */
+/* Alignment (Flex & Grid) */
 .items-center {
   align-items: center;
 }
@@ -135,21 +140,18 @@ a:focus-visible {
   justify-content: flex-end;
 }
 
-/* Grid Alignments */
+/* Grid Self-Alignment */
 .justify-self-center {
   justify-self: center;
-}
-.justify-self-end {
-  justify-self: flex-end;
 }
 .justify-self-start {
   justify-self: flex-start;
 }
-
-/* Grid Definition */
-.grid {
-  display: grid;
+.justify-self-end {
+  justify-self: flex-end;
 }
+
+/* Fluid Grid Columns */
 .grid-cols-fluid-sm {
   grid-template-columns: repeat(
     auto-fit,
@@ -170,7 +172,7 @@ a:focus-visible {
 }
 
 /* ==========================================================================
-   4. SPACING (Margins, Padding, Gap)
+   4. SPACING (Gap, Margin, Padding)
    ========================================================================== */
 /* Gaps */
 .gap-sm {
@@ -187,15 +189,6 @@ a:focus-visible {
 }
 
 /* Margins */
-.mb-sm {
-  margin-bottom: var(--spacing-sm);
-}
-.mb-md {
-  margin-bottom: var(--spacing-md);
-}
-.mb-lg {
-  margin-bottom: var(--spacing-lg);
-}
 .mt-sm {
   margin-top: var(--spacing-sm);
 }
@@ -205,8 +198,17 @@ a:focus-visible {
 .mt-lg {
   margin-top: var(--spacing-lg);
 }
+.mb-sm {
+  margin-bottom: var(--spacing-sm);
+}
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
 
-/* Padding */
+/* Padding (All sides -> Axes -> Individual sides) */
 .p-sm {
   padding: var(--spacing-sm);
 }
@@ -216,6 +218,19 @@ a:focus-visible {
 .p-lg {
   padding: var(--spacing-lg);
 }
+
+.px-md {
+  padding-right: var(--spacing-md);
+  padding-left: var(--spacing-md);
+}
+.px-lg {
+  padding-right: var(--spacing-lg);
+  padding-left: var(--spacing-lg);
+}
+.py-sm {
+  padding-top: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+}
 .py-md {
   padding-top: var(--spacing-md);
   padding-bottom: var(--spacing-md);
@@ -224,25 +239,26 @@ a:focus-visible {
   padding-top: var(--spacing-lg);
   padding-bottom: var(--spacing-lg);
 }
+
 .pt-md {
   padding-top: var(--spacing-md);
 }
 
-/* Pseudo-classes */
+/* Structural Pseudo-classes */
 .first-of-type\:mb-md:first-of-type {
   margin-bottom: var(--spacing-md);
 }
 
 /* ==========================================================================
-   5. SIZING (Width, Height, Grow)
+   5. SIZING & MEDIA
    ========================================================================== */
+/* Width & Height */
 .w-full {
   width: 100%;
 }
 .max-w-sm {
   max-width: 360px;
 }
-
 .min-h-screen {
   min-height: 100dvh;
 }
@@ -252,23 +268,33 @@ a:focus-visible {
 .h-shell-md {
   height: var(--shell-height-md);
 }
-
 .grow {
   flex-grow: 1;
+}
+
+/* Media / Ratios */
+.object-cover {
+  object-fit: cover;
+}
+.aspect-square {
+  aspect-ratio: 1 / 1;
 }
 
 /* ==========================================================================
    6. TYPOGRAPHY
    ========================================================================== */
-/* Font Family */
+/* Families & Weights */
 .font-code {
   font-family: var(--font-code);
 }
 .font-headline {
   font-family: var(--font-headline);
 }
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
 
-/* Font Size & Weight */
+/* Sizes */
 .text-sm {
   font-size: var(--font-size-sm);
 }
@@ -281,11 +307,8 @@ a:focus-visible {
 .text-xl {
   font-size: var(--font-size-xl);
 }
-.font-medium {
-  font-weight: var(--font-weight-medium);
-}
 
-/* Alignment & Spacing */
+/* Alignment & Formatting */
 .text-justify {
   text-align: justify;
 }
@@ -299,23 +322,46 @@ a:focus-visible {
   text-decoration: none;
 }
 
-/* Colors (Using high specificity to safely override generic link colors) */
+/* Semantic Text Colors (Includes states for robust link overriding) */
 .text-surface-variant,
 a.text-surface-variant,
-.hover\:text-surface-variant:visited {
+.hover\:text-surface-variant:hover,
+.hover\:text-surface-variant:visited,
+.focus-visible\:text-surface-variant:focus-visible {
   color: var(--theme-on-surface-variant);
 }
 
 .text-primary,
 a.text-primary,
-.hover\:text-primary:hover {
+.hover\:text-primary:hover,
+.visited\:text-primary:visited,
+.focus-visible\:text-primary:focus-visible {
   color: var(--theme-primary);
 }
 
+.text-on-primary,
+a.text-on-primary,
+.hover\:text-on-primary:hover,
+.visited\:text-on-primary:visited,
+.focus-visible\:text-on-primary:focus-visible {
+  color: var(--theme-on-primary);
+}
+
+.text-on-surface,
+a.text-on-surface,
+.hover\:text-on-surface:hover,
+.visited\:text-on-surface:visited,
+.focus-visible\:text-on-surface:focus-visible {
+  color: var(--theme-on-surface);
+}
+
 /* ==========================================================================
-   7. VISUALS (Backgrounds, Borders, Effects)
+   7. BACKGROUNDS & BORDERS
    ========================================================================== */
-/* Backgrounds */
+/* Background Colors */
+.bg-primary {
+  background-color: var(--theme-primary);
+}
 .bg-surface-container {
   background-color: var(--theme-surface-container);
 }
@@ -323,7 +369,7 @@ a.text-primary,
   background-color: var(--theme-surface-container-lowest);
 }
 
-/* Borders & Radius */
+/* Border Structures */
 .border {
   border: 1px solid transparent;
 }
@@ -333,6 +379,17 @@ a.text-primary,
 .border-t {
   border-top: 1px solid transparent;
 }
+.first-of-type\:border-none:first-of-type {
+  border-top: none;
+}
+
+/* Border Colors */
+.border-transparent {
+  border-color: transparent;
+}
+.border-outline {
+  border-color: var(--theme-outline);
+}
 .border-outline-variant {
   border-color: var(--theme-outline-variant);
 }
@@ -340,11 +397,38 @@ a.text-primary,
   border-color: var(--theme-divider);
 }
 
-.first-of-type\:border-none:first-of-type {
-  border-top: none;
+/* Border Color Hover States */
+.hover\:border-primary:hover,
+.hover\:border-primary:focus-visible,
+.focus-visible\:border-primary:focus-visible {
+  border-color: var(--theme-primary);
+}
+
+/* Border Radius */
+.rounded-base {
+  border-radius: var(--border-radius-base);
 }
 .rounded-md {
   border-radius: var(--border-radius-md);
+}
+
+/* ==========================================================================
+   8. INTERACTIVITY & EFFECTS
+   ========================================================================== */
+/* Cursors & Interactions */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Transitions & Opacity */
+.transition-all {
+  transition: all 0.2s ease;
+}
+.transition-filter {
+  transition: filter 0.5s ease;
+}
+.hover\:opacity-90:hover {
+  opacity: 0.9;
 }
 
 /* Filters */
@@ -354,50 +438,14 @@ a.text-primary,
 .hover\:grayscale-0:hover {
   filter: grayscale(0%);
 }
-.transition-filter {
-  transition: filter 0.5s ease;
-}
 
 /* ==========================================================================
-   8. COMPONENTS
+   9. COMPONENTS
    ========================================================================== */
-.btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--spacing-sm);
-  transition: all 0.2s ease;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: var(--border-radius-base);
-  padding: var(--spacing-md) var(--spacing-lg);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-base);
-  font-family: var(--font-code);
-  text-decoration: none;
-}
-.btn[data-size='sm'] {
-  padding: var(--spacing-sm) var(--spacing-md);
-  font-size: var(--font-size-sm);
-}
-.btn[data-variant='primary'] {
-  background: var(--theme-primary);
-  color: var(--theme-on-primary);
-}
-.btn[data-variant='primary']:hover {
-  opacity: 0.9;
-}
-.btn[data-variant='outline'] {
-  border-color: var(--theme-outline);
-  color: var(--theme-on-surface);
-
-  &:hover,
-  &:focus-visible {
-    border-color: var(--theme-primary);
-    color: var(--theme-primary);
-  }
-}
-
+/**
+ * Prose Component
+ * Standard wrapper for rich text formatting (markdown, legal pages, etc.)
+ */
 .prose {
   color: var(--theme-on-surface);
   font-size: var(--font-size-base);
@@ -422,7 +470,7 @@ a.text-primary,
 }
 
 /* ==========================================================================
-   9. RESPONSIVE MODIFIERS
+   10. RESPONSIVE MODIFIERS
    ========================================================================== */
 @media (min-width: 768px) {
   .md\:flex {
