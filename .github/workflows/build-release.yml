@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-push-image
     permissions:
-      contents: write # Needed to create the GitHub Release
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -94,8 +94,6 @@ jobs:
 
       - name: Package 'dist' directory
         run: |
-          # 3. FIX: We zip the compiled 'dist' folder, NOT the Astro source code
-          # This ensures users downloading the zip just get pure HTML/CSS
           cd dist
           zip -r ../website-compiled.zip .
 
