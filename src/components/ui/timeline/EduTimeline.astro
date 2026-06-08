@@ -6,7 +6,7 @@
 
 import type { EducationItem } from '@/types/index.ts';
 
-import AcademicTimelineItem from './AcademicTimelineItem.astro';
+import EduTimelineItem from './EduTimelineItem.astro';
 
 export interface Props {
   items: EducationItem[];
@@ -16,29 +16,29 @@ const { items } = Astro.props;
 ---
 
 <div class="timeline">
-  {items.map((item) => <AcademicTimelineItem item={item} />)}
+  {items.map((item) => <EduTimelineItem item={item} />)}
 </div>
 
 <style>
   .timeline {
-    position: relative;
     display: flex;
+    position: relative;
     flex-direction: column;
     gap: var(--spacing-lg);
   }
 
   /* The vertical connecting line */
   .timeline::before {
-    content: '';
     position: absolute;
-    left: 11px;
     top: 0;
     bottom: 0;
-    width: 2px;
+    left: 11px;
     background: color-mix(
       in srgb,
       var(--theme-outline-variant) 30%,
       transparent
     );
+    width: 2px;
+    content: '';
   }
 </style>

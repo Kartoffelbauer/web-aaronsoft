@@ -1,6 +1,6 @@
 ---
 /**
- * @fileoverview Individual academic timeline item.
+ * @fileoverview Individual education timeline item.
  * Renders server-side first, then utilizes a custom web component for client-side date hydration.
  */
 
@@ -20,7 +20,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 );
 ---
 
-<academic-tracker
+<education-tracker
   class="timeline-item"
   data-start={item.startDate}
   data-end={item.endDate}
@@ -44,16 +44,16 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
     <p class="timeline-date">{durationText}</p>
     <p class="timeline-desc">{item.description}</p>
   </div>
-</academic-tracker>
+</education-tracker>
 
 <script>
   import { getAcademicStatus } from '@/utils/dateUtils';
 
   /**
-   * Custom element to hydrate academic timeline dates safely on the client.
+   * Custom element to hydrate education timeline dates safely on the client.
    * Ensures 'isActive' states reflect the user's actual local time.
    */
-  class AcademicTracker extends HTMLElement {
+  class EducationTracker extends HTMLElement {
     connectedCallback() {
       const start = this.dataset.start;
       const end = this.dataset.end;
@@ -83,7 +83,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 
   // Prevent HMR (Hot Module Replacement) crashes in dev mode
   if (!customElements.get('academic-tracker')) {
-    customElements.define('academic-tracker', AcademicTracker);
+    customElements.define('academic-tracker', EducationTracker);
   }
 </script>
 
@@ -98,24 +98,24 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
   }
 
   .timeline-dot {
+    display: flex;
     position: absolute;
-    left: 0;
     top: 8px;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid var(--theme-background);
+    border-radius: 50%;
     width: 24px;
     height: 24px;
-    border-radius: 50%;
-    border: 4px solid var(--theme-background);
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .timeline-dot::after {
-    content: '';
-    width: 6px;
-    height: 6px;
     border-radius: 50%;
     background: var(--theme-background);
+    width: 6px;
+    height: 6px;
+    content: '';
   }
 
   .timeline-dot.active {
@@ -134,36 +134,36 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
   }
 
   .timeline-badge {
-    font-family: var(--font-code);
-    font-size: var(--font-size-sm);
-    padding: var(--spacing-sm) var(--spacing-sm);
     border-radius: var(--border-radius-base);
+    padding: var(--spacing-sm) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-code);
   }
 
   .badge-active {
-    color: var(--theme-primary);
     background: color-mix(in srgb, var(--theme-primary) 10%, transparent);
+    color: var(--theme-primary);
   }
 
   .badge-inactive {
-    color: var(--theme-outline);
     background: var(--theme-surface-variant);
+    color: var(--theme-outline);
   }
 
   .timeline-inst {
-    font-weight: var(--font-weight-medium);
     color: var(--theme-on-surface-variant);
+    font-weight: var(--font-weight-medium);
   }
 
   .timeline-date {
-    font-family: var(--font-code);
-    font-size: var(--font-size-sm);
     color: var(--theme-outline);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-code);
   }
 
   .timeline-desc {
-    color: var(--theme-on-surface-variant);
     margin-top: var(--spacing-sm);
     max-width: 600px;
+    color: var(--theme-on-surface-variant);
   }
 </style>

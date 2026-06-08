@@ -4,7 +4,7 @@
  * and wrapping the timeline in the standard SectionLayout.
  */
 
-import { AcademicTimeline } from '@/components/ui/index.astro';
+import { EduTimeline } from '@/components/ui/index.astro';
 import { siteConfig } from '@/data/config';
 import SectionLayout from '@/layouts/SectionLayout.astro';
 
@@ -12,5 +12,5 @@ const { education } = siteConfig.sections;
 ---
 
 <SectionLayout id={education.id} icon="school" title="Academic Journey">
-  <AcademicTimeline items={education.items} />
+  <EduTimeline items={education.items} />
 </SectionLayout>
