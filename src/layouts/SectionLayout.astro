@@ -6,21 +6,15 @@
 
 interface Props {
   id: string;
-  icon?: string;
-  title?: string;
+  icon: string;
+  title: string;
   class?: string;
 }
 
 const { id, icon, title, class: className = '' } = Astro.props;
 ---
 
-<section
-  {id}
-  class:list={[
-    'pt-md border-t border-divider first-of-type:border-none first-of-type:mb-md',
-    className,
-  ]}
->
+<section {id} class:list={['pt-md border-t border-divider', className]}>
   {
     title && (
       <header class="flex items-center gap-sm mb-lg">

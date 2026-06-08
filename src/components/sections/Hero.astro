@@ -3,20 +3,62 @@
  * @fileoverview Page `Hero` section. Displays the primary hero banner
  * including avatar, headline and primary call-to-action.
  */
+import { Image } from 'astro:assets';
+
 import profilePic from '@/assets/img/profile.jpg';
-import DevHero from '@/components/ui/DevHero.astro';
+import LinkButton from '@/components/ui/LinkButton.astro';
 import { siteConfig } from '@/data/config';
-import SectionLayout from '@/layouts/SectionLayout.astro';
 
 const { hero } = siteConfig.sections;
 ---
 
-<SectionLayout id={hero.id}>
-  <DevHero
-    title={hero.title}
-    description={hero.description}
-    image={profilePic}
-    linkedinUrl={hero.linkedinUrl}
-    githubUrl={hero.githubUrl}
-  />
-</SectionLayout>
+<header id={hero.id} class="grid grid-cols-fluid-lg items-center gap-lg my-md">
+  <header
+    id={hero.id}
+    class="grid grid-cols-fluid-lg items-center gap-lg mb-md"
+  >
+    <div>
+      <h1 class="mb-md leading-tight">{hero.title}</h1>
+      <p class="mb-lg text-lg text-surface-variant">{hero.description}</p>
+
+      <nav class="flex gap-md" aria-label="Hero Actions">
+        <LinkButton
+          href={hero.linkedinUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="primary"
+          size="base"
+          aria-label="View LinkedIn Profile"
+        >
+          <span class="material-symbols-outlined icon" aria-hidden="true">
+            open_in_new
+          </span>
+          LinkedIn
+        </LinkButton>
+
+        <LinkButton
+          href={hero.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="outline"
+          size="base"
+          aria-label="View GitHub Profile"
+        >
+          GitHub
+        </LinkButton>
+      </nav>
+    </div>
+
+    <div
+      class="border border-outline-variant rounded-md bg-surface-container p-sm justify-self-center lg:justify-self-end"
+    >
+      <Image
+        src={profilePic}
+        alt="Developer profile picture"
+        width={360}
+        class="w-full max-w-sm aspect-square object-cover rounded-md grayscale transition-filter hover:grayscale-0"
+        loading="eager"
+      />
+    </div>
+  </header>
+</header>

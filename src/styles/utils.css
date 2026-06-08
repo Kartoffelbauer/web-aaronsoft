@@ -207,6 +207,10 @@ a:focus-visible {
 .mb-lg {
   margin-bottom: var(--spacing-lg);
 }
+.my-md {
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
 
 /* Padding (All sides -> Axes -> Individual sides) */
 .p-sm {
