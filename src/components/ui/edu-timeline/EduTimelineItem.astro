@@ -20,7 +20,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 );
 ---
 
-<education-tracker
+<edu-tracker
   class="timeline-item"
   data-start={item.startDate}
   data-end={item.endDate}
@@ -44,7 +44,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
     <p class="timeline-date">{durationText}</p>
     <p class="timeline-desc">{item.description}</p>
   </div>
-</education-tracker>
+</edu-tracker>
 
 <script>
   import { getAcademicStatus } from '@/utils/dateUtils';
@@ -82,13 +82,13 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
   }
 
   // Prevent HMR (Hot Module Replacement) crashes in dev mode
-  if (!customElements.get('academic-tracker')) {
-    customElements.define('academic-tracker', EducationTracker);
+  if (!customElements.get('edu-tracker')) {
+    customElements.define('edu-tracker', EducationTracker);
   }
 </script>
 
 <style>
-  academic-tracker {
+  edu-tracker {
     display: block;
   }
 

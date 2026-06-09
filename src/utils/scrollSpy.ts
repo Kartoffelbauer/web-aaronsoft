@@ -4,14 +4,16 @@
  * 100% accuracy during extremely fast scroll events.
  */
 
+import { getCssVariableInPixels } from '@/utils/domUtils';
+
 /**
  * Initializes the ScrollSpy mechanism to update active navigation links.
- * * @param navbarOffset - The offset in pixels to account for fixed headers and visual breathing room. Defaults to 128.
+ * @param additionalOffset - Extra breathing room (in pixels) added below the navbar line. Defaults to 32.
  */
-export function initScrollSpy(navbarOffset: number = 128): void {
-  // 1. Select DOM elements
+export function initScrollSpy(additionalOffset: number = 32): void {
+  // 1. Select DOM elements (Targeting both introductory header and standard sections)
   const sections = Array.from(
-    document.querySelectorAll<HTMLElement>('section[id]')
+    document.querySelectorAll<HTMLElement>('header[id], section[id]')
   );
   const navLinks = Array.from(
     document.querySelectorAll<HTMLAnchorElement>('.nav-link')
@@ -28,8 +30,18 @@ export function initScrollSpy(navbarOffset: number = 128): void {
     }
   });
 
-  // 3. State management for the rAF loop
+  // 3. State management
   let isTicking = false;
+  let dynamicOffset = 0;
+
+  /**
+   * Caches the navbar offset so we don't trigger layout thrashing
+   * by calling getComputedStyle during high-frequency scroll events.
+   */
+  const calculateOffset = () => {
+    dynamicOffset =
+      getCssVariableInPixels('--shell-height-md') + additionalOffset;
+  };
 
   /**
    * The core calculation logic.
@@ -38,36 +50,32 @@ export function initScrollSpy(navbarOffset: number = 128): void {
   const updateActiveSection = () => {
     let currentActiveId = '';
 
-    // Loop through sections to find which one is currently at the top
+    // Loop through sections sequentially
     for (const section of sections) {
-      // getBoundingClientRect().top is the distance from the top of the viewport
       const rect = section.getBoundingClientRect();
 
       // If the top of the section is at or above our dynamic navbar line...
-      if (rect.top <= navbarOffset) {
+      if (rect.top <= dynamicOffset) {
         currentActiveId = section.id;
       } else {
-        // Because DOM sections are sequential, the moment we hit a section
-        // that is BELOW the navbar line, we know the PREVIOUS section is the active one.
-        // We can break the loop early for maximum performance.
+        // Because DOM sections are ordered, hitting a section below the line
+        // guarantees the previous section is active. Break early for O(1) optimization.
         break;
       }
     }
 
-    // Edge case: If the user scrolls to the absolute bottom of the document,
-    // force the last section to be active, even if it hasn't reached the navbar line.
-    // 1. Use Math.ceil to safely handle fractional pixel scrolling
+    // Edge case: Force the last section to be active if scrolled to the absolute bottom
     const scrollPosition = Math.ceil(window.innerHeight + window.scrollY);
-    // 2. Use documentElement.scrollHeight for the true scrollable height of the page
     const documentHeight = document.documentElement.scrollHeight;
-    // 3. Check if at bottom AND ensure the page is actually tall enough to be scrollable
+
     const isAtBottom =
       scrollPosition >= documentHeight && documentHeight > window.innerHeight;
+
     if (isAtBottom && sections.length > 0) {
       currentActiveId = sections[sections.length - 1].id;
     }
 
-    // Update the DOM classes (O(1) lookup)
+    // Update the DOM classes via O(1) map lookup
     navLinks.forEach((link) => link.classList.remove('active'));
     if (currentActiveId) {
       const activeLink = linkMap.get(currentActiveId);
@@ -80,7 +88,6 @@ export function initScrollSpy(navbarOffset: number = 128): void {
 
   /**
    * Throttled scroll handler.
-   * Ensures our heavy calculation only runs once per screen refresh (typically 60fps).
    */
   const onScroll = () => {
     if (!isTicking) {
@@ -89,9 +96,15 @@ export function initScrollSpy(navbarOffset: number = 128): void {
     }
   };
 
-  // 4. Attach listener using `{ passive: true }` so scrolling isn't blocked by JS
+  // 4. Initialize layout calculations
+  calculateOffset();
+
+  // 5. Attach listeners
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // 5. Trigger immediately to set the initial active state on page load
+  // Re-calculate the layout offset if the user resizes their browser or rotates their device
+  window.addEventListener('resize', calculateOffset, { passive: true });
+
+  // 6. Trigger immediately to establish the initial active state on page load
   updateActiveSection();
 }

@@ -248,11 +248,6 @@ a:focus-visible {
   padding-top: var(--spacing-md);
 }
 
-/* Structural Pseudo-classes */
-.first-of-type\:mb-md:first-of-type {
-  margin-bottom: var(--spacing-md);
-}
-
 /* ==========================================================================
    5. SIZING & MEDIA
    ========================================================================== */
@@ -480,9 +475,6 @@ a.text-on-surface,
   .md\:flex {
     display: flex;
   }
-  .md\:flex-row {
-    flex-direction: row;
-  }
   .md\:justify-between {
     justify-content: space-between;
   }
@@ -500,6 +492,9 @@ a.text-on-surface,
   }
   .lg\:justify-self-end {
     justify-self: flex-end;
+  }
+  .lg\:flex-row {
+    flex-direction: row;
   }
   .lg\:gap-md {
     gap: var(--spacing-md);
