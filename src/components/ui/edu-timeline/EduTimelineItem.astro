@@ -1,19 +1,28 @@
 ---
 /**
- * @fileoverview Individual education timeline item.
- * Renders server-side first, then utilizes a custom web component for client-side date hydration.
+ * @fileoverview Individual Education Timeline Item
+ * Generates a timeline entry with server-side initial status evaluation,
+ * followed by strict client-side hydration via a custom web component.
  */
 
-import type { EducationItem } from '@/types/index';
 import { getAcademicStatus } from '@/utils/dateUtils';
+
+/**
+ * Interface duplicated locally to maintain strict component independence.
+ */
+export interface EducationItem {
+  startDate: string;
+  endDate: string;
+  degree: string;
+  institution: string;
+  description: string;
+}
 
 export interface Props {
   item: EducationItem;
 }
 
 const { item } = Astro.props;
-
-// Calculate initial state server-side to prevent layout shifts before JS loads
 const { durationText, statusLabel, isActive } = getAcademicStatus(
   item.startDate,
   item.endDate
@@ -21,28 +30,36 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 ---
 
 <edu-tracker
-  class="timeline-item"
+  class="relative block pl-lg"
   data-start={item.startDate}
   data-end={item.endDate}
 >
-  <div class:list={['timeline-dot', isActive ? 'active' : 'inactive']}></div>
+  <div
+    class:list={[
+      'timeline-dot absolute left-0 flex items-center justify-center rounded-full',
+      isActive ? 'active' : 'inactive',
+    ]}
+  >
+  </div>
 
   <div class="timeline-content">
-    <div class="timeline-header">
-      <h3 class:list="h3">{item.degree}</h3>
+    <header class="flex justify-between items-start mb-sm gap-sm">
+      <h3>{item.degree}</h3>
       <span
         class:list={[
-          'timeline-badge',
-          isActive ? 'badge-active' : 'badge-inactive',
+          'timeline-badge rounded-base p-sm text-sm font-code',
+          isActive ? 'badge-active' : 'bg-surface-variant text-outline',
         ]}
       >
         {statusLabel}
       </span>
-    </div>
+    </header>
 
-    <p class="timeline-inst">{item.institution}</p>
-    <p class="timeline-date">{durationText}</p>
-    <p class="timeline-desc">{item.description}</p>
+    <p class="text-surface-variant font-medium m-0">{item.institution}</p>
+    <p class="timeline-date-text text-outline text-sm font-code m-0">
+      {durationText}
+    </p>
+    <p class="text-surface-variant mt-sm max-w-md m-0">{item.description}</p>
   </div>
 </edu-tracker>
 
@@ -50,8 +67,9 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
   import { getAcademicStatus } from '@/utils/dateUtils';
 
   /**
-   * Custom element to hydrate education timeline dates safely on the client.
-   * Ensures 'isActive' states reflect the user's actual local time.
+   * EducationTracker Web Component
+   * Safely re-evaluates and hydrates the user's local date/time state
+   * on the client, updating the DOM efficiently using clean private methods.
    */
   class EducationTracker extends HTMLElement {
     connectedCallback() {
@@ -65,47 +83,50 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
         end
       );
 
-      // Scoped DOM updates limit reflows and prevent cross-component interference
+      this.#updateTimelineDot(isActive);
+      this.#updateBadge(statusLabel, isActive);
+      this.#updateDateText(durationText);
+    }
+
+    #updateTimelineDot(isActive: boolean) {
       const dot = this.querySelector('.timeline-dot');
-      if (dot)
-        dot.className = `timeline-dot ${isActive ? 'active' : 'inactive'}`;
+      if (!dot) return;
 
+      dot.classList.toggle('active', isActive);
+      dot.classList.toggle('inactive', !isActive);
+    }
+
+    #updateBadge(statusLabel: string, isActive: boolean) {
       const badge = this.querySelector('.timeline-badge');
-      if (badge) {
-        badge.className = `timeline-badge ${isActive ? 'badge-active' : 'badge-inactive'}`;
-        badge.textContent = statusLabel;
-      }
+      if (!badge) return;
 
-      const dateEl = this.querySelector('.timeline-date');
+      badge.textContent = statusLabel;
+
+      if (isActive) {
+        badge.classList.add('badge-active');
+        badge.classList.remove('bg-surface-variant', 'text-outline');
+      } else {
+        badge.classList.remove('badge-active');
+        badge.classList.add('bg-surface-variant', 'text-outline');
+      }
+    }
+
+    #updateDateText(durationText: string) {
+      const dateEl = this.querySelector('.timeline-date-text');
       if (dateEl) dateEl.textContent = durationText;
     }
   }
 
-  // Prevent HMR (Hot Module Replacement) crashes in dev mode
+  // Prevent duplicate registrations during Hot Module Replacement (HMR)
   if (!customElements.get('edu-tracker')) {
     customElements.define('edu-tracker', EducationTracker);
   }
 </script>
 
 <style>
-  edu-tracker {
-    display: block;
-  }
-
-  .timeline-item {
-    position: relative;
-    padding-left: var(--spacing-lg);
-  }
-
   .timeline-dot {
-    display: flex;
-    position: absolute;
     top: 8px;
-    left: 0;
-    justify-content: center;
-    align-items: center;
     border: 4px solid var(--theme-background);
-    border-radius: 50%;
     width: 24px;
     height: 24px;
   }
@@ -126,44 +147,8 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
     background: var(--theme-outline);
   }
 
-  .timeline-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .timeline-badge {
-    border-radius: var(--border-radius-base);
-    padding: var(--spacing-sm) var(--spacing-sm);
-    font-size: var(--font-size-sm);
-    font-family: var(--font-code);
-  }
-
   .badge-active {
     background: color-mix(in srgb, var(--theme-primary) 10%, transparent);
     color: var(--theme-primary);
-  }
-
-  .badge-inactive {
-    background: var(--theme-surface-variant);
-    color: var(--theme-outline);
-  }
-
-  .timeline-inst {
-    color: var(--theme-on-surface-variant);
-    font-weight: var(--font-weight-medium);
-  }
-
-  .timeline-date {
-    color: var(--theme-outline);
-    font-size: var(--font-size-sm);
-    font-family: var(--font-code);
-  }
-
-  .timeline-desc {
-    margin-top: var(--spacing-sm);
-    max-width: 600px;
-    color: var(--theme-on-surface-variant);
   }
 </style>

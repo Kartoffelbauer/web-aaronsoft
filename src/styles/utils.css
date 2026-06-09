@@ -85,6 +85,9 @@ a:focus-visible {
 }
 
 /* Display */
+.block {
+  display: block;
+}
 .hidden {
   display: none;
 }
@@ -102,11 +105,26 @@ a:focus-visible {
 }
 
 /* Positioning */
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
 .sticky {
   position: sticky;
 }
 .top-0 {
   top: 0;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.left-0 {
+  left: 0;
+}
+.right-0 {
+  right: 0;
 }
 .z-50 {
   z-index: 50;
@@ -127,6 +145,9 @@ a:focus-visible {
 }
 
 /* Alignment (Flex & Grid) */
+.items-start {
+  align-items: flex-start;
+}
 .items-center {
   align-items: center;
 }
@@ -189,6 +210,9 @@ a:focus-visible {
 }
 
 /* Margins */
+.m-0 {
+  margin: 0;
+}
 .mt-sm {
   margin-top: var(--spacing-sm);
 }
@@ -212,7 +236,7 @@ a:focus-visible {
   margin-bottom: var(--spacing-md);
 }
 
-/* Padding (All sides -> Axes -> Individual sides) */
+/* Padding */
 .p-sm {
   padding: var(--spacing-sm);
 }
@@ -247,6 +271,9 @@ a:focus-visible {
 .pt-md {
   padding-top: var(--spacing-md);
 }
+.pl-lg {
+  padding-left: var(--spacing-lg);
+}
 
 /* ==========================================================================
    5. SIZING & MEDIA
@@ -257,6 +284,9 @@ a:focus-visible {
 }
 .max-w-sm {
   max-width: 360px;
+}
+.max-w-md {
+  max-width: 600px;
 }
 .min-h-screen {
   min-height: 100dvh;
@@ -321,7 +351,7 @@ a:focus-visible {
   text-decoration: none;
 }
 
-/* Semantic Text Colors (Includes states for robust link overriding) */
+/* Semantic Text Colors */
 .text-surface-variant,
 a.text-surface-variant,
 .hover\:text-surface-variant:hover,
@@ -354,6 +384,10 @@ a.text-on-surface,
   color: var(--theme-on-surface);
 }
 
+.text-outline {
+  color: var(--theme-outline);
+}
+
 /* ==========================================================================
    7. BACKGROUNDS & BORDERS
    ========================================================================== */
@@ -366,6 +400,12 @@ a.text-on-surface,
 }
 .bg-surface-lowest {
   background-color: var(--theme-surface-container-lowest);
+}
+.bg-surface-variant {
+  background-color: var(--theme-surface-variant);
+}
+.bg-background {
+  background-color: var(--theme-background);
 }
 
 /* Border Structures */
@@ -410,6 +450,9 @@ a.text-on-surface,
 .rounded-md {
   border-radius: var(--border-radius-md);
 }
+.rounded-full {
+  border-radius: 9999px;
+}
 
 /* ==========================================================================
    8. INTERACTIVITY & EFFECTS
@@ -441,10 +484,6 @@ a.text-on-surface,
 /* ==========================================================================
    9. COMPONENTS
    ========================================================================== */
-/**
- * Prose Component
- * Standard wrapper for rich text formatting (markdown, legal pages, etc.)
- */
 .prose {
   color: var(--theme-on-surface);
   font-size: var(--font-size-base);
@@ -492,9 +531,6 @@ a.text-on-surface,
   }
   .lg\:justify-self-end {
     justify-self: flex-end;
-  }
-  .lg\:flex-row {
-    flex-direction: row;
   }
   .lg\:gap-md {
     gap: var(--spacing-md);
