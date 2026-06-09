@@ -21,7 +21,7 @@ body {
 /* Application shell wrapper */
 main {
   flex-grow: 1;
-  padding-top: calc(var(--shell-height-base) + var(--spacing-lg));
+  padding-top: var(--spacing-lg);
   padding-bottom: var(--spacing-lg);
 }
 
@@ -102,8 +102,8 @@ a:focus-visible {
 }
 
 /* Positioning */
-.fixed {
-  position: fixed;
+.sticky {
+  position: sticky;
 }
 .top-0 {
   top: 0;

@@ -3,6 +3,7 @@
  * @fileoverview Global Footer Component.
  * Utilizes mobile-first utility classes to strictly control stacking behavior.
  */
+
 import { Logo } from '@/components/ui/index.astro';
 import LinkButton from '@/components/ui/LinkButton.astro';
 import { siteConfig } from '@/data/config';
@@ -13,7 +14,7 @@ const { logo } = siteConfig;
 
 <footer class="border-t border-outline-variant bg-surface-lowest">
   <div
-    class="container flex flex-col items-center justify-center gap-sm py-md lg:flex-row md:justify-between"
+    class="container flex flex-col items-center justify-center gap-sm py-sm lg:flex-row md:justify-between"
   >
     <Logo title={logo} />
 
@@ -29,6 +30,7 @@ const { logo } = siteConfig;
       <LinkButton href="/impress" variant="link" aria-label="View Imprint">
         Impressum
       </LinkButton>
+
       <LinkButton
         href="/privacy"
         variant="link"
@@ -38,16 +40,16 @@ const { logo } = siteConfig;
       </LinkButton>
     </nav>
   </div>
-
-  <script>
-    import { getCurrentYear } from '@/utils/dateUtils';
-
-    class CurrentYear extends HTMLElement {
-      connectedCallback() {
-        this.textContent = getCurrentYear();
-      }
-    }
-
-    customElements.define('current-year', CurrentYear);
-  </script>
 </footer>
+
+<script>
+  import { getCurrentYear } from '@/utils/dateUtils';
+
+  class CurrentYear extends HTMLElement {
+    connectedCallback() {
+      this.textContent = getCurrentYear();
+    }
+  }
+
+  customElements.define('current-year', CurrentYear);
+</script>

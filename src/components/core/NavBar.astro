@@ -15,9 +15,7 @@ const { isMainPage = true } = Astro.props;
 const { logo, nav, sections } = siteConfig;
 ---
 
-<nav
-  class="fixed top-0 z-50 w-full border-b border-outline-variant glass-effect"
->
+<nav class="sticky top-0 z-50 border-b border-outline-variant glass-effect">
   <div class="container flex items-center justify-between gap-md h-shell">
     <Logo title={logo} />
 
