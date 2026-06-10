@@ -291,11 +291,8 @@ a:focus-visible {
 .min-h-screen {
   min-height: 100dvh;
 }
-.h-shell {
-  height: var(--shell-height-base);
-}
-.h-shell-md {
-  height: var(--shell-height-md);
+.h-nav {
+  height: var(--nav-height-base);
 }
 .grow {
   flex-grow: 1;

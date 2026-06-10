@@ -58,9 +58,8 @@
   --font-size-xl: 2rem;
   --font-size-xxl: 3rem;
 
-  /* Shell */
-  --shell-height-base: 64px;
-  --shell-height-md: 128px;
+  /* Navigation */
+  --nav-height-base: 64px;
 
   /* Grid & Layout Thresholds */
   --grid-fluid-sm: 200px;
