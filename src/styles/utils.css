@@ -404,6 +404,9 @@ a.text-on-surface,
 .bg-background {
   background-color: var(--theme-background);
 }
+.bg-outline {
+  background-color: var(--theme-outline);
+}
 
 /* Border Structures */
 .border {

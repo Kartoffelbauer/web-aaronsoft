@@ -1,15 +1,11 @@
 ---
 /**
  * @fileoverview Individual Education Timeline Item
- * Generates a timeline entry with server-side initial status evaluation,
- * followed by strict client-side hydration via a custom web component.
+ * Handles individual item structure, localized semantic styling, and hydration logic.
  */
 
 import { getAcademicStatus } from '@/utils/dateUtils';
 
-/**
- * Interface duplicated locally to maintain strict component independence.
- */
 export interface EducationItem {
   startDate: string;
   endDate: string;
@@ -34,13 +30,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
   data-start={item.startDate}
   data-end={item.endDate}
 >
-  <div
-    class:list={[
-      'timeline-dot absolute left-0 flex items-center justify-center rounded-full',
-      isActive ? 'active' : 'inactive',
-    ]}
-  >
-  </div>
+  <div class:list={['timeline-dot', isActive ? 'active' : 'inactive']}></div>
 
   <div class="timeline-content">
     <header class="flex justify-between items-start mb-sm gap-sm">
@@ -68,8 +58,7 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 
   /**
    * EducationTracker Web Component
-   * Safely re-evaluates and hydrates the user's local date/time state
-   * on the client, updating the DOM efficiently using clean private methods.
+   * Handles accurate client-side local time hydration.
    */
   class EducationTracker extends HTMLElement {
     connectedCallback() {
@@ -88,6 +77,10 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
       this.#updateDateText(durationText);
     }
 
+    /**
+     * Toggles simple semantic state classes.
+     * Keeps the script agnostic to specific CSS Framework color classes.
+     */
     #updateTimelineDot(isActive: boolean) {
       const dot = this.querySelector('.timeline-dot');
       if (!dot) return;
@@ -117,7 +110,6 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
     }
   }
 
-  // Prevent duplicate registrations during Hot Module Replacement (HMR)
   if (!customElements.get('edu-tracker')) {
     customElements.define('edu-tracker', EducationTracker);
   }
@@ -125,14 +117,20 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
 
 <style>
   .timeline-dot {
+    display: flex;
+    position: absolute;
     top: 8px;
+    left: 0;
+    justify-content: center;
+    align-items: center;
     border: 4px solid var(--theme-background);
+    border-radius: 9999px;
     width: 24px;
     height: 24px;
   }
 
   .timeline-dot::after {
-    border-radius: 50%;
+    border-radius: 9999px;
     background: var(--theme-background);
     width: 6px;
     height: 6px;
@@ -140,15 +138,15 @@ const { durationText, statusLabel, isActive } = getAcademicStatus(
   }
 
   .timeline-dot.active {
-    background: var(--theme-primary);
+    background-color: var(--theme-primary);
   }
 
   .timeline-dot.inactive {
-    background: var(--theme-outline);
+    background-color: var(--theme-outline);
   }
 
   .badge-active {
-    background: color-mix(in srgb, var(--theme-primary) 10%, transparent);
+    background-color: color-mix(in srgb, var(--theme-primary) 10%, transparent);
     color: var(--theme-primary);
   }
 </style>

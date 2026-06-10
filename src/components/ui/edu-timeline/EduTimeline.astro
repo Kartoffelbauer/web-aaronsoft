@@ -27,7 +27,7 @@ const { items } = Astro.props;
 ---
 
 <div class="relative flex flex-col gap-lg">
-  <div class="timeline-connector"></div>
+  <div class="timeline-connector absolute"></div>
 
   {items.map((item) => <EduTimelineItem item={item} />)}
 </div>
