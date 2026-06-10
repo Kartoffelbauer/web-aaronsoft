@@ -20,7 +20,7 @@ const { payload } = Astro.props;
 <BaseCard as="social-tracker" data-start={payload.startDate}>
   <header class="card-header card-padding">
     <div class="avatar-wrapper">
-      <Icon name="account_circle" />
+      <Icon name="account_circle" class="text-xl" />
     </div>
 
     <div class="user-info">
@@ -37,7 +37,7 @@ const { payload } = Astro.props;
       target="_blank"
       rel="noopener noreferrer"
     >
-      <Icon name="open_in_new" />
+      <Icon name="open_in_new" class="text-lg" />
     </a>
   </header>
 
@@ -84,11 +84,6 @@ const { payload } = Astro.props;
     display: grid;
     place-items: center;
     color: var(--theme-on-surface-variant);
-  }
-
-  /* Properly targets the icon span */
-  .avatar-wrapper span {
-    font-size: var(--font-size-xl);
   }
 
   .user-info {

@@ -339,6 +339,9 @@ a:focus-visible {
 .text-xl {
   font-size: var(--font-size-xl);
 }
+.text-xxl {
+  font-size: var(--font-size-xxl);
+}
 
 /* Alignment & Formatting */
 .text-justify {

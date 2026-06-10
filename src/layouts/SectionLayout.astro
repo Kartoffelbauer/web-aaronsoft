@@ -20,7 +20,7 @@ const { id, icon, title, class: className = '' } = Astro.props;
   {
     title && (
       <header class="flex items-center gap-sm mb-lg">
-        {icon && <Icon name={icon} class="text-primary" />}
+        {icon && <Icon name={icon} class="text-primary text-xl" />}
         <h2 class="text-xl font-headline font-medium">{title}</h2>
       </header>
     )
