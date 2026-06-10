@@ -6,6 +6,7 @@
 
 import type { ProjectItem } from '@/types/index.ts';
 
+import Icon from '../Icon.astro';
 import BaseCard from './BaseCard.astro';
 
 export interface Props {
@@ -33,9 +34,7 @@ const { payload } = Astro.props;
         target="_blank"
         rel="noopener noreferrer"
       >
-        <span class="material-symbols-outlined" aria-hidden="true"
-          >open_in_new</span
-        >
+        <Icon name="open_in_new" />
       </a>
     </header>
 

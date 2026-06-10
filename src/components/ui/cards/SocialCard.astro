@@ -7,6 +7,7 @@
 import type { SocialItem } from '@/types/index';
 import { getYearsString } from '@/utils/dateUtils';
 
+import Icon from '../Icon.astro';
 import BaseCard from './BaseCard.astro';
 
 export interface Props {
@@ -19,9 +20,7 @@ const { payload } = Astro.props;
 <BaseCard as="social-tracker" data-start={payload.startDate}>
   <header class="card-header card-padding">
     <div class="avatar-wrapper">
-      <span class="material-symbols-outlined" aria-hidden="true">
-        account_circle
-      </span>
+      <Icon name="account_circle" />
     </div>
 
     <div class="user-info">
@@ -38,9 +37,7 @@ const { payload } = Astro.props;
       target="_blank"
       rel="noopener noreferrer"
     >
-      <span class="material-symbols-outlined" aria-hidden="true"
-        >open_in_new</span
-      >
+      <Icon name="open_in_new" />
     </a>
   </header>
 

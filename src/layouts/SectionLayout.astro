@@ -1,4 +1,6 @@
 ---
+import Icon from '@/components/ui/Icon.astro';
+
 /**
  * @fileoverview Reusable layout wrapper for page sections.
  * Enforces DRY structure and consistent spacing using strictly utility classes.
@@ -18,14 +20,7 @@ const { id, icon, title, class: className = '' } = Astro.props;
   {
     title && (
       <header class="flex items-center gap-sm mb-lg">
-        {icon && (
-          <span
-            class="material-symbols-outlined text-primary"
-            aria-hidden="true"
-          >
-            {icon}
-          </span>
-        )}
+        {icon && <Icon name={icon} class="text-primary" />}
         <h2 class="text-xl font-headline font-medium">{title}</h2>
       </header>
     )

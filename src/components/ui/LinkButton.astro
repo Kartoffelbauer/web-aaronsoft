@@ -7,6 +7,8 @@
 
 import type { HTMLAttributes } from 'astro/types';
 
+import Icon from './Icon.astro';
+
 // BEST PRACTICE: Extend BOTH anchor and button attributes safely
 export interface Props extends HTMLAttributes<'a'> {
   href?: string;
@@ -71,12 +73,6 @@ const variantMap = {
   ]}
   {...rest}
 >
-  {
-    icon && (
-      <span class="material-symbols-outlined icon" aria-hidden="true">
-        {icon}
-      </span>
-    )
-  }
+  {icon && <Icon name={icon} aria-hidden="true" class="text-lg" />}
   <slot />
 </a>

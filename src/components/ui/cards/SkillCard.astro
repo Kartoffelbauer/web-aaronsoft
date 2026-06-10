@@ -1,13 +1,21 @@
 ---
 /**
  * @fileoverview Renders a single technical skill card.
- * Uses polymorphic component rendering to act as a custom web component.
+ * Uses atomic utilities exclusively, achieving zero localized CSS footprint.
  */
 
-import type { SkillItem } from '@/types/index.ts';
 import { getExperienceString } from '@/utils/dateUtils';
 
+import { Icon } from '../index.astro';
 import BaseCard from './BaseCard.astro';
+
+/**
+ * Locally defined data structure for component independence.
+ */
+export interface SkillItem {
+  name: string;
+  startDate: string;
+}
 
 export interface Props {
   payload: SkillItem;
@@ -16,30 +24,31 @@ export interface Props {
 const { payload } = Astro.props;
 ---
 
-<BaseCard
-  as="skill-tracker"
-  data-start={payload.startDate}
-  class="card-padding"
->
-  <h3 class="h3" class="skill-name">{payload.name}</h3>
-  <span class="skill-exp">{getExperienceString(payload.startDate)}</span>
+<BaseCard as="skill-tracker" data-start={payload.startDate} class="p-md">
+  <h3 class="flex items-center gap-sm text-lg font-medium mb-sm">
+    <Icon name="code" class="" />
+    {payload.name}
+  </h3>
+  <p class="text-outline text-sm font-code tracking-wider uppercase">
+    {getExperienceString(payload.startDate)}
+  </p>
 </BaseCard>
 
 <script>
   import { getExperienceString } from '@/utils/dateUtils';
 
   /**
-   * Client-side hydration for dynamic years of experience.
-   * Calculates the time delta on the client so it remains accurate over time.
+   * Custom Element client-side hydration for dynamic experience strings.
+   * Modulates rendering cleanly with scoped local DOM updates.
    */
   class SkillTracker extends HTMLElement {
     connectedCallback() {
       const start = this.dataset.start;
-      if (start) {
-        const expElement = this.querySelector('.skill-exp');
-        if (expElement) {
-          expElement.textContent = getExperienceString(start);
-        }
+      if (!start) return;
+
+      const expElement = this.querySelector('p');
+      if (expElement) {
+        expElement.textContent = getExperienceString(start);
       }
     }
   }
@@ -48,18 +57,3 @@ const { payload } = Astro.props;
     customElements.define('skill-tracker', SkillTracker);
   }
 </script>
-
-<style>
-  .skill-name {
-    margin-bottom: var(--spacing-sm);
-    font-size: var(--font-size-lg);
-  }
-
-  .skill-exp {
-    color: var(--theme-outline);
-    font-size: var(--font-size-xs);
-    font-family: var(--font-code);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-</style>
