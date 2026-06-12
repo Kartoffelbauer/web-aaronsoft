@@ -300,6 +300,9 @@ a:focus-visible {
 .grow {
   flex-grow: 1;
 }
+.shrink-0 {
+  flex-shrink: 0;
+}
 
 /* Media / Ratios */
 .object-cover {
@@ -349,6 +352,9 @@ a:focus-visible {
 }
 .text-center {
   text-align: center;
+}
+.leading-none {
+  line-height: 1;
 }
 .leading-tight {
   line-height: 1.2;

@@ -49,7 +49,7 @@ const structureClasses = isPlain
     : 'px-lg py-md border rounded-base';
 
 // 3. Text sizing logic
-const sizeClasses = size === 'small' ? 'text-sm' : 'text-base';
+const sizeClass = size === 'small' ? 'text-sm' : 'text-base';
 
 // 4. Color, background, and interaction maps
 const variantMap = {
@@ -67,12 +67,12 @@ const variantMap = {
   class:list={[
     baseClasses,
     structureClasses,
-    sizeClasses,
+    sizeClass,
     variantMap[variant],
     customClass,
   ]}
   {...rest}
 >
-  {icon && <Icon name={icon} aria-hidden="true" class="text-lg" />}
+  {icon && <Icon name={icon} aria-hidden="true" class={sizeClass} />}
   <slot />
 </a>

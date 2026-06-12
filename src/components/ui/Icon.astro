@@ -8,7 +8,7 @@ import type { HTMLAttributes } from 'astro/types';
 export interface Props extends HTMLAttributes<'span'> {
   /** The name of the material icon. */
   name: string;
-  /** Optional utility classes to override or extend the default logo styling. */
+  /** Optional utility classes to override base sizing, color, or margins. */
   class?: string;
 }
 
@@ -16,17 +16,22 @@ const { name, class: customClass = '', ...rest } = Astro.props;
 ---
 
 <span
-  class:list={['material-symbols-outlined', customClass]}
-  aria-hidden="true"
+  class:list={[
+    'inline-flex items-center justify-center shrink-0 leading-none',
+    customClass,
+  ]}
   {...rest}
 >
-  {name}
+  <span class="material-symbols-outlined" aria-hidden="true">
+    {name}
+  </span>
 </span>
 
-<style>
-  .material-symbols-outlined {
+<style is:global>
+  :where(.material-symbols-outlined) {
     font-style: normal;
     font-weight: normal;
+    font-size: 1.25em;
     line-height: 1;
     font-family: 'Material Symbols Outlined';
     letter-spacing: normal;
