@@ -4,8 +4,7 @@
  * Utilizes mobile-first utility classes to strictly control stacking behavior.
  */
 
-import { Logo } from '@/components/ui/index.astro';
-import LinkButton from '@/components/ui/LinkButton.astro';
+import { Button, Logo } from '@/components/ui/index.astro';
 import { siteConfig } from '@/data/config';
 import { getCurrentYear } from '@/utils/dateUtils';
 
@@ -27,17 +26,13 @@ const { logo } = siteConfig;
       class="flex items-center justify-center gap-md font-code text-base"
       aria-label="Legal Navigation"
     >
-      <LinkButton href="/impress" variant="link" aria-label="View Imprint">
+      <Button href="/impress" variant="link" aria-label="View Imprint">
         Impressum
-      </LinkButton>
+      </Button>
 
-      <LinkButton
-        href="/privacy"
-        variant="link"
-        aria-label="View Privacy Policy"
-      >
+      <Button href="/privacy" variant="link" aria-label="View Privacy Policy">
         Datenschutz
-      </LinkButton>
+      </Button>
     </nav>
   </div>
 </footer>

@@ -3,8 +3,7 @@
  * @fileoverview Navigation Bar Component.
  * Handles routing across the site. Styling relies on global utility classes.
  */
-import { Logo } from '@/components/ui/index.astro';
-import LinkButton from '@/components/ui/LinkButton.astro';
+import { Button, Logo } from '@/components/ui/index.astro';
 import { siteConfig } from '@/data/config';
 
 export interface Props {
@@ -28,17 +27,17 @@ const { logo, nav, sections } = siteConfig;
       {
         isMainPage ? (
           Object.values(sections).map((sectionData) => (
-            <LinkButton
+            <Button
               href={`#${sectionData.id}`}
               variant="text"
               size="small"
               class="nav-link"
             >
               {sectionData.id}
-            </LinkButton>
+            </Button>
           ))
         ) : (
-          <LinkButton
+          <Button
             href="/"
             variant="text"
             size="small"
@@ -46,14 +45,14 @@ const { logo, nav, sections } = siteConfig;
             aria-label="Navigate to Home"
           >
             HOME
-          </LinkButton>
+          </Button>
         )
       }
     </div>
 
     {
       isMainPage && (
-        <LinkButton
+        <Button
           href={nav.resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
@@ -61,7 +60,7 @@ const { logo, nav, sections } = siteConfig;
           aria-label="View Resume"
         >
           Resume
-        </LinkButton>
+        </Button>
       )
     }
   </div>

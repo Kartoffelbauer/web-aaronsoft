@@ -6,8 +6,8 @@
 
 import { getYearsString } from '@/utils/dateUtils';
 
+import LinkButton from '../Button.astro';
 import Icon from '../Icon.astro';
-import LinkButton from '../LinkButton.astro';
 import BaseCard from './BaseCard.astro';
 
 /**
@@ -46,17 +46,16 @@ const { payload } = Astro.props;
       </span>
     </div>
 
-    <div class="flex items-start">
-      <LinkButton
-        href={payload.linkUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        variant="text"
-        icon="open_in_new"
-        aria-label={`View external link to post by ${payload.author}`}
-        class="text-lg"
-      />
-    </div>
+    <LinkButton
+      href={payload.linkUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      variant="text"
+      icon="open_in_new"
+      aria-label={`View external link to post by ${payload.author}`}
+      align="start"
+      class="text-lg"
+    />
   </header>
 
   <div class="flex flex-col grow">

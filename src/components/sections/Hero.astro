@@ -6,7 +6,7 @@
 import { Image } from 'astro:assets';
 
 import profilePic from '@/assets/img/profile.jpg';
-import LinkButton from '@/components/ui/LinkButton.astro';
+import { Button } from '@/components/ui/index.astro';
 import { siteConfig } from '@/data/config';
 
 const { hero } = siteConfig.sections;
@@ -18,7 +18,7 @@ const { hero } = siteConfig.sections;
     <p class="mb-lg text-lg text-surface-variant">{hero.description}</p>
 
     <nav class="flex gap-md" aria-label="Hero Actions">
-      <LinkButton
+      <Button
         href={hero.linkedinUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -27,9 +27,9 @@ const { hero } = siteConfig.sections;
         aria-label="View LinkedIn Profile"
       >
         LinkedIn
-      </LinkButton>
+      </Button>
 
-      <LinkButton
+      <Button
         href={hero.githubUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -37,7 +37,7 @@ const { hero } = siteConfig.sections;
         aria-label="View GitHub Profile"
       >
         GitHub
-      </LinkButton>
+      </Button>
     </nav>
   </div>
 
