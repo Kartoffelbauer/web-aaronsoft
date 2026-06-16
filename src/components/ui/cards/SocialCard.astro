@@ -1,14 +1,27 @@
 ---
 /**
  * @fileoverview Renders a single social media feed post.
- * Uses polymorphic component rendering to act as the web component itself.
+ * Uses polymorphic component rendering and strictly utility-based styling.
  */
 
-import type { SocialItem } from '@/types/index';
 import { getYearsString } from '@/utils/dateUtils';
 
 import Icon from '../Icon.astro';
+import LinkButton from '../LinkButton.astro';
 import BaseCard from './BaseCard.astro';
+
+/**
+ * Encapsulated data structure defining a Social Item.
+ */
+export interface SocialItem {
+  author: string;
+  headline: string;
+  startDate: string;
+  linkUrl: string;
+  content: string;
+  imageUrl: string;
+  tags: string[];
+}
 
 export interface Props {
   payload: SocialItem;
@@ -18,39 +31,57 @@ const { payload } = Astro.props;
 ---
 
 <BaseCard as="social-tracker" data-start={payload.startDate}>
-  <header class="card-header card-padding">
-    <div class="avatar-wrapper">
+  <header class="flex gap-md p-md">
+    <div class="grid place-items-center text-surface-variant">
       <Icon name="account_circle" class="text-xl" />
     </div>
 
-    <div class="user-info">
-      <div class="name-row">
+    <div class="flex flex-col justify-center flex-1">
+      <div class="flex justify-between text-on-surface font-headline">
         <strong>{payload.author}</strong>
       </div>
-      <span class="headline">{payload.headline}</span>
-      <span class="created-at">{getYearsString(payload.startDate)}</span>
+      <span class="text-surface-variant text-sm">{payload.headline}</span>
+      <span class="text-surface-variant text-sm">
+        {getYearsString(payload.startDate)}
+      </span>
     </div>
 
-    <a
-      href={payload.linkUrl}
-      aria-label={`View external link to post by ${payload.author}`}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <Icon name="open_in_new" class="text-lg" />
-    </a>
+    <div class="flex items-start">
+      <LinkButton
+        href={payload.linkUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        variant="text"
+        icon="open_in_new"
+        aria-label={`View external link to post by ${payload.author}`}
+        class="text-lg"
+      />
+    </div>
   </header>
 
-  <div class="card-content">
-    <p class="social-text">{payload.content}</p>
+  <div class="flex flex-col grow">
+    <p class="m-0 px-md pb-md text-on-surface text-base leading-normal">
+      {payload.content}
+    </p>
 
-    <div class="card-img-wrapper social-img-fix">
-      <img src={payload.imageUrl} alt="Post media graphic" loading="lazy" />
+    <div class="mt-auto h-fluid-sm shrink-0 overflow-hidden">
+      <img
+        src={payload.imageUrl}
+        alt="Post media graphic"
+        class="block w-full h-full object-cover transition-transform group-hover:scale-110"
+        loading="lazy"
+      />
     </div>
   </div>
 
-  <footer class="card-footer card-tags card-padding">
-    {payload.tags.map((tag) => <span class="card-tag">{tag}</span>)}
+  <footer class="flex flex-wrap gap-sm p-md bg-surface-container">
+    {
+      payload.tags.map((tag) => (
+        <span class="bg-primary-alpha-10 text-primary p-sm rounded-md text-sm font-code">
+          {tag}
+        </span>
+      ))
+    }
   </footer>
 </BaseCard>
 
@@ -73,52 +104,3 @@ const { payload } = Astro.props;
     customElements.define('social-tracker', SocialTracker);
   }
 </script>
-
-<style>
-  .card-header {
-    display: flex;
-    gap: var(--spacing-md);
-  }
-
-  .avatar-wrapper {
-    display: grid;
-    place-items: center;
-    color: var(--theme-on-surface-variant);
-  }
-
-  .user-info {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .name-row {
-    display: flex;
-    justify-content: space-between;
-    color: var(--theme-on-surface);
-    font-family: var(--font-headline);
-  }
-
-  .headline,
-  .created-at {
-    color: var(--theme-on-surface-variant);
-    font-size: var(--font-size-sm);
-  }
-
-  .social-text {
-    margin: 0;
-    padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
-    color: var(--theme-on-surface);
-    font-size: var(--font-size-base);
-    line-height: 1.5;
-  }
-
-  .social-img-fix {
-    margin-top: auto;
-  }
-
-  .card-footer {
-    background: var(--theme-surface-container);
-  }
-</style>

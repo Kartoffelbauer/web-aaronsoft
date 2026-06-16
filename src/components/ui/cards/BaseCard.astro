@@ -1,96 +1,25 @@
 ---
 /**
  * @fileoverview Base container primitive for all card types.
- * Encapsulates structural CSS, backgrounds, interactive hover states,
- * and heavily shared internal UI layout components.
  */
 
 import type { HTMLAttributes } from 'astro/types';
 
 export interface Props extends HTMLAttributes<'article'> {
-  as?: any;
+  as?: string | any;
 }
 
 const { as: Tag = 'article', class: className = '', ...rest } = Astro.props;
 ---
 
-<Tag class={`base-card ${className}`.trim()} {...rest}>
+<Tag
+  class:list={[
+    'flex flex-col h-full overflow-hidden border border-outline-variant rounded-base bg-surface-container transition-colors hover:border-primary group',
+    className,
+  ]}
+  {...rest}
+>
   <slot />
 </Tag>
 
-<style>
-  /* ==========================================================
-     1. SHELL STYLES (Strictly Scoped)
-     ========================================================== */
-  .base-card {
-    display: flex;
-    flex-direction: column;
-    transition: border-color 0.2s ease;
-    border: 1px solid var(--theme-outline-variant);
-    border-radius: var(--border-radius-base);
-    background: var(--theme-surface-container);
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .base-card:hover {
-    border-color: var(--theme-primary);
-  }
-
-  /* ==========================================================
-     2. SHARED CHILD UTILITIES
-     ========================================================== */
-  .base-card :global(a) {
-    color: var(--theme-on-surface);
-    text-decoration: none;
-  }
-
-  .base-card :global(a:hover) {
-    color: var(--theme-primary);
-    text-decoration: none;
-  }
-
-  .base-card :global(.card-img-wrapper) {
-    flex-shrink: 0;
-    height: var(--grid-fluid-sm);
-    overflow: hidden;
-  }
-
-  .base-card :global(.card-img-wrapper img) {
-    display: block;
-    transition: transform 0.5s ease;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .base-card:hover :global(.card-img-wrapper img) {
-    transform: scale(1.1);
-  }
-
-  .base-card :global(.card-content) {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-  }
-
-  .base-card:global(.card-padding),
-  .base-card :global(.card-padding) {
-    padding: var(--spacing-md);
-  }
-
-  .base-card :global(.card-tags) {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
-  }
-
-  .base-card :global(.card-tag) {
-    border-radius: var(--border-radius-md);
-    background: color-mix(in srgb, var(--theme-primary) 10%, transparent);
-    padding: var(--spacing-sm);
-    color: var(--theme-primary);
-    font-size: var(--font-size-sm);
-    font-family: var(--font-code);
-  }
-</style>
+<style is:global></style>

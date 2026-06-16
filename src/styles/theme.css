@@ -65,6 +65,10 @@
   --grid-fluid-sm: 200px;
   --grid-fluid-md: 340px;
   --grid-fluid-lg: 400px;
+
+  /* Transition */
+  --transition-duration-fast: 0.2s;
+  --transition-duration-base: 0.5s;
 }
 
 @media (prefers-color-scheme: dark) {

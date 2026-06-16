@@ -1,13 +1,22 @@
 ---
 /**
  * @fileoverview Renders a single project case study.
- * Fully leverages BaseCard shared utilities to eliminate duplicate CSS.
+ * Refactored using utility-first layout principles and local typing encapsulation.
  */
 
-import type { ProjectItem } from '@/types/index.ts';
-
-import Icon from '../Icon.astro';
+import LinkButton from '../LinkButton.astro';
 import BaseCard from './BaseCard.astro';
+
+/**
+ * Encapsulated data structure defining a Project.
+ */
+export interface ProjectItem {
+  title: string;
+  description: string;
+  imageUrl: string;
+  link: string;
+  tags: string[];
+}
 
 export interface Props {
   payload: ProjectItem;
@@ -17,52 +26,39 @@ const { payload } = Astro.props;
 ---
 
 <BaseCard>
-  <div class="card-img-wrapper">
+  <div class="h-fluid-sm shrink-0 overflow-hidden">
     <img
       src={payload.imageUrl}
       alt={`Preview graphic for ${payload.title}`}
+      class="block w-full h-full object-cover transition-transform group-hover:scale-110"
       loading="lazy"
     />
   </div>
 
-  <div class="card-content card-padding project-gap">
-    <header class="project-header">
+  <div class="flex flex-col grow p-md gap-sm">
+    <header class="flex justify-between items-start">
       <h3>{payload.title}</h3>
-      <a
+      <LinkButton
         href={payload.link}
-        aria-label={`View ${payload.title}`}
         target="_blank"
         rel="noopener noreferrer"
-      >
-        <Icon name="open_in_new" class="text-lg" />
-      </a>
+        variant="text"
+        icon="open_in_new"
+        aria-label={`View ${payload.title}`}
+        class="text-lg"
+      />
     </header>
 
-    <p class="project-desc">{payload.description}</p>
+    <p class="text-surface-variant m-0">{payload.description}</p>
 
-    <footer class="card-tags project-footer">
-      {payload.tags.map((tag) => <span class="card-tag">{tag}</span>)}
+    <footer class="flex flex-wrap gap-sm mt-auto pt-sm">
+      {
+        payload.tags.map((tag) => (
+          <span class="bg-primary-alpha-10 text-primary p-sm rounded-md text-sm font-code">
+            {tag}
+          </span>
+        ))
+      }
     </footer>
   </div>
 </BaseCard>
-
-<style>
-  .project-gap {
-    gap: var(--spacing-sm);
-  }
-
-  .project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-  }
-
-  .project-desc {
-    color: var(--theme-on-surface-variant);
-  }
-
-  .project-footer {
-    margin-top: auto;
-    padding-top: var(--spacing-sm);
-  }
-</style>
