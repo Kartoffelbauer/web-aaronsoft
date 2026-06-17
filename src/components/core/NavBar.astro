@@ -3,7 +3,7 @@
  * @fileoverview Navigation Bar Component.
  * Handles routing across the site. Styling relies on global utility classes.
  */
-import { Button, Logo } from '@/components/ui/index.astro';
+import { Button, Container, Logo } from '@/components/ui/index.astro';
 import { siteConfig } from '@/data/config';
 
 export interface Props {
@@ -15,7 +15,7 @@ const { logo, nav, sections } = siteConfig;
 ---
 
 <nav class="sticky top-0 z-50 border-b border-outline-variant glass-effect">
-  <div class="container flex items-center justify-between gap-md h-xl">
+  <Container class="flex items-center justify-between gap-md h-xl">
     <Logo title={logo} />
 
     <div
@@ -63,7 +63,7 @@ const { logo, nav, sections } = siteConfig;
         </Button>
       )
     }
-  </div>
+  </Container>
 </nav>
 
 <style>

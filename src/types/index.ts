@@ -88,7 +88,7 @@ export interface ProjectItem {
   /** The display title of the project. */
   title: string;
   /** Absolute URL to the live project, repository, or case study. */
-  link: string;
+  linkUrl: string;
   /** A concise explanation of the project's purpose and architecture. */
   description: string;
   /** Absolute or relative URL to the project's thumbnail image. */

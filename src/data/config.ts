@@ -52,7 +52,7 @@ export const siteConfig: SiteConfig = {
       items: [
         {
           title: 'Game Engine Core',
-          link: '#',
+          linkUrl: '#',
           description:
             'A custom 3D rendering engine built from scratch to explore low-level graphics APIs and memory management techniques.',
           imageUrl:
@@ -61,7 +61,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           title: 'Distributed Systems',
-          link: '#',
+          linkUrl: '#',
           description:
             'Implementation of a fault-tolerant distributed key-value store using the Raft consensus algorithm.',
           imageUrl:
@@ -70,7 +70,7 @@ export const siteConfig: SiteConfig = {
         },
         {
           title: 'Engine Architecture',
-          link: '#',
+          linkUrl: '#',
           description:
             'A scalable entity-component-system (ECS) framework designed for performance and cache-friendliness in simulation environments.',
           imageUrl:

@@ -4,6 +4,7 @@
  */
 import Footer from '@/components/core/Footer.astro';
 import NavBar from '@/components/core/NavBar.astro';
+import { Container } from '@/components/ui/index.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const { title, description } = Astro.props;
@@ -12,9 +13,9 @@ const { title, description } = Astro.props;
 <BaseLayout {title} {description}>
   <NavBar isMainPage={false} />
 
-  <main class="container">
+  <Container as="main">
     <slot />
-  </main>
+  </Container>
 
   <Footer />
 </BaseLayout>
