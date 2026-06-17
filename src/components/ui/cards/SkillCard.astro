@@ -6,14 +6,19 @@
 
 import { getExperienceString } from '@/utils/dateUtils';
 
-import { Icon } from '../index.astro';
+import { Icon } from '../index.ts';
 import BaseCard from './BaseCard.astro';
 
 /**
- * Locally defined data structure for component independence.
+ * Represents a technical skill, language, or tool.
  */
 export interface SkillItem {
+  /** The display name of the skill. @example "TypeScript" or "C++" */
   name: string;
+  /** * The date the skill was first acquired, in ISO format.
+   * Used to dynamically calculate "Years of Experience" at runtime.
+   * @example "2019-01-01"
+   */
   startDate: string;
 }
 

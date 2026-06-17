@@ -11,15 +11,26 @@ import Icon from '../Icon.astro';
 import BaseCard from './BaseCard.astro';
 
 /**
- * Encapsulated data structure defining a Social Item.
+ * Represents a social post.
  */
 export interface SocialItem {
+  /** The name of the author. */
   author: string;
+  /** The headline of the post. */
   headline: string;
+  /** * The time the post was created
+   * @example "2025-08-31"
+   */
   startDate: string;
-  linkUrl: string;
+  /** The main content of the post. */
   content: string;
+  /** The image of the post. */
   imageUrl: string;
+  /** Absolute URL to the post */
+  linkUrl: string;
+  /** The headline of the link button */
+  linkText: string;
+  /** An array of technologies or concepts utilized. @example ["React", "WebGL"] */
   tags: string[];
 }
 

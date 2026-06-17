@@ -6,12 +6,25 @@
 
 import { getAcademicStatus } from '@/utils/dateUtils';
 
+/**
+ * Represents a single academic milestone or degree program.
+ */
 export interface EducationItem {
-  startDate: string;
-  endDate: string;
+  /** The full title of the degree. @example "Master of Science" */
   degree: string;
+  /** The name of the university or institution. */
   institution: string;
+  /** A brief summary of the curriculum or specializations. */
   description: string;
+  /** * The official start date in ISO format. Used for runtime academic calculations.
+   * @example "2023-09-01"
+   */
+  startDate: string;
+  /** * The graduation date or expected graduation date in ISO format.
+   * Determines if the degree is "Current" or "Completed" at runtime.
+   * @example "2025-08-31"
+   */
+  endDate: string;
 }
 
 export interface Props {

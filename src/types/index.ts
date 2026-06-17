@@ -3,6 +3,13 @@
  * Utilizes generic interfaces for highly scalable, DRY configuration typing.
  */
 
+import type {
+  EducationItem,
+  ProjectItem,
+  SkillItem,
+  SocialItem,
+} from '@/components/ui/types';
+
 // ============================================================================
 // 1. Base UI Interfaces
 // ============================================================================
@@ -41,84 +48,6 @@ export interface HeroSection extends BaseSection {
   linkedinUrl: string;
   /** Absolute URL to the developer's GitHub profile. */
   githubUrl: string;
-}
-
-// ============================================================================
-// 2. Domain Data Models
-// ============================================================================
-
-/**
- * Represents a single academic milestone or degree program.
- */
-export interface EducationItem {
-  /** The full title of the degree. @example "Master of Science" */
-  degree: string;
-  /** The name of the university or institution. */
-  institution: string;
-  /** A brief summary of the curriculum or specializations. */
-  description: string;
-  /** * The official start date in ISO format. Used for runtime academic calculations.
-   * @example "2023-09-01"
-   */
-  startDate: string;
-  /** * The graduation date or expected graduation date in ISO format.
-   * Determines if the degree is "Current" or "Completed" at runtime.
-   * @example "2025-08-31"
-   */
-  endDate: string;
-}
-
-/**
- * Represents a technical skill, language, or tool.
- */
-export interface SkillItem {
-  /** The display name of the skill. @example "TypeScript" or "C++" */
-  name: string;
-  /** * The date the skill was first acquired, in ISO format.
-   * Used to dynamically calculate "Years of Experience" at runtime.
-   * @example "2019-01-01"
-   */
-  startDate: string;
-}
-
-/**
- * Represents a portfolio project or case study.
- */
-export interface ProjectItem {
-  /** The display title of the project. */
-  title: string;
-  /** Absolute URL to the live project, repository, or case study. */
-  linkUrl: string;
-  /** A concise explanation of the project's purpose and architecture. */
-  description: string;
-  /** Absolute or relative URL to the project's thumbnail image. */
-  imageUrl: string;
-  /** An array of technologies or concepts utilized. @example ["React", "WebGL"] */
-  tags: string[];
-}
-
-/**
- * Represents a social post.
- */
-export interface SocialItem {
-  /** The name of the author. */
-  author: string;
-  /** The headline of the post. */
-  headline: string;
-  /** * The time the post was created
-   * @example "2025-08-31"
-   */
-  startDate: string;
-  /** The main content of the post. */
-  content: string;
-  /** The image of the post. */
-  imageUrl: string;
-  /** Absolute URL to the post */
-  linkUrl: string;
-  /** The headline of the link button */
-  linkText: string;
-  /** An array of technologies or concepts utilized. @example ["React", "WebGL"] */
-  tags: string[];
 }
 
 // ============================================================================

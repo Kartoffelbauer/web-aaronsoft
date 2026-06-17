@@ -5,19 +5,8 @@
  * Delegates individual item rendering and hydration logic to EduTimelineItem.
  */
 
+import type { EducationItem } from './EduTimelineItem.astro';
 import EduTimelineItem from './EduTimelineItem.astro';
-
-/**
- * Locally defined data structure for the timeline.
- * Ensures component isolation and avoids cross-file generic imports (anti-pattern).
- */
-export interface EducationItem {
-  startDate: string;
-  endDate: string;
-  degree: string;
-  institution: string;
-  description: string;
-}
 
 export interface Props {
   items: EducationItem[];

@@ -8,13 +8,18 @@ import Button from '../Button.astro';
 import BaseCard from './BaseCard.astro';
 
 /**
- * Encapsulated data structure defining a Project.
+ * Represents a portfolio project or case study.
  */
 export interface ProjectItem {
+  /** The display title of the project. */
   title: string;
+  /** Absolute URL to the live project, repository, or case study. */
+  linkUrl: string;
+  /** A concise explanation of the project's purpose and architecture. */
   description: string;
+  /** Absolute or relative URL to the project's thumbnail image. */
   imageUrl: string;
-  link: string;
+  /** An array of technologies or concepts utilized. @example ["React", "WebGL"] */
   tags: string[];
 }
 
@@ -39,7 +44,7 @@ const { payload } = Astro.props;
     <header class="flex justify-between items-start">
       <h3>{payload.title}</h3>
       <Button
-        href={payload.link}
+        href={payload.linkUrl}
         target="_blank"
         rel="noopener noreferrer"
         variant="text"
