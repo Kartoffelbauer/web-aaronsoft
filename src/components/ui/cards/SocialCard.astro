@@ -6,7 +6,7 @@
 
 import { getYearsString } from '@/utils/dateUtils';
 
-import LinkButton from '../Button.astro';
+import Button from '../Button.astro';
 import Icon from '../Icon.astro';
 import BaseCard from './BaseCard.astro';
 
@@ -46,7 +46,7 @@ const { payload } = Astro.props;
       </span>
     </div>
 
-    <LinkButton
+    <Button
       href={payload.linkUrl}
       target="_blank"
       rel="noopener noreferrer"

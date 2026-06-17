@@ -1,8 +1,6 @@
 ---
 /**
  * @fileoverview Polymorphic Button Component.
- * Dynamically renders `<a>` or `<button>` based on the presence of an `href`.
- * Follows strict utility-first architecture, DRY principles, and isolated state maps.
  */
 
 import type { HTMLAttributes } from 'astro/types';
@@ -15,16 +13,12 @@ type Size = 'base' | 'small';
 type Align = 'center' | 'start' | 'end' | 'between';
 
 // 2. Polymorphic Interface
-export interface Props extends Omit<
-  HTMLAttributes<'a'> & HTMLAttributes<'button'>,
-  'type'
-> {
+export interface Props extends HTMLAttributes<'a'> {
   href?: string;
   variant?: Variant;
   size?: Size;
   align?: Align;
   icon?: string;
-  type?: 'button' | 'submit' | 'reset';
   class?: string;
 }
 
@@ -34,16 +28,11 @@ const {
   size = 'base',
   align = 'center',
   icon,
-  type,
   class: customClass = '',
   ...rest
 } = Astro.props;
 
-// 3. Dynamic Semantic Resolution
-const Tag = href ? 'a' : 'button';
-const buttonType = !href ? type || 'button' : undefined;
-
-// 4. Utility Maps
+// 3. Utility Maps
 const baseClasses =
   'inline-flex justify-center transition-all cursor-pointer font-code shrink-0';
 
@@ -65,7 +54,7 @@ const variantMap: Record<Variant, string> = {
   link: 'text-surface-variant hover:text-primary focus-visible:text-primary visited:text-surface-variant',
 };
 
-// 5. Structure & Typography Isolation
+// 4. Structure & Typography Isolation
 const isPlain = variant.startsWith('text') || variant === 'link';
 
 const structureMap: Record<Size, string> = {
@@ -79,9 +68,8 @@ const typographyMap: Record<Size, string> = {
 };
 ---
 
-<Tag
+<a
   {href}
-  type={buttonType}
   class:list={[
     baseClasses,
     alignMap[align],
@@ -94,4 +82,4 @@ const typographyMap: Record<Size, string> = {
 >
   {icon && <Icon name={icon} aria-hidden="true" class="shrink-0" />}
   <slot />
-</Tag>
+</a>

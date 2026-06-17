@@ -4,7 +4,7 @@
  * Refactored using utility-first layout principles and local typing encapsulation.
  */
 
-import LinkButton from '../Button.astro';
+import Button from '../Button.astro';
 import BaseCard from './BaseCard.astro';
 
 /**
@@ -38,7 +38,7 @@ const { payload } = Astro.props;
   <div class="flex flex-col grow p-md gap-sm">
     <header class="flex justify-between items-start">
       <h3>{payload.title}</h3>
-      <LinkButton
+      <Button
         href={payload.link}
         target="_blank"
         rel="noopener noreferrer"
