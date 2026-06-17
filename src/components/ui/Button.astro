@@ -10,13 +10,11 @@ import type { HTMLAttributes } from 'astro/types';
 import Icon from './Icon.astro';
 
 // 1. Strict Configuration Types
-// Added 'text-primary' as a first-class citizen in the design system.
 type Variant = 'primary' | 'outline' | 'text' | 'text-primary' | 'link';
 type Size = 'base' | 'small';
 type Align = 'center' | 'start' | 'end' | 'between';
 
 // 2. Polymorphic Interface
-// Omitting 'type' from anchor to prevent TS collisions, allowing strict button types.
 export interface Props extends Omit<
   HTMLAttributes<'a'> & HTMLAttributes<'button'>,
   'type'

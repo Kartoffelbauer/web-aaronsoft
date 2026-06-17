@@ -4,7 +4,7 @@
  * Utilizes mobile-first utility classes to strictly control stacking behavior.
  */
 
-import { Button, Logo } from '@/components/ui/index.astro';
+import { Button, Container, Logo } from '@/components/ui/index.astro';
 import { siteConfig } from '@/data/config';
 import { getCurrentYear } from '@/utils/dateUtils';
 
@@ -12,8 +12,8 @@ const { logo } = siteConfig;
 ---
 
 <footer class="border-t border-outline-variant bg-surface-lowest">
-  <div
-    class="container flex flex-col items-center justify-center gap-sm py-sm lg:flex-row md:justify-between"
+  <Container
+    class="flex flex-col items-center justify-center gap-sm py-sm lg:flex-row md:justify-between"
   >
     <Logo title={logo} />
 
@@ -34,7 +34,7 @@ const { logo } = siteConfig;
         Datenschutz
       </Button>
     </nav>
-  </div>
+  </Container>
 </footer>
 
 <script>

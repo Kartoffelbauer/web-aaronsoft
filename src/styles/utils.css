@@ -76,14 +76,6 @@ a:focus-visible {
 /* ==========================================================================
    2. LAYOUT & DISPLAY
    ========================================================================== */
-/* Container */
-.container {
-  margin: 0 auto;
-  padding-inline: clamp(var(--spacing-md, 1rem), 4vw, var(--spacing-lg, 2rem));
-  width: 100%;
-  max-width: 1100px;
-}
-
 /* Display */
 .block {
   display: block;

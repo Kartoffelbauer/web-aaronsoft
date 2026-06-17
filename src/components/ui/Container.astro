@@ -1,0 +1,39 @@
+---
+/**
+ * @fileoverview Resusable Container primitive.
+ * Provides consistent horizontal padding and max-width constraints for content.
+ * Strictly relies on the global `.container` utility to enforce DRY architecture.
+ */
+
+import type { HTMLAttributes } from 'astro/types';
+
+// 1. Expanded Semantic Tags
+type SemanticTag = 'div' | 'main' | 'section' | 'article' | 'header' | 'footer';
+
+// 2. Cleaned Interface
+export interface Props extends HTMLAttributes<'div'> {
+  /** Optional semantic tag to render the container as (e.g., 'main', 'section'). */
+  as?: SemanticTag;
+  /** Optional utility classes to override or extend the default styling. */
+  class?: string;
+}
+
+const { as: Tag = 'div', class: customClass = '', ...rest } = Astro.props;
+---
+
+<Tag class:list={['container', customClass]} {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  .container {
+    margin: 0 auto;
+    padding-inline: clamp(
+      var(--spacing-md, 1rem),
+      4vw,
+      var(--spacing-lg, 2rem)
+    );
+    width: 100%;
+    max-width: 1100px;
+  }
+</style>

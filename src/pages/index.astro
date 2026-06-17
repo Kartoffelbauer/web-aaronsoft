@@ -11,6 +11,7 @@ import Hero from '@/components/sections/Hero.astro';
 import Projects from '@/components/sections/Projects.astro';
 import Skills from '@/components/sections/Skills.astro';
 import Socials from '@/components/sections/Socials.astro';
+import { Container } from '@/components/ui/index.astro';
 import { siteConfig } from '@/data/config';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
@@ -24,13 +25,13 @@ const { hero } = siteConfig.sections;
   <NavBar />
 
   <!-- Flex column with gap-xl provides uniform spacing between all major sections automatically -->
-  <main class="container flex flex-col gap-lg">
+  <Container as="main" class="flex flex-col gap-lg">
     <Hero />
     <Education />
     <Skills />
     <Projects />
     <Socials />
-  </main>
+  </Container>
 
   <Footer />
 </BaseLayout>
