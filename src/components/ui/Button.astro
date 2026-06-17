@@ -10,12 +10,13 @@ import type { HTMLAttributes } from 'astro/types';
 import Icon from './Icon.astro';
 
 // 1. Strict Configuration Types
-type Variant = 'primary' | 'outline' | 'text' | 'link';
+// Added 'text-primary' as a first-class citizen in the design system.
+type Variant = 'primary' | 'outline' | 'text' | 'text-primary' | 'link';
 type Size = 'base' | 'small';
 type Align = 'center' | 'start' | 'end' | 'between';
 
 // 2. Polymorphic Interface
-// Omitting 'type' from anchor to prevent TS collisions, allowing strict button types
+// Omitting 'type' from anchor to prevent TS collisions, allowing strict button types.
 export interface Props extends Omit<
   HTMLAttributes<'a'> & HTMLAttributes<'button'>,
   'type'
@@ -46,27 +47,28 @@ const buttonType = !href ? type || 'button' : undefined;
 
 // 4. Utility Maps
 const baseClasses =
-  'inline-flex transition-all cursor-pointer font-code disabled-state shrink-0';
+  'inline-flex justify-center transition-all cursor-pointer font-code shrink-0';
 
 const alignMap: Record<Align, string> = {
-  center: 'justify-center items-center',
-  start: 'justify-start items-start',
-  end: 'justify-end items-end',
-  between: 'justify-between items-center',
+  center: 'items-center',
+  start: 'items-start',
+  end: 'items-end',
+  between: 'items-center',
 };
 
-// Explicit border declarations ensure layout doesn't shift when switching variants
 const variantMap: Record<Variant, string> = {
   primary:
-    'bg-primary border border-transparent text-on-primary hover:text-on-primary focus-visible:text-on-primary visited:text-on-primary hover:opacity-90 font-medium no-underline',
+    'bg-primary text-on-primary hover:text-on-primary focus-visible:text-on-primary visited:text-on-primary hover:opacity-90 font-medium no-underline',
   outline:
-    'bg-transparent border border-outline text-on-surface hover:border-primary hover:text-primary focus-visible:border-primary font-medium no-underline',
-  text: 'bg-transparent border border-transparent text-surface-variant hover:text-primary focus-visible:text-primary visited:text-surface-variant no-underline',
-  link: 'bg-transparent border border-transparent text-surface-variant hover:text-primary focus-visible:text-primary visited:text-surface-variant',
+    'border border-outline text-on-surface hover:border-primary hover:text-primary focus-visible:border-primary font-medium no-underline',
+  text: 'text-surface-variant hover:text-primary focus-visible:text-primary visited:text-surface-variant no-underline',
+  'text-primary':
+    'text-primary hover:opacity-90 focus-visible:opacity-90 visited:text-primary no-underline font-medium',
+  link: 'text-surface-variant hover:text-primary focus-visible:text-primary visited:text-surface-variant',
 };
 
 // 5. Structure & Typography Isolation
-const isPlain = variant === 'text' || variant === 'link';
+const isPlain = variant.startsWith('text') || variant === 'link';
 
 const structureMap: Record<Size, string> = {
   base: isPlain ? 'gap-sm' : 'px-lg py-md rounded-base gap-md',

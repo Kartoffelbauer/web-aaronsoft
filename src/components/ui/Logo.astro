@@ -1,4 +1,6 @@
 ---
+import Button from './Button.astro';
+
 /**
  * @fileoverview Reusable Logo UI Component.
  * Serves as the primary brand text/link across the site (e.g., in NavBar/Footer).
@@ -15,13 +17,11 @@ export interface Props {
 const { title, class: customClass = '' } = Astro.props;
 ---
 
-<a
+<Button
   href="/"
-  class:list={[
-    'text-primary font-medium text-xl font-headline no-underline',
-    customClass,
-  ]}
-  aria-label="Go to homepage"
+  variant="text-primary"
+  class:list={['font-medium font-headline text-xl', customClass]}
+  aria-label="Homepage"
 >
   {title}
-</a>
+</Button>
