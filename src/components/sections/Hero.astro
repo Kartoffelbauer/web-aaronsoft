@@ -12,12 +12,20 @@ import { siteConfig } from '@/data/config';
 const { hero } = siteConfig.sections;
 ---
 
-<header id={hero.id} class="grid grid-cols-fluid-lg items-center gap-lg py-md">
-  <div>
+<header
+  id={hero.id}
+  class="flex flex-col-reverse lg:flex-row items-center justify-between gap-lg py-md text-center lg:text-left"
+>
+  {/* Primary Content (Text & CTAs) */}
+  <div class="flex-1">
     <h1 class="mb-md leading-tight">{hero.title}</h1>
     <p class="mb-lg text-lg text-surface-variant">{hero.description}</p>
 
-    <nav class="flex gap-md" aria-label="Hero Actions">
+    {/* Navigation/Actions: Centered on mobile, left-aligned on desktop */}
+    <nav
+      class="flex justify-center lg:justify-start gap-md"
+      aria-label="Hero Actions"
+    >
       <Button
         href={hero.linkedinUrl}
         target="_blank"
@@ -41,8 +49,9 @@ const { hero } = siteConfig.sections;
     </nav>
   </div>
 
+  {/* Hero Image / Avatar Container */}
   <div
-    class="border border-outline-variant rounded-md bg-surface-container p-sm justify-self-center lg:justify-self-end"
+    class="shrink-0 border border-outline-variant rounded-md bg-surface-container p-sm max-w-md lg:justify-self-end"
   >
     <Image
       src={profilePic}

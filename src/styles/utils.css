@@ -172,6 +172,9 @@ a:focus-visible {
 .place-items-center {
   place-items: center;
 }
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
 
 /* Grid Self-Alignment */
 .justify-self-center {
@@ -595,5 +598,11 @@ a.text-on-surface,
   }
   .lg\:gap-md {
     gap: var(--spacing-md);
+  }
+  .lg\:text-left {
+    text-align: left;
+  }
+  .lg\:justify-start {
+    justify-content: flex-start;
   }
 }
