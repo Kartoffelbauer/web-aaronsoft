@@ -204,15 +204,17 @@ a:focus-visible,
   margin-bottom: var(--spacing-lg);
 }
 
+.mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .p-sm {
   padding: var(--spacing-sm);
 }
 .p-md {
   padding: var(--spacing-md);
 }
-.p-4 {
-  padding: var(--spacing-md);
-} /* Tailwind backwards compatibility */
 
 .px-md {
   padding-right: var(--spacing-md);
@@ -255,6 +257,9 @@ a:focus-visible,
 }
 .h-xl {
   height: var(--spacing-xl);
+}
+.max-w-lg {
+  max-width: var(--max-w-lg);
 }
 .max-w-md {
   max-width: var(--max-w-md);
@@ -490,12 +495,12 @@ a.text-on-surface,
   .md\:flex {
     display: flex;
   }
-  .md\:justify-between {
-    justify-content: space-between;
-  }
 }
 
 @media (min-width: 950px) {
+  .lg\:justify-between {
+    justify-content: space-between;
+  }
   .lg\:flex-row {
     flex-direction: row;
   }
@@ -507,5 +512,9 @@ a.text-on-surface,
   }
   .lg\:justify-start {
     justify-content: flex-start;
+  }
+  .lg\:px-lg {
+    padding-right: var(--spacing-lg);
+    padding-left: var(--spacing-lg);
   }
 }
