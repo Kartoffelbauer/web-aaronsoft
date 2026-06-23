@@ -2,11 +2,10 @@
 /**
  * @fileoverview Base container primitive for all card types.
  */
-
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes, HTMLTag } from 'astro/types';
 
 export interface Props extends HTMLAttributes<'article'> {
-  as?: string | any;
+  as?: HTMLTag;
 }
 
 const { as: Tag = 'article', class: className = '', ...rest } = Astro.props;
@@ -21,5 +20,3 @@ const { as: Tag = 'article', class: className = '', ...rest } = Astro.props;
 >
   <slot />
 </Tag>
-
-<style is:global></style>
