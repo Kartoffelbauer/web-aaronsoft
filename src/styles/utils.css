@@ -18,7 +18,6 @@ body {
   font-family: var(--font-body);
 }
 
-/* Application shell wrapper */
 main {
   flex-grow: 1;
   padding-top: var(--spacing-lg);
@@ -65,23 +64,22 @@ a {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-a:visited {
+a:visited,
+.link:visited {
   color: var(--theme-link-visited, var(--theme-primary));
 }
 a:hover,
-a:focus-visible {
+a:focus-visible,
+.link:hover,
+.link:focus-visible {
   color: var(--theme-link-hover, var(--theme-primary));
 }
 
 /* ==========================================================================
    2. LAYOUT & DISPLAY
    ========================================================================== */
-/* Display */
 .block {
   display: block;
-}
-.inline-block {
-  display: inline-block;
 }
 .hidden {
   display: none;
@@ -99,7 +97,6 @@ a:focus-visible {
   display: grid;
 }
 
-/* Positioning */
 .relative {
   position: relative;
 }
@@ -112,15 +109,6 @@ a:focus-visible {
 .top-0 {
   top: 0;
 }
-.bottom-0 {
-  bottom: 0;
-}
-.left-0 {
-  left: 0;
-}
-.right-0 {
-  right: 0;
-}
 .z-50 {
   z-index: 50;
 }
@@ -128,18 +116,16 @@ a:focus-visible {
 /* ==========================================================================
    3. FLEXBOX & GRID
    ========================================================================== */
-/* Flex Direction & Wrap */
 .flex-col {
   flex-direction: column;
-}
-.flex-row {
-  flex-direction: row;
 }
 .flex-wrap {
   flex-wrap: wrap;
 }
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
 
-/* Growth & Shrinkage */
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -150,7 +136,6 @@ a:focus-visible {
   flex-shrink: 0;
 }
 
-/* Alignment (Flex & Grid) */
 .items-start {
   align-items: flex-start;
 }
@@ -160,34 +145,17 @@ a:focus-visible {
 .items-end {
   align-items: flex-end;
 }
+.place-items-center {
+  place-items: center;
+}
+
 .justify-center {
   justify-content: center;
 }
 .justify-between {
   justify-content: space-between;
 }
-.justify-end {
-  justify-content: flex-end;
-}
-.place-items-center {
-  place-items: center;
-}
-.flex-col-reverse {
-  flex-direction: column-reverse;
-}
 
-/* Grid Self-Alignment */
-.justify-self-center {
-  justify-self: center;
-}
-.justify-self-start {
-  justify-self: flex-start;
-}
-.justify-self-end {
-  justify-self: flex-end;
-}
-
-/* Fluid Grid Columns */
 .grid-cols-fluid-sm {
   grid-template-columns: repeat(
     auto-fit,
@@ -200,17 +168,13 @@ a:focus-visible {
     minmax(min(100%, var(--grid-fluid-md)), 1fr)
   );
 }
-.grid-cols-fluid-lg {
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, var(--grid-fluid-lg)), 1fr)
-  );
-}
 
 /* ==========================================================================
    4. SPACING (Gap, Margin, Padding)
    ========================================================================== */
-/* Gaps */
+.gap-xs {
+  gap: var(--spacing-xs, 0.5rem);
+} /* Added missing class */
 .gap-sm {
   gap: var(--spacing-sm);
 }
@@ -220,11 +184,7 @@ a:focus-visible {
 .gap-lg {
   gap: var(--spacing-lg);
 }
-.gap-xl {
-  gap: var(--spacing-xl);
-}
 
-/* Margins */
 .m-0 {
   margin: 0;
 }
@@ -233,12 +193,6 @@ a:focus-visible {
 }
 .mt-sm {
   margin-top: var(--spacing-sm);
-}
-.mt-md {
-  margin-top: var(--spacing-md);
-}
-.mt-lg {
-  margin-top: var(--spacing-lg);
 }
 .mb-sm {
   margin-bottom: var(--spacing-sm);
@@ -249,20 +203,12 @@ a:focus-visible {
 .mb-lg {
   margin-bottom: var(--spacing-lg);
 }
-.my-md {
-  margin-top: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-}
 
-/* Padding */
 .p-sm {
   padding: var(--spacing-sm);
 }
 .p-md {
   padding: var(--spacing-md);
-}
-.p-lg {
-  padding: var(--spacing-lg);
 }
 
 .px-md {
@@ -273,7 +219,6 @@ a:focus-visible {
   padding-right: var(--spacing-lg);
   padding-left: var(--spacing-lg);
 }
-
 .py-sm {
   padding-top: var(--spacing-sm);
   padding-bottom: var(--spacing-sm);
@@ -281,10 +226,6 @@ a:focus-visible {
 .py-md {
   padding-top: var(--spacing-md);
   padding-bottom: var(--spacing-md);
-}
-.py-lg {
-  padding-top: var(--spacing-lg);
-  padding-bottom: var(--spacing-lg);
 }
 
 .pt-sm {
@@ -303,15 +244,11 @@ a:focus-visible {
 /* ==========================================================================
    5. SIZING & MEDIA
    ========================================================================== */
-/* Width & Height */
 .w-full {
   width: 100%;
 }
 .h-full {
   height: 100%;
-}
-.w-xl {
-  width: var(--spacing-xl);
 }
 .h-xl {
   height: var(--spacing-xl);
@@ -326,7 +263,6 @@ a:focus-visible {
   height: var(--grid-fluid-sm);
 }
 
-/* Media, Overflows & Ratios */
 .object-cover {
   object-fit: cover;
 }
@@ -340,7 +276,6 @@ a:focus-visible {
 /* ==========================================================================
    6. TYPOGRAPHY
    ========================================================================== */
-/* Families & Weights */
 .font-code {
   font-family: var(--font-code);
 }
@@ -351,10 +286,6 @@ a:focus-visible {
   font-weight: var(--font-weight-medium);
 }
 
-/* Sizes */
-.text-xs {
-  font-size: var(--font-size-xs);
-}
 .text-sm {
   font-size: var(--font-size-sm);
 }
@@ -367,14 +298,7 @@ a:focus-visible {
 .text-xl {
   font-size: var(--font-size-xl);
 }
-.text-xxl {
-  font-size: var(--font-size-xxl);
-}
 
-/* Alignment & Formatting */
-.text-justify {
-  text-align: justify;
-}
 .text-center {
   text-align: center;
 }
@@ -397,7 +321,6 @@ a:focus-visible {
   text-decoration: none;
 }
 
-/* Semantic Text Colors */
 .text-surface-variant,
 a.text-surface-variant,
 .hover\:text-surface-variant:hover,
@@ -437,7 +360,6 @@ a.text-on-surface,
 /* ==========================================================================
    7. BACKGROUNDS & BORDERS
    ========================================================================== */
-/* Background Colors */
 .bg-primary {
   background-color: var(--theme-primary);
 }
@@ -453,14 +375,7 @@ a.text-on-surface,
 .bg-surface-variant {
   background-color: var(--theme-surface-variant);
 }
-.bg-background {
-  background-color: var(--theme-background);
-}
-.bg-outline {
-  background-color: var(--theme-outline);
-}
 
-/* Border Structures */
 .border {
   border: 1px solid transparent;
 }
@@ -471,10 +386,6 @@ a.text-on-surface,
   border-top: 1px solid transparent;
 }
 
-/* Border Colors */
-.border-transparent {
-  border-color: transparent;
-}
 .border-outline {
   border-color: var(--theme-outline);
 }
@@ -485,33 +396,26 @@ a.text-on-surface,
   border-color: var(--theme-divider);
 }
 
-/* Border Color Hover States */
 .hover\:border-primary:hover,
 .hover\:border-primary:focus-visible,
 .focus-visible\:border-primary:focus-visible {
   border-color: var(--theme-primary);
 }
 
-/* Border Radius */
 .rounded-base {
   border-radius: var(--border-radius-base);
 }
 .rounded-md {
   border-radius: var(--border-radius-md);
 }
-.rounded-full {
-  border-radius: 9999px;
-}
 
 /* ==========================================================================
    8. INTERACTIVITY & EFFECTS
    ========================================================================== */
-/* Cursors & Interactions */
 .cursor-pointer {
   cursor: pointer;
 }
 
-/* Transitions & Opacity */
 .transition-all {
   transition: all var(--transition-duration-fast) ease;
 }
@@ -532,12 +436,10 @@ a.text-on-surface,
   opacity: 0.9;
 }
 
-/* Groups */
 .group:hover .group-hover\:scale-110 {
   transform: scale(1.1);
 }
 
-/* Filters */
 .grayscale {
   filter: grayscale(100%);
 }
@@ -581,23 +483,14 @@ a.text-on-surface,
   .md\:justify-between {
     justify-content: space-between;
   }
-  .md\:justify-end {
-    justify-content: flex-end;
-  }
 }
 
 @media (min-width: 950px) {
   .lg\:flex-row {
     flex-direction: row;
   }
-  .lg\:justify-between {
-    justify-content: space-between;
-  }
   .lg\:justify-self-end {
     justify-self: flex-end;
-  }
-  .lg\:gap-md {
-    gap: var(--spacing-md);
   }
   .lg\:text-left {
     text-align: left;
