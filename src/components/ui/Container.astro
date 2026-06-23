@@ -16,7 +16,11 @@ const { as: Tag = 'div', class: customClass = '', ...rest } = Astro.props;
 ---
 
 <Tag
-  class:list={['w-full max-w-lg mx-auto px-md lg:px-lg', customClass]}
+  class:list={[
+    'w-full max-w-lg mx-auto px-md lg:px-lg',
+    Tag === 'main' && 'grow py-lg',
+    customClass,
+  ]}
   {...rest}
 >
   <slot />

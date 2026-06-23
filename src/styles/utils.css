@@ -18,12 +18,6 @@ body {
   font-family: var(--font-body);
 }
 
-main {
-  flex-grow: 1;
-  padding-top: var(--spacing-lg);
-  padding-bottom: var(--spacing-lg);
-}
-
 /* Headings */
 h1,
 h2,
@@ -231,6 +225,10 @@ a:focus-visible,
 .py-md {
   padding-top: var(--spacing-md);
   padding-bottom: var(--spacing-md);
+}
+.py-lg {
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
 }
 
 .pt-sm {
