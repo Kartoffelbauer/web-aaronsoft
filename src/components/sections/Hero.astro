@@ -1,7 +1,7 @@
 ---
 /**
- * @fileoverview Page `Hero` section. Displays the primary hero banner
- * including avatar, headline and primary call-to-action.
+ * @fileoverview Page `Hero` section.
+ * Displays the primary hero banner including avatar, headline, and primary call-to-actions.
  */
 import { Image } from 'astro:assets';
 
@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/index';
 import { siteConfig } from '@/data/config';
 
 const { hero } = siteConfig.sections;
+const IMAGE_SIZE = 360;
 ---
 
 <header
@@ -23,7 +24,7 @@ const { hero } = siteConfig.sections;
 
     {/* Navigation/Actions: Centered on mobile, left-aligned on desktop */}
     <nav
-      class="flex justify-center lg:justify-start gap-md"
+      class="flex flex-wrap justify-center lg:justify-start gap-md"
       aria-label="Hero Actions"
     >
       <Button
@@ -49,16 +50,16 @@ const { hero } = siteConfig.sections;
     </nav>
   </div>
 
-  {/* Hero Image / Avatar Container */}
   <div
-    class="shrink-0 border border-outline-variant rounded-md bg-surface-container p-sm max-w-md lg:justify-self-end"
+    class="w-full max-w-sm border border-outline-variant rounded-md bg-surface-container p-sm lg:justify-self-end"
   >
     <Image
       src={profilePic}
       alt="Developer profile picture"
-      width={360}
-      class="w-full aspect-square object-cover rounded-md grayscale transition-filter hover:grayscale-0"
+      width={IMAGE_SIZE}
+      class="block w-full h-auto aspect-square object-cover rounded-md grayscale transition-filter hover:grayscale-0"
       loading="eager"
+      decoding="sync"
     />
   </div>
 </header>

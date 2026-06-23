@@ -1,9 +1,12 @@
 /**
  * @fileoverview CSS Custom Properties for theme management.
+ * @description Utilizes relative units (rem/em) for accessibility and defines all scalable constraints globally.
  */
 
 :root {
-  /* Light Theme */
+  /* ==========================================================================
+     COLOR TOKENS (Light Theme Default)
+     ========================================================================== */
   --theme-background: #ffffff;
   --theme-on-background: #001a42;
   --theme-surface: #ffffff;
@@ -17,63 +20,93 @@
   --theme-surface-container-lowest: #ffffff;
   --theme-surface-container-low: #f8fafc;
   --theme-surface-container: #f1f5f9;
-  --theme-link: #005ac2;
+
+  /* Link Tokens */
+  --theme-link: var(--theme-primary);
   --theme-link-visited: #6610f2;
   --theme-link-hover: #004499;
+
+  /* Structural Tokens */
   --theme-divider: color-mix(
     in srgb,
     var(--theme-outline-variant) 30%,
     transparent
   );
+  --theme-primary-alpha-10: color-mix(
+    in srgb,
+    var(--theme-primary) 10%,
+    transparent
+  );
 
-  /* Typography */
+  /* ==========================================================================
+     TYPOGRAPHY
+     ========================================================================== */
   --font-headline: 'Inter', sans-serif;
-  --font-code: 'Fira Code', monospace;
   --font-body: 'Inter', sans-serif;
+  --font-code: 'Fira Code', monospace;
 
-  /* Line Height */
-  --line-height-base: 1.6;
-  --line-height-relaxed: 1.7;
-
-  /* Spacing */
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 32px;
-  --spacing-xl: 64px;
-
-  /* Border Radius */
-  --border-radius-base: 0.25rem;
-  --border-radius-md: 0.5rem;
-  --border-radius-lg: 1rem;
-
-  /* Font */
+  /* Font Weights */
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
 
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.25rem;
-  --font-size-xl: 2rem;
-  --font-size-xxl: 3rem;
+  /* Font Sizes (Base 16px) */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.25rem; /* 20px */
+  --font-size-xl: 2rem; /* 32px */
+  --font-size-xxl: 3rem; /* 48px */
 
-  /* Navigation */
-  --nav-height-base: 64px;
+  /* Line Heights & Letter Spacing */
+  --line-height-base: 1.6;
+  --line-height-relaxed: 1.7;
+  --letter-spacing-wider: 0.05em;
 
-  /* Grid & Layout Thresholds */
-  --grid-fluid-sm: 200px;
-  --grid-fluid-md: 340px;
-  --grid-fluid-lg: 400px;
+  /* ==========================================================================
+     SPACING & LAYOUT
+     ========================================================================== */
+  /* Spacing Scale (Base 16px) */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 2rem; /* 32px */
+  --spacing-xl: 4rem; /* 64px */
 
-  /* Transition */
+  /* Layout Constraints */
+  --max-w-md: 37.5rem; /* 600px */
+  --max-w-sm: 22.5rem;
+
+  /* Fluid Grid Breakpoints */
+  --grid-fluid-sm: 12.5rem; /* 200px */
+  --grid-fluid-md: 21.25rem; /* 340px */
+  --grid-fluid-lg: 25rem; /* 400px */
+
+  /* ==========================================================================
+     BORDERS & UI ELEMENTS
+     ========================================================================== */
+  /* Border Radius */
+  --border-radius-base: 0.25rem; /* 4px */
+  --border-radius-md: 0.5rem; /* 8px */
+  --border-radius-lg: 1rem; /* 16px */
+
+  /* Border Widths & Offsets */
+  --border-width-base: 1px;
+  --link-underline-offset: 0.25rem; /* 4px */
+
+  /* ==========================================================================
+     ANIMATION & TRANSFORMS
+     ========================================================================== */
   --transition-duration-fast: 0.2s;
   --transition-duration-base: 0.5s;
+  --scale-110: 1.1;
 }
 
+/* ==========================================================================
+   DARK THEME OVERRIDES
+   ========================================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Dark Theme */
     --theme-background: #0b1326;
     --theme-on-background: #dbe2fd;
     --theme-surface: #0b1326;
@@ -87,7 +120,8 @@
     --theme-surface-container-lowest: #060d20;
     --theme-surface-container-low: #131b2e;
     --theme-surface-container: #171f33;
-    --theme-link: #adc6ff;
+
+    --theme-link: var(--theme-primary);
     --theme-link-visited: #b197fc;
     --theme-link-hover: #dbe2fd;
   }
